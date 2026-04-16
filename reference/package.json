@@ -1,0 +1,33 @@
+{
+  "name": "@compsych/ds-reference",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Live visual reference for the ComPsych Design System. Reads from tokens/dist bundles and renders a Foundations gallery.",
+  "scripts": {
+    "predev": "tsx scripts/build-themes.ts",
+    "dev": "next dev",
+    "prebuild": "cd .. && npm run build:tokens && cd reference && tsx scripts/build-themes.ts",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "build:themes": "tsx scripts/build-themes.ts"
+  },
+  "dependencies": {
+    "next": "15.5.15",
+    "react": "19.0.5",
+    "react-dom": "19.0.5",
+    "lucide-react": "0.468.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.2.2",
+    "@types/node": "22.19.17",
+    "@types/react": "19.0.5",
+    "@types/react-dom": "19.0.5",
+    "eslint": "9.17.0",
+    "eslint-config-next": "15.5.15",
+    "tailwindcss": "4.2.2",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,17 @@
+# Next.js build artifacts
+.next/
+out/
+build/
+
+# Node
+node_modules/
+
+# Generated at build time by scripts/build-themes.ts
+lib/generated-tokens.ts
+styles/themes.css
+
+# Env
+.env*.local
+
+# OS / editor
+.DS_Store

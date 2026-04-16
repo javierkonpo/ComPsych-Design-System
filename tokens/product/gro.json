@@ -1,0 +1,981 @@
+{
+  "_meta": {
+    "tier": "product",
+    "name": "gro",
+    "source": "Tokens Studio Figma export",
+    "migratedFrom": "3. product/GRO.json",
+    "migratedAt": "2026-04-16T11:32:35.664Z"
+  },
+  "color-roles": {
+    "accent": {
+      "primary": {
+        "pd-primary": {
+          "$type": "color",
+          "$value": "{core.color.primary.core-primary-50}"
+        },
+        "pd-on-primary": {
+          "$type": "color",
+          "$value": "{core.color.primary.core-primary-100}"
+        },
+        "pd-on-primary-container": {
+          "$type": "color",
+          "$value": "{core.color.primary.core-primary-100}"
+        },
+        "pd-primary-container": {
+          "$type": "color",
+          "$value": "{core.color.primary.core-primary-20}"
+        },
+        "pd-on-primary-container-variant": {
+          "$type": "color",
+          "$value": "{core.color.primary.core-primary-80}"
+        }
+      },
+      "secondary": {
+        "pd-secondary": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-100}"
+        },
+        "pd-on-secondary": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-20}"
+        },
+        "pd-secondary-container": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-95}"
+        },
+        "pd-on-secondary-container": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-40}"
+        }
+      },
+      "tertiary": {
+        "pd-tertiary": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-100}"
+        },
+        "pd-on-tertiary": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-20}"
+        },
+        "pd-tertiary-container": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-95}"
+        },
+        "pd-on-tertiary-container": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-20}"
+        }
+      }
+    },
+    "add-on": {
+      "primary-fixed": {
+        "pd-primary-fixed": {
+          "$type": "color",
+          "$value": "{core.color.primary.core-primary-70}"
+        },
+        "pd-on-primary-fixed": {
+          "$type": "color",
+          "$value": "{core.color.primary.core-primary-50}"
+        },
+        "pd-primary-fixed-dim": {
+          "$type": "color",
+          "$value": "{core.color.primary.core-primary-90}"
+        },
+        "pd-on-primary-fixed-variant": {
+          "$type": "color",
+          "$value": "{core.color.primary.core-primary-60}"
+        }
+      },
+      "secondary-fixed": {
+        "pd-secondary-fixed": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-90}"
+        },
+        "pd-secondary-fixed-dim": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-95}"
+        },
+        "pd-on-secondary-fixed": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-30}"
+        },
+        "pd-on-secondary-fixed-variant": {
+          "$type": "color",
+          "$value": "{core.color.secondary.core-secondary-60}"
+        }
+      },
+      "add-on-surfaces": {
+        "pd-surface-dim": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-94}"
+        },
+        "pd-surface-bright": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-100}"
+        }
+      }
+    },
+    "error": {
+      "pd-error": {
+        "$type": "color",
+        "$value": "{core.color.red.core-red-50}"
+      },
+      "pd-on-error": {
+        "$type": "color",
+        "$value": "{core.color.red.core-red-100}"
+      },
+      "pd-error-container": {
+        "$type": "color",
+        "$value": "{core.color.red.core-red-90}"
+      },
+      "pd-on-error-container": {
+        "$type": "color",
+        "$value": "{core.color.red.core-red-20}"
+      }
+    },
+    "surface": {
+      "surface": {
+        "pd-on-surface": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-10}"
+        },
+        "pd-on-surface-variant": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-50}"
+        },
+        "pd-surface": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-98}"
+        }
+      },
+      "surface-containers": {
+        "pd-surface-container-lowest": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-100}"
+        },
+        "pd-surface-container": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-98}"
+        },
+        "pd-surface-container-highest": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-92}"
+        },
+        "pd-surface-container-high": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-94}"
+        },
+        "pd-surface-container-low": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-99}"
+        }
+      },
+      "inverse": {
+        "pd-inverse-surface": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-50}"
+        },
+        "pd-inverse-on-surface": {
+          "$type": "color",
+          "$value": "{core.color.neutral.core-neutral-100}"
+        },
+        "pd-inverse-primary": {
+          "$type": "color",
+          "$value": "{core.color.primary.core-primary-80}"
+        }
+      }
+    },
+    "outline": {
+      "pd-outline": {
+        "$type": "color",
+        "$value": "{core.color.neutral.core-neutral-96}"
+      },
+      "pd-outline-variant": {
+        "$type": "color",
+        "$value": "{core.color.neutral.core-neutral-90}"
+      },
+      "pd-outline-inverse": {
+        "$type": "color",
+        "$value": "{core.color.opacity.neutral.core-white-40}"
+      },
+      "pd-outline-fixed": {
+        "$type": "color",
+        "$value": "{core.color.neutral.core-neutral-70}"
+      }
+    },
+    "custom": {
+      "success": {
+        "pd-success": {
+          "$type": "color",
+          "$value": "{core.color.green.core-green-50}"
+        },
+        "pd-on-success": {
+          "$type": "color",
+          "$value": "{core.color.green.core-green-100}"
+        },
+        "pd-on-success-container": {
+          "$type": "color",
+          "$value": "{core.color.green.core-green-10}"
+        },
+        "pd-success-container": {
+          "$type": "color",
+          "$value": "{core.color.green.core-green-95}"
+        }
+      },
+      "warning": {
+        "pd-warning": {
+          "$type": "color",
+          "$value": "{core.color.orange.core-orange-40}"
+        },
+        "pd-on-warning": {
+          "$type": "color",
+          "$value": "{core.color.orange.core-orange-100}"
+        },
+        "pd-warning-container": {
+          "$type": "color",
+          "$value": "{core.color.orange.core-orange-90}"
+        },
+        "pd-on-warning-container": {
+          "$type": "color",
+          "$value": "{core.color.orange.core-orange-10}"
+        }
+      },
+      "info": {
+        "pd-info": {
+          "$type": "color",
+          "$value": "{core.color.blue.core-blue-50}"
+        },
+        "pd-on-info": {
+          "$type": "color",
+          "$value": "{core.color.blue.core-blue-100}"
+        },
+        "pd-info-container": {
+          "$type": "color",
+          "$value": "{core.color.blue.core-blue-90}"
+        },
+        "pd-on-info-container": {
+          "$type": "color",
+          "$value": "{core.color.blue.core-blue-20}"
+        }
+      }
+    },
+    "transparent": {
+      "primary": {
+        "pd-primary-08": {
+          "$type": "color",
+          "$value": "{core.color.opacity.primary.core-primary-08}"
+        }
+      },
+      "neutral": {
+        "pd-white-10": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-white-10}"
+        },
+        "pd-white-20": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-white-20}"
+        },
+        "pd-white-30": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-white-30}"
+        },
+        "pd-white-40": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-white-40}"
+        },
+        "pd-white-50": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-white-50}"
+        },
+        "pd-black-10": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-black-10}"
+        },
+        "pd-black-20": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-black-20}"
+        },
+        "pd-black-30": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-black-30}"
+        },
+        "pd-black-40": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-black-40}"
+        },
+        "pd-black-50": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-black-50}"
+        },
+        "pd-white-80": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-white-80}"
+        },
+        "pd-black-80": {
+          "$type": "color",
+          "$value": "{core.color.opacity.neutral.core-black-80}"
+        }
+      }
+    },
+    "chart": {
+      "pd-chart-color-1": {
+        "$type": "color",
+        "$value": "{core.color.primary.core-primary-80}"
+      },
+      "pd-chart-color-2": {
+        "$type": "color",
+        "$value": "{core.color.primary.core-primary-70}"
+      },
+      "pd-chart-color-3": {
+        "$type": "color",
+        "$value": "{core.color.primary.core-primary-60}"
+      },
+      "pd-chart-color-4": {
+        "$type": "color",
+        "$value": "{core.color.primary.core-primary-50}"
+      },
+      "pd-chart-color-5": {
+        "$type": "color",
+        "$value": "{core.color.primary.core-primary-40}"
+      },
+      "pd-chart-color-6": {
+        "$type": "color",
+        "$value": "{core.color.primary.core-primary-30}"
+      },
+      "pd-chart-color-7": {
+        "$type": "color",
+        "$value": "{core.color.primary.core-primary-20}"
+      },
+      "pd-chart-color-8": {
+        "$type": "color",
+        "$value": "{core.color.primary.core-primary-10}"
+      },
+      "pd-chart-inactive": {
+        "$type": "color",
+        "$value": "{sys.color-roles.surface.surface-container.sys-surface-container-high}"
+      }
+    }
+  },
+  "type-scale": {
+    "display-large": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-display}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-8xl}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 80
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": -2.4
+      }
+    },
+    "display-medium": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-display}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-7xl}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 79.2
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": -1.44
+      }
+    },
+    "display-small": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-display}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-6xl}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 76.8
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": -0.64
+      }
+    },
+    "headline-large": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-headline}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-5xl}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 57.6
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": -0.48
+      }
+    },
+    "headline-medium": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-headline}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-4xl}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 48
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "headline-small": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-headline}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-3xl}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 38.4
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "title-large": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-title}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-2xl}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 36.4
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "title-medium": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-title}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-xl}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 31.2
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "title-small": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-title}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-lg}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 28
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "body-large": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-body}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-lg}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 30
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "body-medium": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-body}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-base}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 24
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "body-small": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-body}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-sm}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 20
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "label-large": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-label}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-regular}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-base}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 22.4
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "label-small": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-label}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-semibold}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-xs}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 18
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0.12
+      }
+    },
+    "label-medium": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": "{core.typography.font.core-label}"
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-medium}"
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": "{core.typography.weight.core-semibold}"
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": "{core.typography.size.core-sm}"
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": 20
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": 0.07
+      }
+    }
+  },
+  "dimensions": {
+    "border-radius": {
+      "pd-radius-xs": {
+        "$type": "number",
+        "$value": "{core.dimension.radius.core-radius-xs}"
+      },
+      "pd-radius-none": {
+        "$type": "number",
+        "$value": "{core.dimension.radius.core-radius-none}"
+      },
+      "pd-radius-sm": {
+        "$type": "number",
+        "$value": "{core.dimension.radius.core-radius-sm}"
+      },
+      "pd-radius-md": {
+        "$type": "number",
+        "$value": "{core.dimension.radius.core-radius-md}"
+      },
+      "pd-radius-lg": {
+        "$type": "number",
+        "$value": "{core.dimension.radius.core-radius-lg}"
+      },
+      "pd-radius-lg-increased": {
+        "$type": "number",
+        "$value": "{core.dimension.radius.core-radius-lg-increased}"
+      },
+      "pd-radius-xl": {
+        "$type": "number",
+        "$value": "{core.dimension.radius.core-radius-xl}"
+      },
+      "pd-radius-xl-increased": {
+        "$type": "number",
+        "$value": "{core.dimension.radius.core-radius-xl-increased}"
+      },
+      "pd-radius-full": {
+        "$type": "number",
+        "$value": "{core.dimension.radius.core-radius-full}"
+      }
+    },
+    "spacing": {
+      "margin": {
+        "pd-margin-sm": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-400}"
+        },
+        "pd-margin-md": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-600}"
+        },
+        "pd-margin-lg": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-800}"
+        },
+        "pd-margin-xl": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-1000}"
+        },
+        "pd-margin-2xl": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-2000}"
+        },
+        "pd-margin-none": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-0}"
+        }
+      },
+      "spacer": {
+        "pd-spacer-sm": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-400}"
+        },
+        "pd-spacer-md": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-600}"
+        },
+        "pd-spacer-xs": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-200}"
+        },
+        "pd-spacer-lg": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-800}"
+        }
+      },
+      "padding": {
+        "pd-padding-2": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-050}"
+        },
+        "pd-padding-4": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-100}"
+        },
+        "pd-padding-8": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-200}"
+        },
+        "pd-padding-12": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-300}"
+        },
+        "pd-padding-16": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-400}"
+        },
+        "pd-padding-24": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-600}"
+        },
+        "pd-neg-padding-16": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-neg-spacing-400}"
+        },
+        "pd-neg-padding-24": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-neg-spacing-600}"
+        },
+        "pd-padding-32": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-800}"
+        },
+        "pd-padding-20": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-500}"
+        },
+        "pd-padding-40": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-1000}"
+        },
+        "pd-padding-48": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-1200}"
+        },
+        "pd-padding-64": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-1600}"
+        },
+        "pd-padding-0": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-0}"
+        },
+        "pd-padding-6": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-150}"
+        },
+        "pd-padding-72": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-1800}"
+        },
+        "pd-padding-80": {
+          "$type": "number",
+          "$value": "{core.dimension.spacing.core-spacing-2000}"
+        }
+      }
+    },
+    "border-width": {
+      "pd-stroke-thin": {
+        "$type": "number",
+        "$value": "{core.dimension.border-width.core-stroke-thin}"
+      },
+      "pd-stroke-medium": {
+        "$type": "number",
+        "$value": "{core.dimension.border-width.core-stroke-medium}"
+      },
+      "pd-stroke-thick": {
+        "$type": "number",
+        "$value": "{core.dimension.border-width.core-stroke-thick}"
+      },
+      "pd-stroke-heavier": {
+        "$type": "number",
+        "$value": "{core.dimension.border-width.core-stroke-heavier}"
+      },
+      "pd-stroke-bold": {
+        "$type": "number",
+        "$value": "{core.dimension.border-width.core-stroke-bold}"
+      }
+    }
+  },
+  "iconography": {
+    "pd-size-xs": {
+      "$type": "number",
+      "$value": "{core.iconography.core-size-xs}"
+    },
+    "pd-size-sm": {
+      "$type": "number",
+      "$value": "{core.iconography.core-size-sm}"
+    },
+    "pd-size-md": {
+      "$type": "number",
+      "$value": "{core.iconography.core-size-md}"
+    },
+    "pd-size-lg": {
+      "$type": "number",
+      "$value": "{core.iconography.core-size-lg}"
+    },
+    "pd-size-xl": {
+      "$type": "number",
+      "$value": "{core.iconography.core-size-xl}"
+    },
+    "pd-size-xxs": {
+      "$type": "number",
+      "$value": "{core.iconography.core-size-xxs}"
+    }
+  },
+  "state-layers": {
+    "pd-hover": {
+      "$type": "number",
+      "$value": "{core.state-layers.core-hover}"
+    },
+    "pd-focused": {
+      "$type": "number",
+      "$value": "{core.state-layers.core-focused}"
+    },
+    "pd-pressed": {
+      "$type": "number",
+      "$value": "{core.state-layers.core-pressed}"
+    },
+    "pd-disabled-container": {
+      "$type": "number",
+      "$value": "{core.state-layers.core-disabled-container}"
+    },
+    "pd-disabled-content": {
+      "$type": "number",
+      "$value": "{core.state-layers.core-disabled-content}"
+    },
+    "pd-scrim": {
+      "$type": "number",
+      "$value": "{core.state-layers.core-scrim}"
+    }
+  }
+}

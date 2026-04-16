@@ -1,0 +1,24 @@
+{
+  "name": "@compsych/ds",
+  "version": "0.1.0",
+  "description": "ComPsych Design System — tokens, specs, and reference implementations.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:tokens": "tsx tokens/build.ts",
+    "clean:tokens": "tsx tokens/build.ts --clean",
+    "typecheck:tokens": "tsc --noEmit tokens/dist/compsych-gro/tokens.ts",
+    "dev": "cd reference && npm run dev",
+    "build": "npm run build:tokens && cd reference && npm run build",
+    "build:reference": "cd reference && npm run build",
+    "install:reference": "cd reference && npm install"
+  },
+  "author": "Konpo Studio",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@types/node": "22.19.17",
+    "style-dictionary": "4.4.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  }
+}

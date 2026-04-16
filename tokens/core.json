@@ -1,0 +1,823 @@
+{
+  "_meta": {
+    "tier": "core",
+    "name": "core",
+    "source": "Tokens Studio Figma export",
+    "migratedFrom": "1. core/Refs.json",
+    "migratedAt": "2026-04-16T11:32:35.664Z"
+  },
+  "color": {
+    "primary": {
+      "core-primary-50": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-50}"
+      },
+      "core-primary-80": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-80}"
+      },
+      "core-primary-0": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-0}"
+      },
+      "core-primary-10": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-10}"
+      },
+      "core-primary-20": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-20}"
+      },
+      "core-primary-30": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-30}"
+      },
+      "core-primary-40": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-40}"
+      },
+      "core-primary-60": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-60}"
+      },
+      "core-primary-70": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-70}"
+      },
+      "core-primary-90": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-90}"
+      },
+      "core-primary-95": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-95}"
+      },
+      "core-primary-100": {
+        "$type": "color",
+        "$value": "{brand.color.primary.primary-100}"
+      }
+    },
+    "green": {
+      "core-green-50": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-50}"
+      },
+      "core-green-80": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-80}"
+      },
+      "core-green-0": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-0}"
+      },
+      "core-green-10": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-10}"
+      },
+      "core-green-20": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-20}"
+      },
+      "core-green-30": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-30}"
+      },
+      "core-green-40": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-40}"
+      },
+      "core-green-60": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-60}"
+      },
+      "core-green-70": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-70}"
+      },
+      "core-green-90": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-90}"
+      },
+      "core-green-95": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-95}"
+      },
+      "core-green-100": {
+        "$type": "color",
+        "$value": "{brand.color.green.green-100}"
+      }
+    },
+    "neutral": {
+      "core-neutral-90": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-90}"
+      },
+      "core-neutral-10": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-10}"
+      },
+      "core-neutral-0": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-0}"
+      },
+      "core-neutral-20": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-20}"
+      },
+      "core-neutral-30": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-30}"
+      },
+      "core-neutral-40": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-40}"
+      },
+      "core-neutral-50": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-50}"
+      },
+      "core-neutral-60": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-60}"
+      },
+      "core-neutral-70": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-70}"
+      },
+      "core-neutral-80": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-80}"
+      },
+      "core-neutral-92": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-92}"
+      },
+      "core-neutral-94": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-94}"
+      },
+      "core-neutral-96": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-96}"
+      },
+      "core-neutral-98": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-98}"
+      },
+      "core-neutral-99": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-99}"
+      },
+      "core-neutral-100": {
+        "$type": "color",
+        "$value": "{brand.color.neutral.neutral-100}"
+      }
+    },
+    "yellow": {
+      "core-yellow-50": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-50}"
+      },
+      "core-yellow-90": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-90}"
+      },
+      "core-yellow-95": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-95}"
+      },
+      "core-yellow-100": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-100}"
+      },
+      "core-yellow-0": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-0}"
+      },
+      "core-yellow-60": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-60}"
+      },
+      "core-yellow-70": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-70}"
+      },
+      "core-yellow-80": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-80}"
+      },
+      "core-yellow-10": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-10}"
+      },
+      "core-yellow-20": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-20}"
+      },
+      "core-yellow-30": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-30}"
+      },
+      "core-yellow-40": {
+        "$type": "color",
+        "$value": "{brand.color.yellow.yellow-40}"
+      }
+    },
+    "blue": {
+      "core-blue-0": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-0}"
+      },
+      "core-blue-10": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-10}"
+      },
+      "core-blue-20": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-20}"
+      },
+      "core-blue-30": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-30}"
+      },
+      "core-blue-40": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-40}"
+      },
+      "core-blue-50": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-50}"
+      },
+      "core-blue-60": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-60}"
+      },
+      "core-blue-70": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-70}"
+      },
+      "core-blue-80": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-80}"
+      },
+      "core-blue-90": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-90}"
+      },
+      "core-blue-95": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-95}"
+      },
+      "core-blue-100": {
+        "$type": "color",
+        "$value": "{brand.color.blue.blue-100}"
+      }
+    },
+    "neutral-variant": {
+      "core-neutral-variant-0": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-0}"
+      },
+      "core-neutral-variant-10": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-10}"
+      },
+      "core-neutral-variant-20": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-20}"
+      },
+      "core-neutral-variant-30": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-30}"
+      },
+      "core-neutral-variant-40": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-40}"
+      },
+      "core-neutral-variant-50": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-50}"
+      },
+      "core-neutral-variant-60": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-60}"
+      },
+      "core-neutral-variant-70": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-70}"
+      },
+      "core-neutral-variant-80": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-80}"
+      },
+      "core-neutral-variant-90": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-90*}"
+      },
+      "core-neutral-variant-95": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-95}"
+      },
+      "neutral-variant-100": {
+        "$type": "color",
+        "$value": "{brand.color.neutral-variant.neutral-variant-100}"
+      }
+    },
+    "orange": {
+      "core-orange-0": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-0}"
+      },
+      "core-orange-10": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-10}"
+      },
+      "core-orange-20": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-20}"
+      },
+      "core-orange-30": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-30}"
+      },
+      "core-orange-40": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-40}"
+      },
+      "core-orange-50": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-50}"
+      },
+      "core-orange-60": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-60}"
+      },
+      "core-orange-70": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-70}"
+      },
+      "core-orange-80": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-80}"
+      },
+      "core-orange-90": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-90}"
+      },
+      "core-orange-95": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-95}"
+      },
+      "core-orange-100": {
+        "$type": "color",
+        "$value": "{brand.color.orange.orange-100}"
+      }
+    },
+    "red": {
+      "core-red-0": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-0}"
+      },
+      "core-red-10": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-10}"
+      },
+      "core-red-20": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-20}"
+      },
+      "core-red-30": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-30}"
+      },
+      "core-red-40": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-40}"
+      },
+      "core-red-50": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-50}"
+      },
+      "core-red-60": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-60}"
+      },
+      "core-red-70": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-70}"
+      },
+      "core-red-80": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-80}"
+      },
+      "core-red-90": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-90}"
+      },
+      "core-red-95": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-95}"
+      },
+      "core-red-100": {
+        "$type": "color",
+        "$value": "{brand.color.red.red-100}"
+      }
+    },
+    "secondary": {
+      "core-secondary-0": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-0}"
+      },
+      "core-secondary-10": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-10}"
+      },
+      "core-secondary-20": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-20}"
+      },
+      "core-secondary-30": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-30}"
+      },
+      "core-secondary-40": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-40}"
+      },
+      "core-secondary-50": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-50}"
+      },
+      "core-secondary-60": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-60}"
+      },
+      "core-secondary-70": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-70}"
+      },
+      "core-secondary-80": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-80}"
+      },
+      "core-secondary-90": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-90}"
+      },
+      "core-secondary-95": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-95}"
+      },
+      "core-secondary-100": {
+        "$type": "color",
+        "$value": "{brand.color.secondary.secondary-100}"
+      }
+    },
+    "opacity": {
+      "primary": {
+        "core-primary-08": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.primary.primary-08}"
+        }
+      },
+      "neutral": {
+        "core-white-10": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.white-10}"
+        },
+        "core-white-20": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.white-20}"
+        },
+        "core-white-30": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.white-30}"
+        },
+        "core-white-40": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.white-40}"
+        },
+        "core-white-50": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.white-50}"
+        },
+        "core-black-10": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.black-10}"
+        },
+        "core-black-20": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.black-20}"
+        },
+        "core-black-30": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.black-30}"
+        },
+        "core-black-40": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.black-40}"
+        },
+        "core-black-50": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.black-50}"
+        },
+        "core-white-80": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.white-80}"
+        },
+        "core-black-80": {
+          "$type": "color",
+          "$value": "{brand.color.opacity.neutral.black-80}"
+        }
+      }
+    }
+  },
+  "typography": {
+    "font": {
+      "core-headline": {
+        "$type": "text",
+        "$value": "{brand.typography.font.headline}"
+      },
+      "core-body": {
+        "$type": "text",
+        "$value": "{brand.typography.font.body}"
+      },
+      "core-display": {
+        "$type": "text",
+        "$value": "{brand.typography.font.display}"
+      },
+      "core-title": {
+        "$type": "text",
+        "$value": "{brand.typography.font.title}"
+      },
+      "core-label": {
+        "$type": "text",
+        "$value": "{brand.typography.font.label}"
+      }
+    },
+    "weight": {
+      "core-regular": {
+        "$type": "text",
+        "$value": "{brand.typography.weight.400}"
+      },
+      "core-medium": {
+        "$type": "text",
+        "$value": "{brand.typography.weight.500}"
+      },
+      "core-semibold": {
+        "$type": "text",
+        "$value": "{brand.typography.weight.600}"
+      },
+      "core-bold": {
+        "$type": "text",
+        "$value": "{brand.typography.weight.700}"
+      }
+    },
+    "size": {
+      "core-xs": {
+        "$type": "number",
+        "$value": "{brand.typography.size.xs}"
+      },
+      "core-sm": {
+        "$type": "number",
+        "$value": "{brand.typography.size.sm}"
+      },
+      "core-base": {
+        "$type": "number",
+        "$value": "{brand.typography.size.base}"
+      },
+      "core-lg": {
+        "$type": "number",
+        "$value": "{brand.typography.size.lg}"
+      },
+      "core-xl": {
+        "$type": "number",
+        "$value": "{brand.typography.size.xl}"
+      },
+      "core-2xl": {
+        "$type": "number",
+        "$value": "{brand.typography.size.2xl}"
+      },
+      "core-3xl": {
+        "$type": "number",
+        "$value": "{brand.typography.size.3xl}"
+      },
+      "core-4xl": {
+        "$type": "number",
+        "$value": "{brand.typography.size.4xl}"
+      },
+      "core-5xl": {
+        "$type": "number",
+        "$value": "{brand.typography.size.5xl}"
+      },
+      "core-6xl": {
+        "$type": "number",
+        "$value": "{brand.typography.size.6xl}"
+      },
+      "core-7xl": {
+        "$type": "number",
+        "$value": "{brand.typography.size.7xl}"
+      },
+      "core-8xl": {
+        "$type": "number",
+        "$value": "{brand.typography.size.8xl}"
+      }
+    }
+  },
+  "dimension": {
+    "spacing": {
+      "core-spacing-100": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.100}"
+      },
+      "core-neg-spacing-200": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.-200}"
+      },
+      "core-neg-spacing-100": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.-100}"
+      },
+      "core-neg-spacing-400": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.-400}"
+      },
+      "core-neg-spacing-600": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.-600}"
+      },
+      "core-spacing-0": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.0}"
+      },
+      "core-spacing-025": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.025}"
+      },
+      "core-spacing-050": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.050}"
+      },
+      "core-spacing-150": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.150}"
+      },
+      "core-spacing-200": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.200}"
+      },
+      "core-spacing-300": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.300}"
+      },
+      "core-spacing-400": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.400}"
+      },
+      "core-spacing-500": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.500}"
+      },
+      "core-spacing-600": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.600}"
+      },
+      "core-spacing-800": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.800}"
+      },
+      "core-spacing-1000": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.1000}"
+      },
+      "core-spacing-1200": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.1200}"
+      },
+      "core-spacing-1600": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.1600}"
+      },
+      "core-spacing-1800": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.1800}"
+      },
+      "core-spacing-2000": {
+        "$type": "number",
+        "$value": "{brand.dimensions.spacing.2000}"
+      }
+    },
+    "border-width": {
+      "core-stroke-thin": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-width.thin}"
+      },
+      "core-stroke-medium": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-width.medium}"
+      },
+      "core-stroke-thick": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-width.thick}"
+      },
+      "core-stroke-heavier": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-width.heavier}"
+      },
+      "core-stroke-bold": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-width.bold}"
+      }
+    },
+    "radius": {
+      "core-radius-none": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-radius.none}"
+      },
+      "core-radius-xs": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-radius.xs}"
+      },
+      "core-radius-sm": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-radius.sm}"
+      },
+      "core-radius-md": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-radius.md}"
+      },
+      "core-radius-lg": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-radius.lg}"
+      },
+      "core-radius-lg-increased": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-radius.lg-increased}"
+      },
+      "core-radius-xl": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-radius.xl}"
+      },
+      "core-radius-xl-increased": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-radius.xl-increased}"
+      },
+      "core-radius-full": {
+        "$type": "number",
+        "$value": "{brand.dimensions.border-radius.full}"
+      }
+    }
+  },
+  "iconography": {
+    "core-size-xs": {
+      "$type": "number",
+      "$value": "{brand.iconography.xs}"
+    },
+    "core-size-sm": {
+      "$type": "number",
+      "$value": "{brand.iconography.sm}"
+    },
+    "core-size-md": {
+      "$type": "number",
+      "$value": "{brand.iconography.md}"
+    },
+    "core-size-lg": {
+      "$type": "number",
+      "$value": "{brand.iconography.lg}"
+    },
+    "core-size-xl": {
+      "$type": "number",
+      "$value": "{brand.iconography.xl}"
+    },
+    "core-size-xxs": {
+      "$type": "number",
+      "$value": "{brand.iconography.xxs}"
+    }
+  },
+  "state-layers": {
+    "core-hover": {
+      "$type": "number",
+      "$value": "{brand.state-layers.hover}"
+    },
+    "core-focused": {
+      "$type": "number",
+      "$value": "{brand.state-layers.focused}"
+    },
+    "core-pressed": {
+      "$type": "number",
+      "$value": "{brand.state-layers.pressed}"
+    },
+    "core-disabled-container": {
+      "$type": "number",
+      "$value": "{brand.state-layers.disabled-container}"
+    },
+    "core-disabled-content": {
+      "$type": "number",
+      "$value": "{brand.state-layers.disabled-content}"
+    },
+    "core-scrim": {
+      "$type": "number",
+      "$value": "{brand.state-layers.scrim}"
+    }
+  }
+}

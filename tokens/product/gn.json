@@ -1,0 +1,981 @@
+{
+  "_meta": {
+    "tier": "product",
+    "name": "gn",
+    "source": "placeholder — no upstream data",
+    "migratedAt": "2026-04-16T11:32:35.664Z",
+    "note": "GuidanceNow was NOT present in the Tokens Studio export dated 2026-04-16T11:32:35.664Z. This file mirrors the GRO structure with every $value blanked to the empty string so the build matrix still emits gn bundles. Raise with ComPsych: is GN defined in Figma yet? If so, include it in the next export and drop the placeholder branch in migrate.ts."
+  },
+  "color-roles": {
+    "accent": {
+      "primary": {
+        "pd-primary": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-primary": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-primary-container": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-primary-container": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-primary-container-variant": {
+          "$type": "color",
+          "$value": ""
+        }
+      },
+      "secondary": {
+        "pd-secondary": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-secondary": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-secondary-container": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-secondary-container": {
+          "$type": "color",
+          "$value": ""
+        }
+      },
+      "tertiary": {
+        "pd-tertiary": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-tertiary": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-tertiary-container": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-tertiary-container": {
+          "$type": "color",
+          "$value": ""
+        }
+      }
+    },
+    "add-on": {
+      "primary-fixed": {
+        "pd-primary-fixed": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-primary-fixed": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-primary-fixed-dim": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-primary-fixed-variant": {
+          "$type": "color",
+          "$value": ""
+        }
+      },
+      "secondary-fixed": {
+        "pd-secondary-fixed": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-secondary-fixed-dim": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-secondary-fixed": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-secondary-fixed-variant": {
+          "$type": "color",
+          "$value": ""
+        }
+      },
+      "add-on-surfaces": {
+        "pd-surface-dim": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-surface-bright": {
+          "$type": "color",
+          "$value": ""
+        }
+      }
+    },
+    "error": {
+      "pd-error": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-on-error": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-error-container": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-on-error-container": {
+        "$type": "color",
+        "$value": ""
+      }
+    },
+    "surface": {
+      "surface": {
+        "pd-on-surface": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-surface-variant": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-surface": {
+          "$type": "color",
+          "$value": ""
+        }
+      },
+      "surface-containers": {
+        "pd-surface-container-lowest": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-surface-container": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-surface-container-highest": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-surface-container-high": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-surface-container-low": {
+          "$type": "color",
+          "$value": ""
+        }
+      },
+      "inverse": {
+        "pd-inverse-surface": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-inverse-on-surface": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-inverse-primary": {
+          "$type": "color",
+          "$value": ""
+        }
+      }
+    },
+    "outline": {
+      "pd-outline": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-outline-variant": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-outline-inverse": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-outline-fixed": {
+        "$type": "color",
+        "$value": ""
+      }
+    },
+    "custom": {
+      "success": {
+        "pd-success": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-success": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-success-container": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-success-container": {
+          "$type": "color",
+          "$value": ""
+        }
+      },
+      "warning": {
+        "pd-warning": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-warning": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-warning-container": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-warning-container": {
+          "$type": "color",
+          "$value": ""
+        }
+      },
+      "info": {
+        "pd-info": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-info": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-info-container": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-on-info-container": {
+          "$type": "color",
+          "$value": ""
+        }
+      }
+    },
+    "transparent": {
+      "primary": {
+        "pd-primary-08": {
+          "$type": "color",
+          "$value": ""
+        }
+      },
+      "neutral": {
+        "pd-white-10": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-white-20": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-white-30": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-white-40": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-white-50": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-black-10": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-black-20": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-black-30": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-black-40": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-black-50": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-white-80": {
+          "$type": "color",
+          "$value": ""
+        },
+        "pd-black-80": {
+          "$type": "color",
+          "$value": ""
+        }
+      }
+    },
+    "chart": {
+      "pd-chart-color-1": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-chart-color-2": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-chart-color-3": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-chart-color-4": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-chart-color-5": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-chart-color-6": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-chart-color-7": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-chart-color-8": {
+        "$type": "color",
+        "$value": ""
+      },
+      "pd-chart-inactive": {
+        "$type": "color",
+        "$value": ""
+      }
+    }
+  },
+  "type-scale": {
+    "display-large": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "display-medium": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "display-small": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "headline-large": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "headline-medium": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "headline-small": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "title-large": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "title-medium": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "title-small": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "body-large": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "body-medium": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "body-small": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "label-large": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "label-small": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "label-medium": {
+      "pd-font-family": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-weight-emphasized": {
+        "$type": "text",
+        "$value": ""
+      },
+      "pd-font-size": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-line-height": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-tracking": {
+        "$type": "number",
+        "$value": ""
+      }
+    }
+  },
+  "dimensions": {
+    "border-radius": {
+      "pd-radius-xs": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-radius-none": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-radius-sm": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-radius-md": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-radius-lg": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-radius-lg-increased": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-radius-xl": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-radius-xl-increased": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-radius-full": {
+        "$type": "number",
+        "$value": ""
+      }
+    },
+    "spacing": {
+      "margin": {
+        "pd-margin-sm": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-margin-md": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-margin-lg": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-margin-xl": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-margin-2xl": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-margin-none": {
+          "$type": "number",
+          "$value": ""
+        }
+      },
+      "spacer": {
+        "pd-spacer-sm": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-spacer-md": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-spacer-xs": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-spacer-lg": {
+          "$type": "number",
+          "$value": ""
+        }
+      },
+      "padding": {
+        "pd-padding-2": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-4": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-8": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-12": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-16": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-24": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-neg-padding-16": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-neg-padding-24": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-32": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-20": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-40": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-48": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-64": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-0": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-6": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-72": {
+          "$type": "number",
+          "$value": ""
+        },
+        "pd-padding-80": {
+          "$type": "number",
+          "$value": ""
+        }
+      }
+    },
+    "border-width": {
+      "pd-stroke-thin": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-stroke-medium": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-stroke-thick": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-stroke-heavier": {
+        "$type": "number",
+        "$value": ""
+      },
+      "pd-stroke-bold": {
+        "$type": "number",
+        "$value": ""
+      }
+    }
+  },
+  "iconography": {
+    "pd-size-xs": {
+      "$type": "number",
+      "$value": ""
+    },
+    "pd-size-sm": {
+      "$type": "number",
+      "$value": ""
+    },
+    "pd-size-md": {
+      "$type": "number",
+      "$value": ""
+    },
+    "pd-size-lg": {
+      "$type": "number",
+      "$value": ""
+    },
+    "pd-size-xl": {
+      "$type": "number",
+      "$value": ""
+    },
+    "pd-size-xxs": {
+      "$type": "number",
+      "$value": ""
+    }
+  },
+  "state-layers": {
+    "pd-hover": {
+      "$type": "number",
+      "$value": ""
+    },
+    "pd-focused": {
+      "$type": "number",
+      "$value": ""
+    },
+    "pd-pressed": {
+      "$type": "number",
+      "$value": ""
+    },
+    "pd-disabled-container": {
+      "$type": "number",
+      "$value": ""
+    },
+    "pd-disabled-content": {
+      "$type": "number",
+      "$value": ""
+    },
+    "pd-scrim": {
+      "$type": "number",
+      "$value": ""
+    }
+  }
+}

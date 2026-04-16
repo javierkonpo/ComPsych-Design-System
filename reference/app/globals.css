@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+@import '../styles/themes.css';
+
+/*
+ * The generated `themes.css` file (see reference/scripts/build-themes.ts)
+ * emits one `[data-theme="<brand>-<product>"]` block per (brand × product)
+ * bundle plus a :root fallback (duplicate of compsych-gro). Switching the
+ * `data-theme` attribute on <body> cascades all --sys-* variables.
+ */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  background-color: var(
+    --sys-color-roles-surface-surface-sys-surface,
+    #ffffff
+  );
+  color: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+code {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, 'Cascadia Mono', Consolas,
+    'Liberation Mono', monospace;
+}
+
+a {
+  color: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
