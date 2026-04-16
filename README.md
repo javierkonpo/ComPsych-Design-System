@@ -26,7 +26,7 @@ Full instructions: [`docs/adoption-guide.md`](docs/adoption-guide.md).
 
 ## Reference site
 
-Live at: https://compsych-ds.vercel.app (placeholder — will update after the first deploy).
+Live at: **https://ds-compsych.vercel.app/**
 
 The `reference/` folder contains a Next.js 15 gallery app that reads directly from the generated token bundles and renders every foundation live, with a brand × product theme switcher that reskins the whole page in real time. See [`reference/README.md`](reference/README.md) for local dev and deploy instructions.
 

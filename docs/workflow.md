@@ -206,7 +206,7 @@ Local `npm run dev` inside `reference/` keeps doing the right thing automaticall
 | Deployed site shows stale values | `sync:artifacts` wasn't run before the last commit. Run it at the repo root, commit the regenerated files, push. |
 | Page renders unthemed / CSS variables empty | `reference/styles/themes.css` missing or corrupt. Run `npm run sync:artifacts`, commit, push. |
 
-Once deployed, update the placeholder URL in `README.md` and `reference/README.md`.
+Production URL: **https://ds-compsych.vercel.app/**. Preview URLs are generated per PR.
 
 ---
 

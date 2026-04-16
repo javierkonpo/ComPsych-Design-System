@@ -2,7 +2,7 @@
 
 The live visual source of truth for the ComPsych Design System. A Next.js 15 App Router project that reads from the generated token bundles in `tokens/dist/` and renders a browsable Foundations gallery with a brand × product theme switcher.
 
-Deploys to: https://compsych-ds.vercel.app (placeholder — updated after the first deploy).
+Deployed at: **https://ds-compsych.vercel.app/**
 
 ## What this app is
 
@@ -196,9 +196,9 @@ Reference deps didn't install. Most likely cause: a custom Install Command is co
 **Deployed site shows stale token values**
 You pushed a token source change without regenerating the artifacts. Run `npm run sync:artifacts`, commit the three vendored files, push.
 
-### After the first successful deploy
+### Live deployment
 
-Update the placeholder URL in the root [`README.md`](../README.md) and in the adopter docs to point at the real Vercel domain.
+The production URL is **https://ds-compsych.vercel.app/**. Every push to `main` triggers a production deploy; every PR triggers a preview deploy with its own URL.
 
 ## Known limitations
 
