@@ -154,18 +154,37 @@ Once the components gallery starts landing, each component page lives at `refere
 
 ### Deploy (Vercel)
 
-Configuration lives in `vercel.json` at the repo root:
+Configuration lives at [`reference/vercel.json`](../reference/vercel.json). The project's **Root Directory** must be set to `reference` in the Vercel dashboard — this is non-negotiable because the repo-root `package.json` contains only the Style Dictionary toolchain (no Next.js), so Vercel's Next.js auto-detection fails against the root with *"No Next.js version detected."*
 
 ```json
 {
   "framework": "nextjs",
-  "installCommand": "npm install && cd reference && npm install",
-  "buildCommand": "npm run build:tokens && cd reference && npm run build",
-  "outputDirectory": "reference/.next"
+  "installCommand": "cd .. && npm install && cd reference && npm install",
+  "buildCommand":   "cd .. && npm run build:tokens && cd reference && npm run build",
+  "outputDirectory": ".next"
 }
 ```
 
-In the Vercel dashboard: import the repo, leave Root Directory blank, and let the config drive everything. First-time deploys auto-detect Next.js from the output directory. Preview deploys fire on every PR; production deploys fire on pushes to `main`.
+The `cd ..` dance is what makes the hybrid work. Vercel runs every command from `reference/` (per Root Directory). We hop up to the repo root to install the token toolchain and build `tokens/dist/`, then hop back into `reference/` to finish. Output path resolves relative to `reference/`, so `.next` is the correct value.
+
+#### Deploy cascade
+
+1. Push to `main` on GitHub.
+2. Vercel webhook fires; build queues.
+3. Vercel clones and `cd reference`.
+4. `installCommand` — root install, then reference install.
+5. `buildCommand` — root `build:tokens` (emits 12 bundles into `tokens/dist/`), then reference `npm run build` (whose `prebuild` hook re-runs `build:tokens` and `scripts/build-themes.ts` before `next build`).
+6. Vercel serves `reference/.next`.
+
+Preview deploys run on every PR; production deploys run on pushes to `main`. A `.vercelignore` at the repo root keeps `node_modules`, `tokens/dist`, `reference/.next`, and `tokens-studio-import` out of the upload.
+
+#### Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| *"No Next.js version detected"* | Project Settings → Root Directory → `reference` → Save → redeploy. |
+| `Cannot find module '.../tokens/dist/...'` | `installCommand` isn't reaching the root. Verify `reference/vercel.json` and check the build log for the root `npm install` step. |
+| Page renders unthemed / CSS vars empty | `scripts/build-themes.ts` didn't run. Grep build log for `[build-themes] wrote 12 theme blocks` — if absent, the `prebuild` hook in `reference/package.json` was removed or broken. |
 
 Once deployed, update the placeholder URL in `README.md` and `reference/README.md`.
 

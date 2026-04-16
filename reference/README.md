@@ -128,23 +128,57 @@ Only `sys.*` tokens are applied in UI. This applies to this reference app too. N
 1. Add the token upstream (see the "How to add a token" recipe in the root `CLAUDE.md`), or
 2. Document the gap explicitly on-page (see `elevation/page.tsx` for how to do this cleanly).
 
-## Vercel deployment
+## Vercel Deployment
 
-Vercel config lives in `vercel.json` at the **repo root** (not this folder). The configuration:
+### Required project setting
 
-- Install command: installs both the root (for `build:tokens` / `tsx`) and reference (for Next.js).
-- Build command: `npm run build:tokens && cd reference && npm run build`.
-- Output directory: `reference/.next`.
-- Framework: `nextjs`.
+The Vercel project's **Root Directory** must be set to `reference` (Settings → General → Root Directory). Without this, Vercel's Next.js auto-detection looks at the repo root and fails with *"No Next.js version detected"* — the root `package.json` only contains the token-pipeline toolchain, not Next.
 
-To deploy:
+### What drives the build
 
-1. Import the repo into Vercel.
-2. Leave "Root Directory" blank — the repo root (the default).
-3. Vercel will pick up `vercel.json` at the root and use those commands.
-4. The framework is auto-detected as Next.js from the output directory.
+Configuration lives in [`reference/vercel.json`](./vercel.json):
 
-No further Vercel dashboard tweaks should be required.
+```json
+{
+  "framework": "nextjs",
+  "installCommand": "cd .. && npm install && cd reference && npm install",
+  "buildCommand":   "cd .. && npm run build:tokens && cd reference && npm run build",
+  "outputDirectory": ".next"
+}
+```
+
+Why `cd ..`? The Next.js app depends on `tokens/dist/` being present, and `tokens/dist/` is produced by the Style Dictionary toolchain that lives in the **repo root** `package.json`. Both commands hop up one level, run the root step, then hop back into `reference/` to finish. Vercel's Root Directory is still `reference/`, so Next's auto-detection succeeds and `outputDirectory` resolves against the reference folder.
+
+### Deploy cascade (git push → live site)
+
+1. You push to `main` on GitHub.
+2. Vercel's GitHub integration receives the webhook and enqueues a build.
+3. Vercel checks out the repo, `cd`s into `reference/` (per Root Directory).
+4. `installCommand` runs: root `npm install` (Style Dictionary, tsx, typescript), then `reference/npm install` (Next.js, React, Tailwind v4, Lucide).
+5. `buildCommand` runs:
+   - `cd ..` → `npm run build:tokens` — emits 12 bundles under `tokens/dist/`.
+   - `cd reference` → `npm run build` — triggers the `prebuild` hook (which re-runs `build:tokens` and `scripts/build-themes.ts`) and then `next build`.
+6. Vercel picks up `reference/.next/` as the output and deploys.
+
+The `build:tokens` step runs twice during a Vercel deploy (once explicitly in `buildCommand`, once inside `reference/`'s `prebuild` hook). This is intentional: the `prebuild` hook is what makes `npm run build` work standalone on a developer laptop, and leaving it in place means the reference build stays self-contained. The extra ~3 seconds on Vercel are cheap insurance against drift.
+
+### Troubleshooting
+
+**"No Next.js version detected. Make sure your package.json has 'next' in either 'dependencies' or 'devDependencies'."**
+Vercel's Root Directory is not set to `reference`. Fix: Project Settings → General → Root Directory → `reference` → Save → redeploy.
+
+**`Cannot find module '.../tokens/dist/...'` during build**
+The install step didn't reach the repo root — `tokens/dist/` was never created. Fix: verify `installCommand` in `reference/vercel.json` is exactly `cd .. && npm install && cd reference && npm install`. A fresh push should re-run.
+
+**`next` is missing from `dependencies`**
+Vercel's auto-detection and optimization features only inspect `dependencies`, not `devDependencies`. In `reference/package.json`, `next` must live under `dependencies`. (It already does; this is here in case a future refactor moves it.)
+
+**Build succeeds but page is unthemed / CSS variables look empty**
+The `scripts/build-themes.ts` step failed silently or was skipped. Fix: check the Vercel build log for `[build-themes] wrote 12 theme blocks to ...` — if it's missing, the `prebuild` hook didn't fire. Verify `reference/package.json` still has `"prebuild"` chained to `tsx scripts/build-themes.ts`.
+
+### After the first successful deploy
+
+Update the placeholder URL in the root [`README.md`](../README.md) and in the adopter docs to point at the real Vercel domain.
 
 ## Known limitations
 

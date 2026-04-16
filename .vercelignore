@@ -1,0 +1,18 @@
+# Install artifacts — Vercel installs fresh
+node_modules
+reference/node_modules
+
+# Build outputs — Vercel builds fresh
+reference/.next
+tokens/dist
+reference/styles/themes.css
+reference/lib/generated-tokens.ts
+
+# Tokens Studio import workspace — never deploys
+tokens-studio-import
+
+# VCS + logs + OS cruft
+.git
+*.log
+.DS_Store
+Thumbs.db
