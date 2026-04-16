@@ -6,9 +6,12 @@ build/
 # Node
 node_modules/
 
-# Generated at build time by scripts/build-themes.ts
-lib/generated-tokens.ts
-styles/themes.css
+# NOTE: lib/generated-tokens.ts and styles/themes.css are INTENTIONALLY
+# committed. Both are produced by scripts/build-themes.ts from the
+# committed tokens/dist/ bundles. Committing them keeps Vercel's default
+# Next.js build working with zero custom configuration. Re-run
+# `npm run build:themes` after any token change so the committed files
+# stay in sync.
 
 # Env
 .env*.local

@@ -154,41 +154,57 @@ Once the components gallery starts landing, each component page lives at `refere
 
 ### Deploy (Vercel)
 
-Configuration lives at [`reference/vercel.json`](../reference/vercel.json). Two Vercel project settings are required:
+Vercel deployment uses a **vendored-artifacts** strategy. Three generated files are committed to the repo so Vercel only needs to run a plain Next.js build:
 
-1. **Root Directory** = `reference` (Settings → General). Without this, Next.js auto-detection reads the root `package.json` — which has no `next` dependency — and fails with *"No Next.js version detected."*
-2. **"Include source files outside of the Root Directory in the Build Step"** = **enabled**. Without this, the `cd ..` in our install/build commands lands on a stubbed empty directory because Vercel only uploads files inside the Root Directory. Symptom: `npm run build` exits 127 because `tsx` was never installed at the root.
+- `tokens/dist/` — Style Dictionary output (12 bundles × 3 files).
+- `reference/styles/themes.css` — concatenated per-theme CSS consumed by `app/globals.css`.
+- `reference/lib/generated-tokens.ts` — typed `sys` import used by reference UI.
+
+With those in place, Vercel's auto-detected Next.js build works without any cross-directory dance, without the "Include outside" toggle, without custom install or build commands.
+
+#### Required Vercel project setting
+
+Only one: **Settings → General → Root Directory** = `reference`. Everything else uses defaults. Any custom Install Command, Build Command, or Output Directory previously configured in the dashboard should be **cleared** — they override `vercel.json` and have been the source of past deploy failures.
+
+#### `reference/vercel.json`
+
+Minimal. This file just declares the framework; everything else defaults:
 
 ```json
 {
-  "framework": "nextjs",
-  "installCommand": "cd .. && npm install && cd reference && npm install",
-  "buildCommand":   "cd .. && npm run build:tokens && cd reference && npm run build",
-  "outputDirectory": ".next"
+  "framework": "nextjs"
 }
 ```
 
-The `cd ..` dance is what makes the hybrid work. Vercel runs every command from `reference/` (per Root Directory). We hop up to the repo root to install the token toolchain and build `tokens/dist/`, then hop back into `reference/` to finish. Output path resolves relative to `reference/`, so `.next` is the correct value.
+#### Token change workflow
+
+The vendored artifacts are generated, not hand-edited. After changing any token source JSON:
+
+```
+npm run sync:artifacts    # at repo root — runs build:tokens + build:themes
+```
+
+Then commit **both** the source changes and the three regenerated artifacts (`tokens/dist/`, `reference/styles/themes.css`, `reference/lib/generated-tokens.ts`). Skipping this step deploys stale values to Vercel until the next sync commit lands.
+
+Local `npm run dev` inside `reference/` keeps doing the right thing automatically via the `predev` hook, so dev-time updates don't require manual syncing.
 
 #### Deploy cascade
 
 1. Push to `main` on GitHub.
 2. Vercel webhook fires; build queues.
 3. Vercel clones and `cd reference`.
-4. `installCommand` — root install, then reference install.
-5. `buildCommand` — root `build:tokens` (emits 12 bundles into `tokens/dist/`), then reference `npm run build` (whose `prebuild` hook re-runs `build:tokens` and `scripts/build-themes.ts` before `next build`).
+4. `npm install` — installs Next.js, React, Tailwind v4, Lucide.
+5. `npm run build` — runs `next build`. Reads the committed `styles/themes.css` and `lib/generated-tokens.ts` directly.
 6. Vercel serves `reference/.next`.
-
-Preview deploys run on every PR; production deploys run on pushes to `main`. A `.vercelignore` at the repo root keeps `node_modules`, `tokens/dist`, `reference/.next`, and `tokens-studio-import` out of the upload.
 
 #### Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
-| *"No Next.js version detected"* | Project Settings → Root Directory → `reference` → Save → redeploy. |
-| `Command "npm run build" exited with 127` | Enable **"Include source files outside of the Root Directory in the Build Step"** (same settings section). The `cd ..` in our commands needs access to the real repo root for `tsx` and the token toolchain. |
-| `Cannot find module '.../tokens/dist/...'` | Same toggle as above — the root `build:tokens` step never produced the bundles because the root `package.json` wasn't visible to the build sandbox. |
-| Page renders unthemed / CSS vars empty | `scripts/build-themes.ts` didn't run. Grep build log for `[build-themes] wrote 12 theme blocks` — if absent, the `prebuild` hook in `reference/package.json` was removed or broken. |
+| *"No Next.js version detected"* | Settings → Root Directory → `reference` → Save → redeploy. |
+| `next: command not found` / exit 127 | Dashboard has a custom Install Command overriding the default. Settings → Build & Development → clear all three command overrides, save, redeploy. |
+| Deployed site shows stale values | `sync:artifacts` wasn't run before the last commit. Run it at the repo root, commit the regenerated files, push. |
+| Page renders unthemed / CSS variables empty | `reference/styles/themes.css` missing or corrupt. Run `npm run sync:artifacts`, commit, push. |
 
 Once deployed, update the placeholder URL in `README.md` and `reference/README.md`.
 

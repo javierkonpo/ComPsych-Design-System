@@ -22,10 +22,18 @@ lerna-debug.log*
 dist/
 build/
 out/
-tokens/dist/
 .turbo/
 .cache/
 *.tsbuildinfo
+
+# NOTE: tokens/dist/ is INTENTIONALLY committed. It is the build output of
+# the Style Dictionary pipeline, and the Next.js reference app under
+# reference/ imports from it directly. Committing it keeps Vercel's default
+# Next.js auto-detection working (no custom build chain, no cd .. tricks).
+# ALWAYS run `npm run build:tokens` before committing token source changes,
+# so the committed dist/ stays in sync with the JSON sources.
+!tokens/dist/
+!tokens/dist/**
 
 # Tokens Studio import workspace — raw source, extracted files, migration
 # script, and report. Only the migrated tokens/*.json files are committed.

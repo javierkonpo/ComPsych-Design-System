@@ -1,7 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs",
-  "installCommand": "set -e; echo '--- [1/2] root install (for style-dictionary + tsx) ---'; cd .. && npm install && echo '--- [2/2] reference install (for next.js) ---'; cd reference && npm install",
-  "buildCommand": "set -e; echo '--- [1/2] root build:tokens ---'; cd .. && npm run build:tokens && echo '--- [2/2] reference build (runs prebuild hook, then next build) ---'; cd reference && npm run build",
-  "outputDirectory": ".next"
+  "framework": "nextjs"
 }
