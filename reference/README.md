@@ -130,9 +130,14 @@ Only `sys.*` tokens are applied in UI. This applies to this reference app too. N
 
 ## Vercel Deployment
 
-### Required project setting
+### Required project settings
 
-The Vercel project's **Root Directory** must be set to `reference` (Settings → General → Root Directory). Without this, Vercel's Next.js auto-detection looks at the repo root and fails with *"No Next.js version detected"* — the root `package.json` only contains the token-pipeline toolchain, not Next.
+Two settings, both under **Settings → General → Root Directory** in the Vercel dashboard:
+
+1. **Root Directory** must be `reference`. Without this, Vercel's Next.js auto-detection looks at the repo root and fails with *"No Next.js version detected"* — the root `package.json` only contains the token-pipeline toolchain, not Next.
+2. **"Include source files outside of the Root Directory in the Build Step"** must be **enabled**. Without this, the build environment only receives files inside `reference/`, so the `cd ..` in `installCommand` / `buildCommand` lands on a stubbed directory with no `package.json` and no `tokens/` folder. The build will then exit 127 on `npm run build` because `tsx` (from the root package) was never installed and `tokens/dist/` is never produced.
+
+Both settings need to be flipped for any deploy to succeed. The default state for fresh projects is Root Directory = repo root with the "include outside" toggle OFF.
 
 ### What drives the build
 
@@ -167,8 +172,11 @@ The `build:tokens` step runs twice during a Vercel deploy (once explicitly in `b
 **"No Next.js version detected. Make sure your package.json has 'next' in either 'dependencies' or 'devDependencies'."**
 Vercel's Root Directory is not set to `reference`. Fix: Project Settings → General → Root Directory → `reference` → Save → redeploy.
 
+**`Command "npm run build" exited with 127`**
+Exit 127 is shell-speak for "command not found." On this project, the most common cause is the **"Include source files outside of the Root Directory in the Build Step"** toggle being off — the root `npm install` silently no-ops because the root `package.json` isn't in the build sandbox, so `tsx` isn't on `PATH` when the token build tries to run. Fix: enable that toggle, save, redeploy. The build log with the toggle enabled shows `--- [1/2] root install ...` and `--- [1/2] root build:tokens ...` lines emitted by `vercel.json`; if those lines are missing or the install under them did nothing, the toggle is still off.
+
 **`Cannot find module '.../tokens/dist/...'` during build**
-The install step didn't reach the repo root — `tokens/dist/` was never created. Fix: verify `installCommand` in `reference/vercel.json` is exactly `cd .. && npm install && cd reference && npm install`. A fresh push should re-run.
+The install step didn't reach the repo root — `tokens/dist/` was never created. Same toggle as above, same fix.
 
 **`next` is missing from `dependencies`**
 Vercel's auto-detection and optimization features only inspect `dependencies`, not `devDependencies`. In `reference/package.json`, `next` must live under `dependencies`. (It already does; this is here in case a future refactor moves it.)

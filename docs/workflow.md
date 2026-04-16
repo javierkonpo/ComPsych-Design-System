@@ -154,7 +154,10 @@ Once the components gallery starts landing, each component page lives at `refere
 
 ### Deploy (Vercel)
 
-Configuration lives at [`reference/vercel.json`](../reference/vercel.json). The project's **Root Directory** must be set to `reference` in the Vercel dashboard — this is non-negotiable because the repo-root `package.json` contains only the Style Dictionary toolchain (no Next.js), so Vercel's Next.js auto-detection fails against the root with *"No Next.js version detected."*
+Configuration lives at [`reference/vercel.json`](../reference/vercel.json). Two Vercel project settings are required:
+
+1. **Root Directory** = `reference` (Settings → General). Without this, Next.js auto-detection reads the root `package.json` — which has no `next` dependency — and fails with *"No Next.js version detected."*
+2. **"Include source files outside of the Root Directory in the Build Step"** = **enabled**. Without this, the `cd ..` in our install/build commands lands on a stubbed empty directory because Vercel only uploads files inside the Root Directory. Symptom: `npm run build` exits 127 because `tsx` was never installed at the root.
 
 ```json
 {
@@ -183,7 +186,8 @@ Preview deploys run on every PR; production deploys run on pushes to `main`. A `
 | Symptom | Fix |
 |---------|-----|
 | *"No Next.js version detected"* | Project Settings → Root Directory → `reference` → Save → redeploy. |
-| `Cannot find module '.../tokens/dist/...'` | `installCommand` isn't reaching the root. Verify `reference/vercel.json` and check the build log for the root `npm install` step. |
+| `Command "npm run build" exited with 127` | Enable **"Include source files outside of the Root Directory in the Build Step"** (same settings section). The `cd ..` in our commands needs access to the real repo root for `tsx` and the token toolchain. |
+| `Cannot find module '.../tokens/dist/...'` | Same toggle as above — the root `build:tokens` step never produced the bundles because the root `package.json` wasn't visible to the build sandbox. |
 | Page renders unthemed / CSS vars empty | `scripts/build-themes.ts` didn't run. Grep build log for `[build-themes] wrote 12 theme blocks` — if absent, the `prebuild` hook in `reference/package.json` was removed or broken. |
 
 Once deployed, update the placeholder URL in `README.md` and `reference/README.md`.
