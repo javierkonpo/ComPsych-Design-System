@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { StatusPill } from '@/components/status-pill';
+import { CopyCodeBlock } from '@/components/copy-code-block';
 
 export default function AboutPage() {
   return (
@@ -328,23 +329,7 @@ function InstallStep({
       <p className="ref-body-sm" style={{ margin: 0 }}>
         {body}
       </p>
-      <pre
-        className="ref-caption font-mono overflow-x-auto"
-        style={{
-          margin: 0,
-          padding: '12px 14px',
-          borderRadius: 8,
-          backgroundColor:
-            'var(--sys-color-roles-surface-surface-container-sys-surface-container, #f3f4f6)',
-          color:
-            'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
-          fontSize: 12,
-          lineHeight: 1.55,
-          whiteSpace: 'pre',
-        }}
-      >
-        {code}
-      </pre>
+      <CopyCodeBlock code={code} label={`Copy ${title} snippet`} />
     </div>
   );
 }
