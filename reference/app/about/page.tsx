@@ -232,12 +232,6 @@ import { sys } from '@javierkonpo/design-system/themes/compsych-gro';`}
             status="planned"
             statusLabel="Planned"
             detail={<>Added as each product&rsquo;s needs are defined.</>}
-          />
-          <StatusRow
-            label="Package distribution"
-            status="planned"
-            statusLabel="Planned"
-            detail="Internal npm package for ComPsych consumption."
             last
           />
         </div>
