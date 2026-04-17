@@ -185,27 +185,6 @@ import { sys } from '@javierkonpo/design-system/themes/compsych-gro';`}
         </div>
       </Section>
 
-      <Section heading="Who maintains what">
-        <div className="grid gap-4 md:grid-cols-2">
-          <OwnershipCard
-            owner="Konpo Studio"
-            items={[
-              'Tokens',
-              'Specifications',
-              'Reference app',
-              'Adopter guides',
-            ]}
-          />
-          <OwnershipCard
-            owner="ComPsych engineering"
-            items={[
-              'Angular component implementations (web product codebases)',
-              'React Native component implementations (mobile product codebases)',
-            ]}
-          />
-        </div>
-      </Section>
-
       <Section heading="Status">
         <div
           className="rounded-lg overflow-hidden"
@@ -302,48 +281,6 @@ function InventoryCard({
       <p className="ref-body" style={{ margin: 0 }}>
         {children}
       </p>
-    </div>
-  );
-}
-
-function OwnershipCard({ owner, items }: { owner: string; items: string[] }) {
-  return (
-    <div
-      className="rounded-lg p-6 flex flex-col gap-3"
-      style={{
-        border:
-          '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
-        backgroundColor:
-          'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
-      }}
-    >
-      <div className="ref-heading-md">{owner}</div>
-      <ul className="flex flex-col gap-1.5">
-        {items.map((item) => (
-          <li
-            key={item}
-            className="ref-body flex gap-2.5 items-start"
-            style={{
-              color:
-                'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
-            }}
-          >
-            <span
-              aria-hidden
-              className="shrink-0"
-              style={{
-                width: 4,
-                height: 4,
-                borderRadius: 9999,
-                marginTop: 9,
-                backgroundColor:
-                  'var(--sys-color-roles-accent-primary-sys-primary, #075cba)',
-              }}
-            />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
