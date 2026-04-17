@@ -2,8 +2,7 @@
 
 import { sys, flattenLeaves, type TokenLeaf } from '@/lib/tokens';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
-import { RulesGrid, InContextPanel } from '@/components/rules-grid';
-import { RadiusSample } from '@/components/radius-sample';
+import { useCssVar, toPx } from '@/lib/utils';
 
 const USAGE: Record<string, string> = {
   sysRadiusNone:         'Sharp — tables, code blocks, dividers.',
@@ -35,20 +34,6 @@ export default function RadiusPage() {
           clean.
         </>
       }
-      rules={
-        <RulesGrid
-          dos={[
-            'Use radius-md as the default for cards and panels.',
-            'Use radius-full only for genuinely capsule-shaped elements (avatars, pills).',
-            'Follow the nesting rule: inner-radius = outer-radius − padding.',
-          ]}
-          donts={[
-            'Apply radius-xl to every element on a page — it loses meaning.',
-            'Mix radii across siblings that should clearly feel paired.',
-            'Pick a radius to make a one-off design fit; adjust the design.',
-          ]}
-        />
-      }
     >
       <section className="flex flex-col gap-5">
         <div className="flex flex-col gap-1 max-w-3xl">
@@ -77,56 +62,67 @@ export default function RadiusPage() {
           ))}
         </div>
       </section>
-
-      <InContextPanel>
-        <p className="ref-body max-w-2xl mb-5">
-          Nested radii: the outer card uses <code>radius-lg</code>, the button
-          inside uses <code>radius-sm</code>. The difference gives the inner
-          element breathing room and keeps both corners visually clean.
-        </p>
-        <NestedExample />
-      </InContextPanel>
     </FoundationPageShell>
   );
 }
 
-function NestedExample() {
+// ---------------------------------------------------------------------------
+// RadiusSample is inlined here (rather than imported from
+// `@/components/radius-sample`) because the separate-module version trips
+// a Next.js 15 / React 19 client-manifest bug specific to this page —
+// `next start` throws "Could not find the module
+// app/foundations/radius/page.tsx#default in the React Client Manifest"
+// and the route returns 500. Inlining the visual component into the page
+// file sidesteps the bundler edge case. Iconography and border-width
+// follow the same inline pattern for the same reason.
+// ---------------------------------------------------------------------------
+
+function RadiusSample({
+  token,
+  usage,
+}: {
+  token: TokenLeaf;
+  usage?: string;
+}) {
+  const value = useCssVar(token.cssVar);
+
   return (
-    <div
-      className="p-5 max-w-sm"
-      style={{
-        backgroundColor:
-          'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
-        border:
-          '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
-        borderRadius:
-          'calc(var(--sys-dimensions-border-radius-sys-radius-lg, 16) * 1px)',
-      }}
-    >
-      <div className="ref-heading-md mb-2">Outer card — radius-lg</div>
-      <p
-        className="ref-body-sm mb-4"
+    <div className="flex flex-col gap-2">
+      <div
+        className="w-full aspect-[3/2] flex items-center justify-center"
         style={{
-          color:
-            'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-        }}
-      >
-        Inner button uses radius-sm.
-      </p>
-      <button
-        type="button"
-        className="ref-body-sm font-medium px-4 py-2"
-        style={{
-          borderRadius:
-            'calc(var(--sys-dimensions-border-radius-sys-radius-sm, 8) * 1px)',
           backgroundColor:
-            'var(--sys-color-roles-accent-primary-sys-primary, #075cba)',
+            'var(--sys-color-roles-accent-primary-sys-primary-container, #070f36)',
           color:
-            'var(--sys-color-roles-accent-primary-sys-on-primary, #ffffff)',
+            'var(--sys-color-roles-accent-primary-sys-on-primary-container, #ffffff)',
+          borderRadius: toPx(value),
         }}
       >
-        Primary action
-      </button>
+        <span className="text-xs font-mono">{toPx(value)}</span>
+      </div>
+      <div className="flex flex-col gap-1">
+        <div className="ref-body font-medium">{token.path.at(-1)}</div>
+        {usage && (
+          <div
+            className="ref-body-sm"
+            style={{
+              color:
+                'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+            }}
+          >
+            {usage}
+          </div>
+        )}
+        <code
+          className="ref-caption font-mono"
+          style={{
+            color:
+              'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+          }}
+        >
+          sys.{token.path.join('.')}
+        </code>
+      </div>
     </div>
   );
 }

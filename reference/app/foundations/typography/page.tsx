@@ -2,7 +2,6 @@
 
 import { sys } from '@/lib/tokens';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
-import { RulesGrid, InContextPanel } from '@/components/rules-grid';
 import { TypeSpecimen } from '@/components/type-specimen';
 
 const SAMPLE = 'ComPsych helps people thrive at work and in life.';
@@ -59,20 +58,6 @@ export default function TypographyPage() {
           sizes.
         </>
       }
-      rules={
-        <RulesGrid
-          dos={[
-            'Pick one Display / Headline per page. Let the hierarchy breathe.',
-            'Use Body for prose, Label for controls and chips.',
-            'Reach for the emphasised weight variant when mid-paragraph emphasis is truly needed.',
-          ]}
-          donts={[
-            'Invent one-off font sizes to fit a design.',
-            'Mix three sizes of headlines on a single page.',
-            'Change line-height to shoehorn text into a space — shorten the text instead.',
-          ]}
-        />
-      }
     >
       <TypeSection title="Display" blurb="Biggest type. Marketing and hero moments.">
         {DISPLAY.map((r) => (
@@ -103,18 +88,6 @@ export default function TypographyPage() {
           <TypeSpecimen key={r.key} role={r.key} label={r.label} sample="Start now" />
         ))}
       </TypeSection>
-
-      <InContextPanel>
-        <p className="ref-body max-w-2xl">
-          The emphasised weight variant exists on every role. Use it for the
-          small number of moments where inline emphasis helps comprehension —
-          not as a second, louder style.
-        </p>
-        <div className="mt-4 flex flex-col gap-2">
-          <TypeSpecimen role="bodyLarge" label="Body · Large (emphasised)" sample={SAMPLE} emphasized />
-          <TypeSpecimen role="titleMedium" label="Title · Medium (emphasised)" sample={SAMPLE} emphasized />
-        </div>
-      </InContextPanel>
     </FoundationPageShell>
   );
 }

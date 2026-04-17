@@ -2,7 +2,6 @@
 
 import { sys, flattenLeaves, type TokenLeaf } from '@/lib/tokens';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
-import { RulesGrid, InContextPanel } from '@/components/rules-grid';
 import { SpacingSample } from '@/components/spacing-sample';
 
 function sortByValue(tokens: TokenLeaf[]): TokenLeaf[] {
@@ -57,20 +56,6 @@ export default function SpacingPage() {
           across every product.
         </>
       }
-      rules={
-        <RulesGrid
-          dos={[
-            'Prefer gap (spacer) over margin for sibling elements in a flex/grid container.',
-            'Use padding tokens for inner component whitespace; margin for separating unrelated blocks.',
-            'Reach for the closest step on the scale, even if it rounds the layout.',
-          ]}
-          donts={[
-            'Combine spacing tokens with arithmetic (calc(var(--...) + 2px)) to invent new sizes.',
-            'Use negative spacing to fix a broken layout — revisit the parent container instead.',
-            'Mix padding and margin tokens interchangeably; they have different meanings.',
-          ]}
-        />
-      }
     >
       <SpacingSection
         title="Padding scale"
@@ -101,14 +86,6 @@ export default function SpacingPage() {
           <SpacingSample tokens={negativePadding} maxValue={maxAbs} />
         </SpacingSection>
       )}
-
-      <InContextPanel>
-        <p className="ref-body max-w-2xl mb-5">
-          A simple card laid out with spacing tokens. Each whitespace region
-          below is labeled with the token that produced it.
-        </p>
-        <ContextCard />
-      </InContextPanel>
     </FoundationPageShell>
   );
 }
@@ -144,108 +121,3 @@ function SpacingSection({
   );
 }
 
-function ContextCard() {
-  return (
-    <div
-      className="rounded-lg flex flex-col max-w-lg"
-      style={{
-        padding:
-          'calc(var(--sys-dimensions-spacing-padding-sys-padding-24, 24) * 1px)',
-        gap:
-          'calc(var(--sys-dimensions-spacing-spacer-sys-spacer-md, 24) * 1px)',
-        backgroundColor:
-          'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
-        border:
-          '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
-      }}
-    >
-      <Annotation token="sys.dimensions.spacing.padding.sysPadding24">
-        padding-24 around the card
-      </Annotation>
-      <div className="flex flex-col gap-2">
-        <div className="ref-heading-md">Your weekly check-in</div>
-        <p
-          className="ref-body-sm"
-          style={{
-            color:
-              'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-            margin: 0,
-          }}
-        >
-          Two items waiting.
-        </p>
-      </div>
-      <Annotation token="sys.dimensions.spacing.spacer.sysSpacerMd">
-        spacer-md between header and body
-      </Annotation>
-      <div
-        className="flex"
-        style={{
-          gap:
-            'calc(var(--sys-dimensions-spacing-spacer-sys-spacer-sm, 16) * 1px)',
-        }}
-      >
-        <button
-          type="button"
-          className="rounded-md ref-body-sm font-medium"
-          style={{
-            padding:
-              'calc(var(--sys-dimensions-spacing-padding-sys-padding-8, 8) * 1px) calc(var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px)',
-            backgroundColor:
-              'var(--sys-color-roles-accent-primary-sys-primary, #075cba)',
-            color:
-              'var(--sys-color-roles-accent-primary-sys-on-primary, #ffffff)',
-          }}
-        >
-          Start
-        </button>
-        <button
-          type="button"
-          className="rounded-md ref-body-sm font-medium"
-          style={{
-            padding:
-              'calc(var(--sys-dimensions-spacing-padding-sys-padding-8, 8) * 1px) calc(var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px)',
-            backgroundColor: 'transparent',
-            color:
-              'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
-            border:
-              '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
-          }}
-        >
-          Later
-        </button>
-      </div>
-      <Annotation token="sys.dimensions.spacing.spacer.sysSpacerSm">
-        spacer-sm between button pair
-      </Annotation>
-    </div>
-  );
-}
-
-function Annotation({
-  token,
-  children,
-}: {
-  token: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div
-      className="ref-caption font-mono"
-      style={{
-        color:
-          'var(--sys-color-roles-accent-primary-sys-primary, #075cba)',
-      }}
-    >
-      <span className="font-semibold">{children}</span>{' '}
-      <span
-        style={{
-          color:
-            'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-        }}
-      >
-        — {token}
-      </span>
-    </div>
-  );
-}

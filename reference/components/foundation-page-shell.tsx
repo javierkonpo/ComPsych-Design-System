@@ -9,23 +9,19 @@ interface Props {
   description: string;
   /** 2–3 sentences of plain-language rationale. */
   whyThisMatters: ReactNode;
-  /** Typically a <RulesGrid /> with dos/donts. */
-  rules?: ReactNode;
-  /** Token displays, in-context panels — anything the foundation needs. */
+  /** Token displays — anything the foundation needs. */
   children: ReactNode;
 }
 
 /**
  * Shared layout for every foundation page. Enforces the stakeholder-facing
- * template: header → why this matters → usage rules → tokens → (optional)
- * in-context examples.
+ * template: header → why this matters → tokens.
  */
 export function FoundationPageShell({
   eyebrow = 'Foundations',
   title,
   description,
   whyThisMatters,
-  rules,
   children,
 }: Props) {
   return (
@@ -66,15 +62,6 @@ export function FoundationPageShell({
           {whyThisMatters}
         </p>
       </section>
-
-      {rules && (
-        <section className="flex flex-col gap-4">
-          <h2 className="ref-heading-lg" style={{ margin: 0 }}>
-            Usage
-          </h2>
-          {rules}
-        </section>
-      )}
 
       {children}
     </div>

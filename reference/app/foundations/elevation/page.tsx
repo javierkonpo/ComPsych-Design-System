@@ -1,7 +1,6 @@
 'use client';
 
 import { FoundationPageShell } from '@/components/foundation-page-shell';
-import { RulesGrid, InContextPanel } from '@/components/rules-grid';
 import { ElevationSample } from '@/components/elevation-sample';
 import { Callout } from '@/components/callout';
 
@@ -25,20 +24,6 @@ export default function ElevationPage() {
           floating, and which is modal — without instructions. A consistent
           ladder means users learn the metaphor once and apply it everywhere.
         </>
-      }
-      rules={
-        <RulesGrid
-          dos={[
-            'Use the lowest level that makes the surface distinct from its background.',
-            'Match elevation to the interaction metaphor: modal = lv5, menu = lv4, card = lv1.',
-            'Use a scrim (dimmed overlay) to separate modals from their underlying context.',
-          ]}
-          donts={[
-            'Nest multiple elevated surfaces to create extra visual pop — flatten instead.',
-            'Use elevation to communicate importance — use color, spacing, or hierarchy.',
-            'Apply elevation to a surface that has no interactive meaning.',
-          ]}
-        />
       }
     >
       <Callout tone="info" title="Tokens pending upstream">
@@ -78,29 +63,6 @@ export default function ElevationPage() {
           ))}
         </div>
       </section>
-
-      <InContextPanel title="Guidance">
-        <ul
-          className="ref-body flex flex-col gap-2 list-disc pl-5 max-w-3xl"
-          style={{
-            color:
-              'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
-          }}
-        >
-          <li>
-            Depth uses two cues: a shadow (primary in light mode) and a subtle
-            surface tint shift (primary in dark mode).
-          </li>
-          <li>
-            Don&rsquo;t nest elevations inside a single card — elevation
-            correlates with interaction, not importance.
-          </li>
-          <li>
-            Modal surfaces pair with a scrim over content below. The scrim is
-            not an elevation level in itself.
-          </li>
-        </ul>
-      </InContextPanel>
     </FoundationPageShell>
   );
 }

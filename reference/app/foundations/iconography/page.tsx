@@ -3,7 +3,6 @@
 import { Home } from 'lucide-react';
 import { sys, flattenLeaves, type TokenLeaf } from '@/lib/tokens';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
-import { RulesGrid, InContextPanel } from '@/components/rules-grid';
 import { useCssVar, toPx } from '@/lib/utils';
 
 const USAGE: Record<string, string> = {
@@ -33,20 +32,6 @@ export default function IconographyPage() {
           directly, so icon choice is flexible while sizing stays consistent.
         </>
       }
-      rules={
-        <RulesGrid
-          dos={[
-            'Size icons using the scale below — sm inside compact controls, md for nav, lg for callouts.',
-            'Let icon color inherit from its text context; never hard-code a color.',
-            'Pick Lucide icons that match the platform conventions your audience expects.',
-          ]}
-          donts={[
-            'Scale icons with arbitrary CSS sizes.',
-            'Apply a decorative color to an icon that appears alongside labeled text.',
-            'Ship a custom-drawn icon when a Lucide equivalent exists.',
-          ]}
-        />
-      }
     >
       <section className="flex flex-col gap-5">
         <div className="flex flex-col gap-1 max-w-3xl">
@@ -70,14 +55,6 @@ export default function IconographyPage() {
           ))}
         </div>
       </section>
-
-      <InContextPanel>
-        <p className="ref-body max-w-2xl mb-5">
-          Icons in an inline row of labels. The icon&rsquo;s color matches the
-          surrounding text, and its size steps up with the text size.
-        </p>
-        <InlineIconRow />
-      </InContextPanel>
     </FoundationPageShell>
   );
 }
@@ -139,25 +116,6 @@ function IconSample({
           sys.{token.path.join('.')}
         </code>
       </div>
-    </div>
-  );
-}
-
-function InlineIconRow() {
-  return (
-    <div className="flex items-center gap-8 flex-wrap">
-      <span className="flex items-center gap-2 ref-body-sm">
-        <Home size={16} strokeWidth={2} />
-        Home · size-xs
-      </span>
-      <span className="flex items-center gap-2 ref-body">
-        <Home size={20} strokeWidth={2} />
-        Home · size-sm
-      </span>
-      <span className="flex items-center gap-2 ref-body-lg">
-        <Home size={24} strokeWidth={2} />
-        Home · size-md
-      </span>
     </div>
   );
 }

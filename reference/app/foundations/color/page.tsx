@@ -2,7 +2,6 @@
 
 import { sys, flattenLeaves, type TokenLeaf } from '@/lib/tokens';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
-import { RulesGrid, InContextPanel } from '@/components/rules-grid';
 import { ColorSwatch } from '@/components/color-swatch';
 import { ColorRamp } from '@/components/color-ramp';
 
@@ -122,20 +121,6 @@ export default function ColorPage() {
           lands on a paired <code>on-*</code> color with verified contrast.
         </>
       }
-      rules={
-        <RulesGrid
-          dos={[
-            'Reach for a semantic role (primary, surface, error) not a hue.',
-            'Pair every container with its dedicated on-* color for text and icons.',
-            'Trust the system — the role meanings hold across all products and brands.',
-          ]}
-          donts={[
-            'Hardcode hex values in a component.',
-            'Reference a core, product, or brand token directly — only sys tokens are public.',
-            'Mix an on-primary text color over a surface container; contrast is not guaranteed.',
-          ]}
-        />
-      }
     >
       <section className="flex flex-col gap-5">
         <SectionHeading
@@ -204,18 +189,6 @@ export default function ColorPage() {
           <ColorRamp label="Chart scale" tokens={chartTokens} />
         </section>
       )}
-
-      <InContextPanel>
-        <div className="flex flex-col gap-3 max-w-2xl">
-          <p className="ref-body">
-            Below: a small card composed entirely of semantic roles — primary
-            for the CTA, surface for the background, outline for the border,
-            on-surface-variant for the secondary text. Flip the Product in the
-            header to watch every role reskin.
-          </p>
-          <MiniCard />
-        </div>
-      </InContextPanel>
     </FoundationPageShell>
   );
 }
@@ -245,44 +218,6 @@ function SectionHeading({
         </p>
       )}
     </div>
-  );
-}
-
-function MiniCard() {
-  return (
-    <article
-      className="rounded-lg p-5 flex flex-col gap-3"
-      style={{
-        backgroundColor:
-          'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
-        border:
-          '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
-      }}
-    >
-      <div className="ref-heading-md">Upcoming appointment</div>
-      <p
-        className="ref-body-sm"
-        style={{
-          color:
-            'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-          margin: 0,
-        }}
-      >
-        Thursday at 2:00 PM with Dr. Chen. Join link sent to your email.
-      </p>
-      <button
-        type="button"
-        className="self-start rounded-md px-4 py-2 ref-body-sm font-medium transition-opacity hover:opacity-90"
-        style={{
-          backgroundColor:
-            'var(--sys-color-roles-accent-primary-sys-primary, #075cba)',
-          color:
-            'var(--sys-color-roles-accent-primary-sys-on-primary, #ffffff)',
-        }}
-      >
-        Add to calendar
-      </button>
-    </article>
   );
 }
 

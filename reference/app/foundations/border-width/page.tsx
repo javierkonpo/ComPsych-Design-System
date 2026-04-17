@@ -2,7 +2,6 @@
 
 import { sys, flattenLeaves, type TokenLeaf } from '@/lib/tokens';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
-import { RulesGrid, InContextPanel } from '@/components/rules-grid';
 import { useCssVar, toPx } from '@/lib/utils';
 
 const USAGE: Record<string, string> = {
@@ -31,20 +30,6 @@ export default function BorderWidthPage() {
           thinking.
         </>
       }
-      rules={
-        <RulesGrid
-          dos={[
-            'Use stroke-thin as the default for dividers and field borders.',
-            'Use an inset outline or box-shadow for focus/selected — not a real border change.',
-            'Step up one weight at a time to signal increasing emphasis.',
-          ]}
-          donts={[
-            'Swap border-width on hover or focus — that causes layout shift.',
-            'Introduce fractional pixel widths to hit a specific visual.',
-            'Use stroke-bold on routine UI — it should stand out, not be everywhere.',
-          ]}
-        />
-      }
     >
       <section className="flex flex-col gap-5">
         <div className="flex flex-col gap-1 max-w-3xl">
@@ -72,16 +57,6 @@ export default function BorderWidthPage() {
           ))}
         </div>
       </section>
-
-      <InContextPanel>
-        <p className="ref-body max-w-2xl">
-          The default bordered input below uses <code>stroke-thin</code>. On
-          focus, we swap in an <strong>outline</strong> at{' '}
-          <code>stroke-thick</code> — the visible weight doubles, but the
-          element&rsquo;s box size doesn&rsquo;t, so nothing shifts.
-        </p>
-        <DemoInput />
-      </InContextPanel>
     </FoundationPageShell>
   );
 }
@@ -141,40 +116,3 @@ function BorderSample({
   );
 }
 
-function DemoInput() {
-  return (
-    <div
-      className="mt-4 flex flex-col gap-2 max-w-sm"
-      style={{ color: 'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)' }}
-    >
-      <label htmlFor="demo-border-input" className="ref-body-sm font-medium">
-        Email address
-      </label>
-      <input
-        id="demo-border-input"
-        type="email"
-        placeholder="you@example.com"
-        className="px-3 ref-body"
-        style={{
-          height: 40,
-          borderRadius:
-            'calc(var(--sys-dimensions-border-radius-sys-radius-sm, 8) * 1px)',
-          border:
-            '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
-          backgroundColor:
-            'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
-        }}
-      />
-      <div
-        className="ref-caption"
-        style={{
-          color:
-            'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-        }}
-      >
-        Click into the field to see the focus outline — same element size,
-        heavier weight.
-      </div>
-    </div>
-  );
-}
