@@ -11,7 +11,6 @@ const NAV_SECTIONS: Array<{
     heading: 'Overview',
     items: [
       { href: '/about', label: 'About' },
-      { href: '/', label: 'Home' },
     ],
   },
   {
@@ -63,7 +62,7 @@ export function Nav() {
     >
       <div className="p-6 flex flex-col gap-7">
         <Link
-          href="/"
+          href="/about"
           className="block"
           style={{
             textDecoration: 'none',
