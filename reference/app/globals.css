@@ -53,8 +53,23 @@ a:hover {
 /* ------------------------------------------------------------------ */
 /* Local type scale for the reference-app chrome (nav, headings, body
    microcopy). References system typography where it fits; otherwise
-   uses a small local scale that composes cleanly with sys tokens.   */
+   uses a small local scale that composes cleanly with sys tokens.
+
+   Headline stack tries Google Sans first (locally installed on many
+   Google / Android / ChromeOS devices; not on Google Fonts), then DM
+   Sans (self-hosted via next/font as the canonical substitute), then
+   falls back to Inter / system. Body copy stays on Inter.          */
 /* ------------------------------------------------------------------ */
+
+.ref-heading-display,
+.ref-heading-xl,
+.ref-heading-lg,
+.ref-heading-md {
+  font-family:
+    'Google Sans Text', 'Google Sans', var(--font-display), var(--font-inter),
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+}
 
 .ref-heading-display {
   font-size: 44px;
