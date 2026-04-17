@@ -70,16 +70,6 @@ export function Nav() {
           }}
         >
           <ComPsychLogo />
-          <span
-            className="block ref-caption uppercase tracking-wider font-medium mt-1"
-            style={{
-              color:
-                'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-              letterSpacing: '0.08em',
-            }}
-          >
-            Design System
-          </span>
         </Link>
 
         {NAV_SECTIONS.map((section) => (
