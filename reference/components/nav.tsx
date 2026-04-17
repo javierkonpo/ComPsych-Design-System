@@ -3,9 +3,16 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+type NavItem = {
+  href: string;
+  label: string;
+  muted?: boolean;
+  disabled?: boolean;
+};
+
 const NAV_SECTIONS: Array<{
   heading: string;
-  items: Array<{ href: string; label: string; muted?: boolean }>;
+  items: NavItem[];
 }> = [
   {
     heading: 'Overview',
@@ -27,7 +34,7 @@ const NAV_SECTIONS: Array<{
   },
   {
     heading: 'Components',
-    items: [{ href: '/components', label: 'Gallery', muted: true }],
+    items: [{ href: '/components', label: 'Coming soon', muted: true, disabled: true }],
   },
 ];
 
@@ -91,6 +98,25 @@ export function Nav() {
                     ? pathname === '/'
                     : pathname === item.href ||
                       pathname.startsWith(item.href + '/');
+
+                if (item.disabled) {
+                  return (
+                    <li key={item.href}>
+                      <span
+                        aria-disabled="true"
+                        className="block px-2.5 py-1.5 rounded text-sm italic select-none cursor-not-allowed"
+                        style={{
+                          color:
+                            'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+                          opacity: 0.75,
+                        }}
+                      >
+                        {item.label}
+                      </span>
+                    </li>
+                  );
+                }
+
                 return (
                   <li key={item.href}>
                     <Link
@@ -110,17 +136,6 @@ export function Nav() {
                       }}
                     >
                       {item.label}
-                      {item.muted && (
-                        <span
-                          className="ml-2 ref-caption"
-                          style={{
-                            color:
-                              'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-                          }}
-                        >
-                          coming soon
-                        </span>
-                      )}
                     </Link>
                   </li>
                 );
