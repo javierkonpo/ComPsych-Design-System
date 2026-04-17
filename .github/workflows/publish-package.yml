@@ -1,0 +1,50 @@
+name: Publish @compsych/design-system
+
+# Publishes the package to GitHub Packages (npm.pkg.github.com)
+# whenever a release is published in this repo, or on manual dispatch.
+#
+# To cut a release:
+#   1. bump `packages/design-system/package.json` version
+#   2. commit + push
+#   3. `gh release create vX.Y.Z --generate-notes`
+# This workflow runs automatically when the release is published, rebuilds
+# the package from source, and pushes to GitHub Packages.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@compsych'
+
+      - name: Install root deps
+        run: npm install
+
+      - name: Install package deps
+        run: cd packages/design-system && npm install
+
+      - name: Build tokens
+        run: npm run build:tokens
+
+      - name: Build package contents
+        run: npm run build:package
+
+      - name: Publish
+        run: cd packages/design-system && npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

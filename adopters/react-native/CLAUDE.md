@@ -6,20 +6,33 @@ This file is dropped into the root of a React Native project that consumes the C
 
 ## What this project consumes
 
-- **Tokens** as a TypeScript export, imported from the generated TS output of the DS repo.
-- **Component specs** as the source of truth for every UI component. Canonical specs live in the DS repo at `specs/<component-name>.spec.md`.
+- **Tokens** as a TypeScript export from the `@compsych/design-system` npm package (published to GitHub Packages under the `@compsych` scope).
+- **Component specs** shipped inside the same package at `@compsych/design-system/specs/<component-name>.spec.md`. Canonical source lives in the DS repo at `specs/<component-name>.spec.md`.
 
 This project does NOT import components from the DS. React Native components are implemented here, generated from the specs. The specs — not the React reference — are authoritative.
 
 ---
 
-## Where tokens live in this project
+## Installing and importing tokens
 
-The generated TypeScript file exposes the `sys` namespace:
+Install once:
+
+```bash
+npm install @compsych/design-system
+```
+
+(Requires a `.npmrc` that points the `@compsych` scope at GitHub Packages. See the repo's [`INSTALL.md`](../../INSTALL.md).)
+
+Import the theme bundle that matches the product this codebase ships. Both named exports are supported:
 
 ```ts
-import { sys } from '@compsych/ds-tokens';
+// Pick one:
+import { sys } from '@compsych/design-system/themes/compsych-gro';
+import { tokens } from '@compsych/design-system/themes/compsych-gro';
+// tokens.sys === sys
 ```
+
+Swap `compsych-gro` for the brand × product your build targets — one of `compsych-{gro,crc,gn,fmla}` or `brand-{b,c}-{gro,crc,gn,fmla}`.
 
 Real shape of the current generated `tokens.ts`:
 
@@ -102,29 +115,36 @@ const styles = StyleSheet.create({
 
 ## Applying the active product theme
 
-React Native has no CSS. Use a theme provider pattern via React context.
+React Native has no CSS. Each bundle is a self-contained `sys` tree — the simplest pattern is to import one bundle and expose its `sys` value through React context.
 
 ```tsx
 import { createContext, useContext, PropsWithChildren } from 'react';
-import { tokens } from '@compsych/ds-tokens';
+import { sys as defaultSys } from '@compsych/design-system/themes/compsych-gro';
 
-type Product = 'gro' | 'crc' | 'gn' | 'fmla';
-type Brand   = 'compsych' | 'brandB' | 'brandC';
+type Sys = typeof defaultSys;
 
-const DsContext = createContext<{ brand: Brand; product: Product }>({
-  brand: 'compsych',
-  product: 'gro',
-});
+const DsContext = createContext<Sys>(defaultSys);
 
-export function DsProvider({ brand, product, children }: PropsWithChildren<{ brand: Brand; product: Product }>) {
-  return <DsContext.Provider value={{ brand, product }}>{children}</DsContext.Provider>;
+export function DsProvider({ sys, children }: PropsWithChildren<{ sys: Sys }>) {
+  return <DsContext.Provider value={sys}>{children}</DsContext.Provider>;
 }
 
 export function useSys() {
-  const { brand, product } = useContext(DsContext);
-  return tokens[brand][product].sys; // sys namespace for the active (brand, product)
+  return useContext(DsContext);
 }
 ```
+
+At the app root, pick the bundle that matches your build:
+
+```tsx
+import { sys } from '@compsych/design-system/themes/compsych-fmla';
+// ...
+<DsProvider sys={sys}>
+  <App />
+</DsProvider>
+```
+
+If the project needs to swap themes at runtime (e.g. a white-label preview for internal tooling), import multiple bundles and switch the context value. Coordinate with the DS team before building this — most production surfaces ship one bundle.
 
 Inside components, read tokens via the hook:
 
@@ -155,17 +175,17 @@ export function Button({ label, onPress }: Props) {
 
 Destructure the roles you need at the top of the render to keep the inline paths short.
 
-The exact shape of the generated token bundle depends on the build strategy. Ask the DS team if unsure.
-
 ---
 
 ## Finding the canonical spec
 
-Before implementing any UI, read the spec:
+Before implementing any UI, read the spec. The specs ship inside the package:
 
 ```
-<compsych-ds-repo>/specs/<component-name>.spec.md
+node_modules/@compsych/design-system/specs/<component-name>.spec.md
 ```
+
+(The same files live in the DS repo at `specs/<component-name>.spec.md` if you prefer to browse them on GitHub.)
 
 Pay special attention to:
 

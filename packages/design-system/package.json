@@ -1,0 +1,51 @@
+{
+  "name": "@compsych/design-system",
+  "version": "0.1.0",
+  "description": "ComPsych Design System — token bundles (12 brand\u00d7product combinations) and component specifications, consumed by ComPsych's Angular web and React Native mobile applications.",
+  "license": "UNLICENSED",
+  "author": "Konpo Studio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/javierkonpo/ComPsych-Design-System.git",
+    "directory": "packages/design-system"
+  },
+  "homepage": "https://ds-compsych.vercel.app/",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "sideEffects": [
+    "./themes/*.css"
+  ],
+  "files": [
+    "themes",
+    "specs",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./themes/compsych-gro.ts",
+      "default": "./themes/compsych-gro.ts"
+    },
+    "./themes/*.css": "./themes/*.css",
+    "./themes/*": {
+      "types": "./themes/*.ts",
+      "default": "./themes/*.ts"
+    },
+    "./specs/*": "./specs/*"
+  },
+  "scripts": {
+    "build": "tsx scripts/build-package.ts",
+    "prepack": "tsx scripts/build-package.ts"
+  },
+  "devDependencies": {
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  },
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "compsych",
+    "style-dictionary"
+  ]
+}

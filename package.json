@@ -8,11 +8,14 @@
     "build:tokens": "tsx tokens/build.ts",
     "clean:tokens": "tsx tokens/build.ts --clean",
     "typecheck:tokens": "tsc --noEmit tokens/dist/compsych-gro/tokens.ts",
+    "build:package": "cd packages/design-system && npx tsx scripts/build-package.ts",
+    "pack:package": "cd packages/design-system && npm pack",
     "dev": "cd reference && npm run dev",
-    "build": "npm run build:tokens && cd reference && npm run build:themes && npm run build",
+    "build": "npm run build:tokens && npm run build:package && cd reference && npm run build:themes && npm run build",
     "build:reference": "cd reference && npm run build:themes && npm run build",
-    "sync:artifacts": "npm run build:tokens && cd reference && npm run build:themes",
-    "install:reference": "cd reference && npm install"
+    "sync:artifacts": "npm run build:tokens && npm run build:package && cd reference && npm run build:themes",
+    "install:reference": "cd reference && npm install",
+    "install:package": "cd packages/design-system && npm install"
   },
   "author": "Konpo Studio",
   "license": "UNLICENSED",

@@ -4,7 +4,7 @@ The code-layer translation of the ComPsych design system, consumed by ComPsych's
 
 ## For ComPsych engineering teams
 
-If you're here to adopt the system in a codebase, start with **[INSTALL.md](INSTALL.md)** — install commands, theme imports, and Claude Code prompts for generating components. The file is currently marked as a placeholder until the npm package ships.
+If you're here to adopt the system in a codebase, start with **[INSTALL.md](INSTALL.md)** — install commands, theme imports, and Claude Code prompts for generating components. The `@compsych/design-system` package is published to GitHub Packages under the private `@compsych` scope.
 
 If you want the visual walkthrough, open **[the reference app](https://ds-compsych.vercel.app/)** and start on the "About" page.
 
@@ -21,14 +21,18 @@ The canonical source of truth is the **specs + tokens**. ComPsych's Angular and 
 
 ## Quick start (adopting the system)
 
-1. Install the generated token packages in your project (publishing workflow documented in `docs/adoption-guide.md`).
-2. Copy the adopter `CLAUDE.md` into your project root:
+1. Authenticate npm with GitHub Packages for the `@compsych` scope (see [`INSTALL.md`](INSTALL.md)).
+2. Install the package:
+   ```bash
+   npm install @compsych/design-system
+   ```
+3. Import the theme bundle that matches the product you're building (twelve bundles: three brands × four products).
+4. Copy the adopter `CLAUDE.md` into your project root:
    - Angular: `adopters/angular/CLAUDE.md`
    - React Native: `adopters/react-native/CLAUDE.md`
-3. Configure the active product (`gro`, `crc`, `gn`, or `fmla`) and, if applicable, the active brand.
-4. Build UI using only `sys.*` tokens. See `specs/foundations.md` for the token catalog and `specs/` for component specs.
+5. Build UI using only `sys.*` tokens. See `specs/foundations.md` for the token catalog and `specs/` for component specs.
 
-Full instructions: [`docs/adoption-guide.md`](docs/adoption-guide.md).
+Full instructions: [`INSTALL.md`](INSTALL.md).
 
 ## Reference site
 
@@ -49,19 +53,22 @@ npm run build          # builds tokens + reference for production
 
 ```
 compsych-ds/
-├── CLAUDE.md               Instructions for Claude Code sessions working in this repo.
-├── README.md               This file.
-├── manifest.json           Machine-readable inventory of brands, products, tokens, components.
-├── tokens/                 The four-tier token source files + build config.
-│   ├── brand/              Tier 4 — raw values per brand (white-label).
-│   ├── core.json           Tier 1 — raw primitives.
-│   ├── product/            Tier 3 — semantic role mappings per product.
-│   ├── system.json         Tier 2 — the only tier applied in UI.
-│   └── build.ts            Style Dictionary configuration.
-├── specs/                  Framework-agnostic component specs and foundations documentation.
-├── reference/              Next.js 15 reference gallery — live visual source of truth.
-├── adopters/               Drop-in CLAUDE.md files for Angular and React Native projects.
-└── docs/                   Adoption guide and internal workflow docs.
+├── CLAUDE.md                     Instructions for Claude Code sessions working in this repo.
+├── README.md                     This file.
+├── INSTALL.md                    Install guide for ComPsych adopter projects.
+├── manifest.json                 Machine-readable inventory of brands, products, tokens, components.
+├── tokens/                       The four-tier token source files + build config.
+│   ├── brand/                    Tier 4 — raw values per brand (white-label).
+│   ├── core.json                 Tier 1 — raw primitives.
+│   ├── product/                  Tier 3 — semantic role mappings per product.
+│   ├── system.json               Tier 2 — the only tier applied in UI.
+│   └── build.ts                  Style Dictionary configuration.
+├── packages/
+│   └── design-system/            @compsych/design-system — the distributable npm package.
+├── specs/                        Framework-agnostic component specs and foundations documentation.
+├── reference/                    Next.js 15 reference gallery — live visual source of truth.
+├── adopters/                     Drop-in CLAUDE.md files for Angular and React Native projects.
+└── docs/                         Adoption guide and internal workflow docs.
 ```
 
 ## The four-tier architecture (short)

@@ -6,26 +6,30 @@ This file is dropped into the root of an Angular project that consumes the ComPs
 
 ## What this project consumes
 
-- **Tokens** as CSS custom properties, loaded from the generated CSS output of the DS repo.
-- **Component specs** as the source of truth for every UI component. Canonical specs live in the DS repo at `specs/<component-name>.spec.md`.
+- **Tokens** as CSS custom properties, loaded from the `@compsych/design-system` npm package (published to GitHub Packages under the `@compsych` scope).
+- **Component specs** shipped inside the same package at `@compsych/design-system/specs/<component-name>.spec.md`. Canonical source lives in the DS repo at `specs/<component-name>.spec.md`.
 
 This project does NOT import components from the DS. Angular components are implemented here, generated from the specs. The specs — not the React reference — are authoritative.
 
 ---
 
-## Where tokens live in this project
+## Installing and importing tokens
 
-The generated CSS token file is imported at app startup. Typical path:
+Install once:
 
+```bash
+npm install @compsych/design-system
 ```
-src/styles/ds-tokens.css
-```
 
-It is imported in `src/styles.scss` (or `src/styles.css`) with:
+(Requires a `.npmrc` that points the `@compsych` scope at GitHub Packages. See the repo's [`INSTALL.md`](../../INSTALL.md).)
+
+Import the theme bundle for the product this codebase ships. In `src/styles.scss` (or `src/styles.css`):
 
 ```scss
-@import 'ds-tokens.css';
+@import '@compsych/design-system/themes/compsych-gro.css';
 ```
+
+Swap `compsych-gro` for the brand × product your build targets — one of `compsych-{gro,crc,gn,fmla}` or `brand-{b,c}-{gro,crc,gn,fmla}`.
 
 The file exposes every `sys.*` token as a CSS custom property. Real names from the current build:
 
@@ -75,44 +79,28 @@ Incorrect:
 
 ---
 
-## Applying the active product theme
+## Applying the active theme
 
-The active product is set on the root element via a `data-theme` attribute:
+The simplest pattern: import a single brand × product bundle. The bundle's `:root` block defines every `--sys-*` variable. The whole page inherits that theme — no data-attribute needed.
 
-```html
-<html data-theme="gro">
+```scss
+// src/styles.scss
+@import '@compsych/design-system/themes/compsych-gro.css';
 ```
 
-Valid values: `gro` (GuidanceResources), `crc` (ResourceCenter), `gn` (GuidanceNow), `fmla` (AbsenceResources).
-
-If you need to switch themes dynamically at runtime, either:
-
-1. Mutate the attribute on `document.documentElement` from a `ThemeService`, and ensure the loaded `ds-tokens.css` file contains rules scoped under `[data-theme="..."]` selectors (build-time configuration).
-2. Or load a different compiled token bundle (one file per product) at startup.
-
-Ask the DS team which strategy is in use for this project. Build-time selection is simpler and faster; runtime switching requires the multi-theme CSS output.
-
----
-
-## Applying the active brand
-
-For white-label deployments, the active brand is set with a `data-brand` attribute on the same root element:
-
-```html
-<html data-brand="compsych" data-theme="gro">
-```
-
-If this project ships only the default `compsych` brand, the attribute can be omitted. If the project supports multiple brands, it must be set at bootstrap before any component renders.
+If the project needs to switch themes at runtime (e.g. white-label preview for internal tooling), import multiple bundles and namespace them with a `data-theme` attribute in a small custom stylesheet, mirroring the pattern used by the reference app. Coordinate with the DS team before building this — most production surfaces ship one bundle.
 
 ---
 
 ## Finding the canonical spec
 
-Before implementing any UI, read the spec:
+Before implementing any UI, read the spec. The specs ship inside the package:
 
 ```
-<compsych-ds-repo>/specs/<component-name>.spec.md
+node_modules/@compsych/design-system/specs/<component-name>.spec.md
 ```
+
+(The same files live in the DS repo at `specs/<component-name>.spec.md` if you prefer to browse them on GitHub.)
 
 The spec defines the props, events, visual spec, states, behavior, and accessibility requirements. Match them exactly.
 
