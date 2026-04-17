@@ -11,23 +11,38 @@ import {
 } from '@/lib/tokens';
 import { useTheme } from '@/lib/theme-context';
 
+/**
+ * The two-dropdown switcher surfaced in the top header bar. Does not own
+ * any surrounding chrome (title, label, readout) — that lives in HeaderBar.
+ */
 export function ThemeSwitcher() {
   const { brand, product, setBrand, setProduct, isPlaceholder } = useTheme();
 
   const selectStyle: React.CSSProperties = {
-    padding: '6px 10px',
-    borderRadius: 'var(--sys-dimensions-border-radius-sys-radius-sm, 6px)',
-    border: '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
-    backgroundColor: 'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
-    color: 'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
+    height: 32,
+    padding: '0 8px',
+    borderRadius:
+      'var(--sys-dimensions-border-radius-sys-radius-sm, 6px)',
+    border:
+      '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
+    backgroundColor:
+      'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
+    color:
+      'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
     fontSize: 13,
-    minWidth: 120,
+    minWidth: 160,
+    maxWidth: 200,
+  };
+
+  const labelStyle: React.CSSProperties = {
+    color:
+      'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
   };
 
   return (
     <div className="flex items-center gap-3" aria-label="Active theme">
-      <label className="flex items-center gap-2 text-xs uppercase tracking-wide opacity-70">
-        Brand
+      <label className="flex items-center gap-1.5 text-xs" style={labelStyle}>
+        <span>Brand</span>
         <select
           aria-label="Brand"
           value={brand}
@@ -42,8 +57,8 @@ export function ThemeSwitcher() {
         </select>
       </label>
 
-      <label className="flex items-center gap-2 text-xs uppercase tracking-wide opacity-70">
-        Product
+      <label className="flex items-center gap-1.5 text-xs" style={labelStyle}>
+        <span>Product</span>
         <select
           aria-label="Product"
           value={product}

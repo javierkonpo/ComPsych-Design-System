@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ThemeSwitcher } from './theme-switcher';
 
 const NAV_SECTIONS: Array<{
   heading: string;
@@ -15,7 +14,6 @@ const NAV_SECTIONS: Array<{
   {
     heading: 'Foundations',
     items: [
-      { href: '/foundations', label: 'Index' },
       { href: '/foundations/color', label: 'Color' },
       { href: '/foundations/typography', label: 'Typography' },
       { href: '/foundations/spacing', label: 'Spacing' },
@@ -38,7 +36,8 @@ export function Nav() {
     <aside
       className="shrink-0 w-[260px] border-r overflow-y-auto sticky top-0 h-screen"
       style={{
-        borderColor: 'var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
+        borderColor:
+          'var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
         backgroundColor:
           'var(--sys-color-roles-surface-surface-container-sys-surface-container-low, #f9fafb)',
       }}
@@ -48,15 +47,9 @@ export function Nav() {
           ComPsych DS · Reference
         </Link>
 
-        <div>
-          <ThemeSwitcher />
-        </div>
-
         {NAV_SECTIONS.map((section) => (
           <div key={section.heading}>
-            <div
-              className="text-[11px] uppercase tracking-wider mb-2 opacity-60"
-            >
+            <div className="text-[11px] uppercase tracking-wider mb-2 opacity-60">
               {section.heading}
             </div>
             <ul className="flex flex-col gap-0.5">
@@ -64,7 +57,8 @@ export function Nav() {
                 const active =
                   item.href === '/'
                     ? pathname === '/'
-                    : pathname === item.href || pathname.startsWith(item.href + '/');
+                    : pathname === item.href ||
+                      pathname.startsWith(item.href + '/');
                 return (
                   <li key={item.href}>
                     <Link
