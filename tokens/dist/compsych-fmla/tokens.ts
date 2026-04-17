@@ -316,6 +316,124 @@ export const sys = {
     "sysDisabledContainer": 48,
     "sysDisabledContent": 64,
     "sysScrim": 10
+  },
+  "elevation": {
+    "sysLevel0": {
+      "shadow": {
+        "color": "#00000000",
+        "type": "dropShadow",
+        "x": 0,
+        "y": 0,
+        "blur": 0,
+        "spread": 0
+      },
+      "sysSurfaceTintOpacity": 0
+    },
+    "sysLevel1": {
+      "shadow": {
+        "1": {
+          "color": "#0000000f",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 2,
+          "blur": 4,
+          "spread": 0
+        },
+        "2": {
+          "color": "#0000000a",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 2,
+          "blur": 8,
+          "spread": 0
+        }
+      },
+      "sysSurfaceTintOpacity": 0.05
+    },
+    "sysLevel2": {
+      "shadow": {
+        "1": {
+          "color": "#00000014",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 2,
+          "blur": 4,
+          "spread": 0
+        },
+        "2": {
+          "color": "#0000001a",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 4,
+          "blur": 16,
+          "spread": 0
+        }
+      },
+      "sysSurfaceTintOpacity": 0.08
+    },
+    "sysLevel3": {
+      "shadow": {
+        "1": {
+          "color": "#0000001f",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 2,
+          "blur": 6,
+          "spread": 0
+        },
+        "2": {
+          "color": "#00000029",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 4,
+          "blur": 16,
+          "spread": 0
+        }
+      },
+      "sysSurfaceTintOpacity": 0.11
+    },
+    "sysLevel4": {
+      "shadow": {
+        "1": {
+          "color": "#0000001a",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 4,
+          "blur": 8,
+          "spread": 0
+        },
+        "2": {
+          "color": "#00000029",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 6,
+          "blur": 20,
+          "spread": 0
+        }
+      },
+      "sysSurfaceTintOpacity": 0.12
+    },
+    "sysLevel5": {
+      "shadow": {
+        "1": {
+          "color": "#00000029",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 5,
+          "blur": 8,
+          "spread": 0
+        },
+        "2": {
+          "color": "#00000029",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 8,
+          "blur": 20,
+          "spread": 0
+        }
+      },
+      "sysSurfaceTintOpacity": 0.14
+    }
   }
 } as const;
 

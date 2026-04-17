@@ -977,5 +977,67 @@
       "$type": "number",
       "$value": "{product.state-layers.pd-scrim}"
     }
+  },
+  "elevation": {
+    "sys-level-0": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": "{core.elevation.0.shadow}"
+      },
+      "sys-surface-tint-opacity": {
+        "$type": "number",
+        "$value": "{core.elevation.0.surface-tint-opacity}"
+      }
+    },
+    "sys-level-1": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": "{core.elevation.1.shadow}"
+      },
+      "sys-surface-tint-opacity": {
+        "$type": "number",
+        "$value": "{core.elevation.1.surface-tint-opacity}"
+      }
+    },
+    "sys-level-2": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": "{core.elevation.2.shadow}"
+      },
+      "sys-surface-tint-opacity": {
+        "$type": "number",
+        "$value": "{core.elevation.2.surface-tint-opacity}"
+      }
+    },
+    "sys-level-3": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": "{core.elevation.3.shadow}"
+      },
+      "sys-surface-tint-opacity": {
+        "$type": "number",
+        "$value": "{core.elevation.3.surface-tint-opacity}"
+      }
+    },
+    "sys-level-4": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": "{core.elevation.4.shadow}"
+      },
+      "sys-surface-tint-opacity": {
+        "$type": "number",
+        "$value": "{core.elevation.4.surface-tint-opacity}"
+      }
+    },
+    "sys-level-5": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": "{core.elevation.5.shadow}"
+      },
+      "sys-surface-tint-opacity": {
+        "$type": "number",
+        "$value": "{core.elevation.5.surface-tint-opacity}"
+      }
+    }
   }
 }

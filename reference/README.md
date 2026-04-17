@@ -203,5 +203,4 @@ The production URL is **https://ds-compsych.vercel.app/**. Every push to `main` 
 ## Known limitations
 
 - **GN (GuidanceNow) theme is a placeholder.** Sys-tier values are blank. Swatches appear empty, type has no size. A banner at the top of every foundations page flags this when the active product is GN.
-- **Elevation has no sys-tier tokens yet.** Brand defines `Elevation.lv1`–`lv5` as DTCG `boxShadow` composites, but no Sys roles reference them. The elevation page uses illustrative shadows and documents the gap.
 - **Font family is `google sans`**, but Google Sans is not a public Google Font. The reference app falls back to a system UI font stack so text renders consistently. Adopter projects will need a real font strategy (webfont upload, licensed alternative, or a fallback like Inter).

@@ -82,7 +82,7 @@ npm run clean:tokens    # Wipes tokens/dist/.
 1. **Load.** `build.ts` reads all four tiers from disk: `tokens/core.json`, `tokens/system.json`, every brand file under `tokens/brand/`, every product file under `tokens/product/`.
 2. **Sanitize.** `_meta` and `_description` keys are stripped (they are not DTCG tokens and would confuse Style Dictionary).
 3. **Namespace wrap.** The raw JSON files are not pre-namespaced on disk. In memory, each tier's contents are wrapped under the correct key (`brand`, `core`, `product`, `sys`) so references like `{core.color.blue.40}` resolve cleanly.
-4. **Expand elevation composites.** A known quirk: `sys.elevation.*` tokens reference `{core.elevation.N}`, but `core.elevation.N` is a group, not a leaf. The build expands these in memory into two leaf references (`shadow` + `surface-tint`). When real values arrive we may restructure elevation in JSON and remove this step.
+4. **Expand elevation composites (legacy).** An in-memory rewrite that fires only when `sys.elevation.<role>` is authored as a single-string reference to a core group (e.g. `{core.elevation.0}`). The current token source authors elevation as explicit sub-token refs (`{core.elevation.N.shadow}`, `{core.elevation.N.surface-tint-opacity}`) so this step is effectively inert today, but kept for back-compat with older `system.json` shapes. Safe to remove once no source uses the group-ref pattern.
 5. **Matrix build.** For each of 3 brands × 4 products = 12 combinations, a fresh Style Dictionary instance is configured with:
    - DTCG mode (`usesDtcg: true`) — the source uses `$value`/`$type`.
    - `expand: true` — composite tokens (typography, shadow) are flattened into leaf tokens so CSS/SCSS emit one variable per sub-property.
@@ -93,7 +93,7 @@ npm run clean:tokens    # Wipes tokens/dist/.
    - `tokens.css` — CSS custom properties (`--sys-color-primary: ...`).
    - `tokens.scss` — SCSS variables (`$sys-color-primary: ...`).
    - `tokens.ts` — Nested `export const sys = { ... } as const` literal via a custom format. Self-contained, no imports.
-8. **Summary.** The script logs a per-bundle token count so regressions are obvious (currently 161 `sys.*` tokens per bundle).
+8. **Summary.** The script logs a per-bundle token count so regressions are obvious (currently 291 `sys.*` tokens per bundle, including the expanded elevation sub-tokens).
 
 ### CI expectation
 

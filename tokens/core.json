@@ -819,5 +819,89 @@
       "$type": "number",
       "$value": "{brand.state-layers.scrim}"
     }
+  },
+  "elevation": {
+    "0": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": {
+          "color": "#00000000",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 0,
+          "blur": 0,
+          "spread": 0
+        }
+      },
+      "surface-tint-opacity": {
+        "$type": "number",
+        "$value": 0
+      }
+    },
+    "1": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": [
+          { "color": "#0000000f", "type": "dropShadow", "x": 0, "y": 2, "blur": 4, "spread": 0 },
+          { "color": "#0000000a", "type": "dropShadow", "x": 0, "y": 2, "blur": 8, "spread": 0 }
+        ]
+      },
+      "surface-tint-opacity": {
+        "$type": "number",
+        "$value": 0.05
+      }
+    },
+    "2": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": [
+          { "color": "#00000014", "type": "dropShadow", "x": 0, "y": 2, "blur": 4, "spread": 0 },
+          { "color": "#0000001a", "type": "dropShadow", "x": 0, "y": 4, "blur": 16, "spread": 0 }
+        ]
+      },
+      "surface-tint-opacity": {
+        "$type": "number",
+        "$value": 0.08
+      }
+    },
+    "3": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": [
+          { "color": "#0000001f", "type": "dropShadow", "x": 0, "y": 2, "blur": 6, "spread": 0 },
+          { "color": "#00000029", "type": "dropShadow", "x": 0, "y": 4, "blur": 16, "spread": 0 }
+        ]
+      },
+      "surface-tint-opacity": {
+        "$type": "number",
+        "$value": 0.11
+      }
+    },
+    "4": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": [
+          { "color": "#0000001a", "type": "dropShadow", "x": 0, "y": 4, "blur": 8, "spread": 0 },
+          { "color": "#00000029", "type": "dropShadow", "x": 0, "y": 6, "blur": 20, "spread": 0 }
+        ]
+      },
+      "surface-tint-opacity": {
+        "$type": "number",
+        "$value": 0.12
+      }
+    },
+    "5": {
+      "shadow": {
+        "$type": "boxShadow",
+        "$value": [
+          { "color": "#00000029", "type": "dropShadow", "x": 0, "y": 5, "blur": 8, "spread": 0 },
+          { "color": "#00000029", "type": "dropShadow", "x": 0, "y": 8, "blur": 20, "spread": 0 }
+        ]
+      },
+      "surface-tint-opacity": {
+        "$type": "number",
+        "$value": 0.14
+      }
+    }
   }
 }
