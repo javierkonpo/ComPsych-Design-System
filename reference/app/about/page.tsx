@@ -120,12 +120,12 @@ export default function AboutPage() {
           <StatusRow
             label="Foundations (tokens)"
             status="complete"
-            statusLabel="Complete and stable"
+            statusLabel="Complete"
           />
           <StatusRow
             label="Core components"
-            status="in-progress"
-            statusLabel="In progress"
+            status="planned"
+            statusLabel="Planned"
             detail="Specifications being written; reference implementations following."
           />
           <StatusRow
@@ -136,8 +136,8 @@ export default function AboutPage() {
           />
           <StatusRow
             label="Package distribution"
-            status="in-progress"
-            statusLabel="In progress"
+            status="planned"
+            statusLabel="Planned"
             detail="Internal npm package for ComPsych consumption."
             last
           />
