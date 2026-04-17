@@ -1,53 +1,92 @@
 'use client';
 
 import { useCssVar } from '@/lib/utils';
-import { CopyChip } from './copy-chip';
 import type { TokenLeaf } from '@/lib/tokens';
 
 interface Props {
+  /** Background color token. */
   token: TokenLeaf;
-  /** Optional second token rendered as text over the first — for on-* pairings. */
+  /** Optional paired on-* token. When present, it colors the label text
+   *  rendered over the swatch, demonstrating the pairing. */
   onToken?: TokenLeaf;
-  label?: string;
+  /** Prominent role name, e.g. "Primary" or "Success container". */
+  label: string;
+  /** Short usage hint — when this role should be reached for. */
+  usage?: string;
   size?: 'sm' | 'md' | 'lg';
 }
 
 /**
- * A labelled color swatch. `token` colors the background; if `onToken` is
- * provided it colors the label text and icon, demonstrating a pairing.
+ * Stakeholder-first color swatch.
+ *
+ * Surfaces: role name (prominent), short usage hint, resolved value, and
+ * full token path as muted reference text. No copy button, no giant
+ * --sys-* chip.
  */
-export function ColorSwatch({ token, onToken, label, size = 'md' }: Props) {
+export function ColorSwatch({
+  token,
+  onToken,
+  label,
+  usage,
+  size = 'md',
+}: Props) {
   const resolved = useCssVar(token.cssVar);
-  const height = size === 'sm' ? 56 : size === 'lg' ? 128 : 88;
+  const height = size === 'sm' ? 64 : size === 'lg' ? 132 : 96;
 
   return (
     <div
-      className="flex flex-col rounded overflow-hidden"
+      className="flex flex-col rounded-lg overflow-hidden h-full"
       style={{
         border:
           '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
+        backgroundColor:
+          'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
       }}
     >
       <div
-        className="flex items-center justify-center px-3 text-sm font-medium"
+        className="flex items-center justify-center px-4 ref-body font-medium"
         style={{
           height,
           backgroundColor: `var(${token.cssVar})`,
-          color: onToken ? `var(${onToken.cssVar})` : 'inherit',
+          color: onToken ? `var(${onToken.cssVar})` : 'transparent',
         }}
       >
-        {onToken ? <span>Aa · on-pairing text</span> : null}
+        {onToken ? 'Aa · on-pairing text' : null}
       </div>
-      <div
-        className="p-2 flex flex-col gap-1.5 text-xs"
-        style={{
-          backgroundColor:
-            'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
-        }}
-      >
-        <div className="font-medium truncate">{label ?? token.path.at(-1)}</div>
-        <div className="font-mono opacity-70 truncate">{resolved || '—'}</div>
-        <CopyChip value={`var(${token.cssVar})`} />
+      <div className="p-4 flex flex-col gap-1.5">
+        <div className="ref-heading-md">{label}</div>
+        {usage && (
+          <div
+            className="ref-body-sm"
+            style={{
+              color:
+                'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+            }}
+          >
+            {usage}
+          </div>
+        )}
+        <div className="flex items-baseline justify-between gap-3 pt-1">
+          <span
+            className="ref-body-sm font-mono"
+            style={{
+              color:
+                'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
+            }}
+          >
+            {resolved || '—'}
+          </span>
+          <code
+            className="ref-caption font-mono text-right truncate"
+            style={{
+              color:
+                'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+            }}
+            title={`sys.${token.path.join('.')}`}
+          >
+            sys.{token.path.slice(-2).join('.')}
+          </code>
+        </div>
       </div>
     </div>
   );

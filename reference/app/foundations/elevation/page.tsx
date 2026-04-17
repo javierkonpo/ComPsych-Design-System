@@ -1,54 +1,72 @@
 'use client';
 
-import { PageHeader } from '@/components/page-header';
-import { PlaceholderBanner } from '@/components/placeholder-banner';
+import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { RulesGrid, InContextPanel } from '@/components/rules-grid';
 import { ElevationSample } from '@/components/elevation-sample';
+import { Callout } from '@/components/callout';
 
-// Illustrative shadows. When `sys.elevation.*` tokens land upstream, replace
-// these with `var(--sys-elevation-<role>-shadow)` values and drop the
-// constants below. See note on the page.
 const LEVELS = [
-  { level: 0, label: 'Flat (lv0)',          usage: 'Page backgrounds, sections, inline content. ~70% of UI.', shadow: 'none' },
-  { level: 1, label: 'Resting (lv1)',       usage: 'Cards, list items, tiles. ~20% of UI.',                   shadow: '0 1px 2px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)' },
-  { level: 2, label: 'Interactive (lv2)',   usage: 'Hovered cards, navigation rails.',                        shadow: '0 2px 4px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04)' },
-  { level: 3, label: 'Floating (lv3)',      usage: 'FABs, search bars, toolbars.',                            shadow: '0 4px 6px rgba(0,0,0,0.07), 0 4px 14px rgba(0,0,0,0.06)' },
-  { level: 4, label: 'Overlay (lv4)',       usage: 'Menus, dialogs, popovers, drawers.',                      shadow: '0 8px 10px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.08)' },
-  { level: 5, label: 'Modal (lv5)',         usage: 'Full-screen modals, bottom sheets.',                      shadow: '0 16px 24px rgba(0,0,0,0.10), 0 16px 40px rgba(0,0,0,0.10)' },
+  { level: 0, label: 'Flat (lv0)',          usage: 'Page backgrounds, sections, inline content. Most of the UI.',       shadow: 'none' },
+  { level: 1, label: 'Resting (lv1)',       usage: 'Cards, list items, tiles.',                                          shadow: '0 1px 2px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)' },
+  { level: 2, label: 'Interactive (lv2)',   usage: 'Hovered cards, navigation rails.',                                   shadow: '0 2px 4px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04)' },
+  { level: 3, label: 'Floating (lv3)',      usage: 'Floating action buttons, search bars, toolbars.',                     shadow: '0 4px 6px rgba(0,0,0,0.07), 0 4px 14px rgba(0,0,0,0.06)' },
+  { level: 4, label: 'Overlay (lv4)',       usage: 'Menus, dialogs, popovers, drawers.',                                  shadow: '0 8px 10px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.08)' },
+  { level: 5, label: 'Modal (lv5)',         usage: 'Full-screen modals, bottom sheets.',                                  shadow: '0 16px 24px rgba(0,0,0,0.10), 0 16px 40px rgba(0,0,0,0.10)' },
 ];
 
 export default function ElevationPage() {
   return (
-    <>
-      <PlaceholderBanner />
-      <PageHeader
-        eyebrow="Foundations"
-        title="Elevation"
-        description="Six levels mapped to UI contexts. Higher levels grow softer and larger in light mode, and combine with a subtle primary surface tint in dark mode."
-      />
+    <FoundationPageShell
+      title="Elevation"
+      description="Six levels of surface layering, each tied to a specific UI context. Higher levels sit visually closer to the viewer."
+      whyThisMatters={
+        <>
+          Elevation tells a user which surface is interactive, which is
+          floating, and which is modal — without instructions. A consistent
+          ladder means users learn the metaphor once and apply it everywhere.
+        </>
+      }
+      rules={
+        <RulesGrid
+          dos={[
+            'Use the lowest level that makes the surface distinct from its background.',
+            'Match elevation to the interaction metaphor: modal = lv5, menu = lv4, card = lv1.',
+            'Use a scrim (dimmed overlay) to separate modals from their underlying context.',
+          ]}
+          donts={[
+            'Nest multiple elevated surfaces to create extra visual pop — flatten instead.',
+            'Use elevation to communicate importance — use color, spacing, or hierarchy.',
+            'Apply elevation to a surface that has no interactive meaning.',
+          ]}
+        />
+      }
+    >
+      <Callout tone="info" title="Tokens pending upstream">
+        Elevation tokens are reserved for the next Tokens Studio export. The
+        Brand tier already defines <code>Elevation.lv1</code>–<code>lv5</code>{' '}
+        as box-shadow composites, but no Sys roles reference them yet. This
+        page documents the intended structure; sample cards below use
+        illustrative shadows until the tokens land.
+      </Callout>
 
-      <section
-        className="mb-10 p-4 rounded text-sm"
-        style={{
-          backgroundColor:
-            'var(--sys-color-roles-custom-info-sys-info-container, #daecff)',
-          color: 'var(--sys-color-roles-custom-info-sys-on-info-container, #162755)',
-          border:
-            '1px solid var(--sys-color-roles-custom-info-sys-info, #226cee)',
-        }}
-      >
-        <strong>Note: </strong>
-        The current Tokens Studio export defines elevation <em>only</em> in the
-        Brand tier (as W3C DTCG <code>boxShadow</code> composites). No{' '}
-        <code>sys.elevation.*</code> role tokens exist yet, so nothing gets
-        emitted at the Sys tier. The samples below use illustrative shadows
-        so the page stays useful. When the Figma system adds{' '}
-        <code>sys.elevation.*</code> roles, this page should read them live via{' '}
-        <code>var(--sys-elevation-*)</code>.
-      </section>
-
-      <section className="mb-10">
-        <h2 className="text-lg font-semibold mb-4">Levels</h2>
-        <div className="grid gap-6 md:grid-cols-3">
+      <section className="flex flex-col gap-5">
+        <div className="flex flex-col gap-1 max-w-3xl">
+          <h3 className="ref-heading-lg" style={{ margin: 0 }}>
+            Levels
+          </h3>
+          <p
+            className="ref-body"
+            style={{
+              color:
+                'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+              margin: 0,
+            }}
+          >
+            Each level maps to a single UI context. Mixing contexts at the
+            same level is a signal to simplify.
+          </p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {LEVELS.map((l) => (
             <ElevationSample
               key={l.level}
@@ -61,20 +79,28 @@ export default function ElevationPage() {
         </div>
       </section>
 
-      <section>
-        <h2 className="text-lg font-semibold mb-4">Guidance</h2>
+      <InContextPanel title="Guidance">
         <ul
-          className="text-sm list-disc pl-5 flex flex-col gap-2 max-w-3xl"
+          className="ref-body flex flex-col gap-2 list-disc pl-5 max-w-3xl"
           style={{
             color:
               'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
           }}
         >
-          <li>Depth has two cues: shadow (primary in light mode) and surface tone shift (primary in dark mode).</li>
-          <li>Don&apos;t nest elevations inside a single card — elevation correlates with interaction, not importance.</li>
-          <li>Modal surfaces pair with a scrim over the content below — the scrim itself is not an elevation level.</li>
+          <li>
+            Depth uses two cues: a shadow (primary in light mode) and a subtle
+            surface tint shift (primary in dark mode).
+          </li>
+          <li>
+            Don&rsquo;t nest elevations inside a single card — elevation
+            correlates with interaction, not importance.
+          </li>
+          <li>
+            Modal surfaces pair with a scrim over content below. The scrim is
+            not an elevation level in itself.
+          </li>
         </ul>
-      </section>
-    </>
+      </InContextPanel>
+    </FoundationPageShell>
   );
 }

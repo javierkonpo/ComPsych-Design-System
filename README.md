@@ -2,6 +2,12 @@
 
 The code-layer translation of the ComPsych design system, consumed by ComPsych's Angular web and React Native mobile applications.
 
+## For ComPsych engineering teams
+
+If you're here to adopt the system in a codebase, start with **[INSTALL.md](INSTALL.md)** — install commands, theme imports, and Claude Code prompts for generating components. The file is currently marked as a placeholder until the npm package ships.
+
+If you want the visual walkthrough, open **[the reference app](https://ds-compsych.vercel.app/)** and start on the "About" page.
+
 ## What this repo is
 
 This is not a component library. It is a shared source of truth made up of:
