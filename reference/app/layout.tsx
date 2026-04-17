@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/lib/theme-context';
 import { Nav } from '@/components/nav';
-import { HeaderBar } from '@/components/header-bar';
 import './globals.css';
 
 // Inter is loaded via `next/font/google` — self-hosted at build time, no
@@ -29,7 +28,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="flex min-h-screen">
             <Nav />
             <div className="flex-1 min-w-0 flex flex-col">
-              <HeaderBar />
               <main className="flex-1 px-10 py-12 max-w-6xl w-full">
                 {children}
               </main>
