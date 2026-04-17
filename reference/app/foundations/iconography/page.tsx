@@ -3,6 +3,7 @@
 import { Home } from 'lucide-react';
 import { sys, flattenLeaves, type TokenLeaf } from '@/lib/tokens';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CopyChip } from '@/components/copy-chip';
 import { useCssVar, toPx } from '@/lib/utils';
 
 const USAGE: Record<string, string> = {
@@ -106,15 +107,7 @@ function IconSample({
             {usage}
           </div>
         )}
-        <code
-          className="ref-caption font-mono"
-          style={{
-            color:
-              'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-          }}
-        >
-          sys.{token.path.join('.')}
-        </code>
+        <CopyChip block value={`sys.${token.path.join('.')}`} />
       </div>
     </div>
   );
