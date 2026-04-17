@@ -4,7 +4,7 @@ The code-layer translation of the ComPsych design system, consumed by ComPsych's
 
 ## For ComPsych engineering teams
 
-If you're here to adopt the system in a codebase, start with **[INSTALL.md](INSTALL.md)** — install commands, theme imports, and Claude Code prompts for generating components. The `@compsych/design-system` package is published to GitHub Packages under the private `@compsych` scope.
+If you're here to adopt the system in a codebase, start with **[INSTALL.md](INSTALL.md)** — install commands, theme imports, and Claude Code prompts for generating components. The `@javierkonpo/design-system` package is published to GitHub Packages under the `@javierkonpo` scope (scoped to the repo owner; this will move to `@compsych` when the repo lives under a ComPsych GitHub org).
 
 If you want the visual walkthrough, open **[the reference app](https://ds-compsych.vercel.app/)** and start on the "About" page.
 
@@ -21,10 +21,10 @@ The canonical source of truth is the **specs + tokens**. ComPsych's Angular and 
 
 ## Quick start (adopting the system)
 
-1. Authenticate npm with GitHub Packages for the `@compsych` scope (see [`INSTALL.md`](INSTALL.md)).
+1. Authenticate npm with GitHub Packages for the `@javierkonpo` scope (see [`INSTALL.md`](INSTALL.md)).
 2. Install the package:
    ```bash
-   npm install @compsych/design-system
+   npm install @javierkonpo/design-system
    ```
 3. Import the theme bundle that matches the product you're building (twelve bundles: three brands × four products).
 4. Copy the adopter `CLAUDE.md` into your project root:
@@ -64,7 +64,7 @@ compsych-ds/
 │   ├── system.json               Tier 2 — the only tier applied in UI.
 │   └── build.ts                  Style Dictionary configuration.
 ├── packages/
-│   └── design-system/            @compsych/design-system — the distributable npm package.
+│   └── design-system/            @javierkonpo/design-system — the distributable npm package.
 ├── specs/                        Framework-agnostic component specs and foundations documentation.
 ├── reference/                    Next.js 15 reference gallery — live visual source of truth.
 ├── adopters/                     Drop-in CLAUDE.md files for Angular and React Native projects.

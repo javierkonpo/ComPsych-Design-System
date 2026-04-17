@@ -1,6 +1,6 @@
 # Installing the ComPsych Design System
 
-How to install `@compsych/design-system` in an existing Angular or React Native codebase, and how to use Claude Code to generate components from the system's specifications.
+How to install `@javierkonpo/design-system` in an existing Angular or React Native codebase, and how to use Claude Code to generate components from the system's specifications.
 
 The stakeholder-facing reference app — a visual showcase with live theming across all four products — lives at **https://ds-compsych.vercel.app/**. Share that link for walkthroughs and design reviews; use this file for install.
 
@@ -13,11 +13,11 @@ The stakeholder-facing reference app — a visual showcase with live theming acr
 
 ## 1 · Authenticate npm with GitHub Packages
 
-The package is published to GitHub Packages under the private `@compsych` scope. Create (or append to) a project-level `.npmrc` file at the root of your Angular or React Native project:
+The package is published to GitHub Packages under the `@javierkonpo` scope (the scope is tied to the repo owner on GitHub Packages — this will switch to `@compsych` when the repo moves to a ComPsych org). Create (or append to) a project-level `.npmrc` file at the root of your Angular or React Native project:
 
 ```ini
 # .npmrc
-@compsych:registry=https://npm.pkg.github.com
+@javierkonpo:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
@@ -33,13 +33,13 @@ For CI, set `GITHUB_TOKEN` as a secret in your workflow — GitHub provides one 
 
 ```bash
 # npm
-npm install @compsych/design-system
+npm install @javierkonpo/design-system
 
 # pnpm
-pnpm add @compsych/design-system
+pnpm add @javierkonpo/design-system
 
 # yarn
-yarn add @compsych/design-system
+yarn add @javierkonpo/design-system
 ```
 
 ## 3 · Pick your theme
@@ -56,7 +56,7 @@ The package ships twelve pre-built theme bundles — one per brand × product co
 
 ```scss
 /* src/styles.scss */
-@import '@compsych/design-system/themes/compsych-crc.css';
+@import '@javierkonpo/design-system/themes/compsych-crc.css';
 ```
 
 That single import defines every `--sys-*` CSS custom property on `:root`. Your components read from those variables.
@@ -65,10 +65,10 @@ That single import defines every `--sys-*` CSS custom property on `:root`. Your 
 
 ```ts
 // App-level theme module
-import { tokens } from '@compsych/design-system/themes/compsych-fmla';
+import { tokens } from '@javierkonpo/design-system/themes/compsych-fmla';
 
 // or, if you prefer the bare `sys` namespace:
-import { sys } from '@compsych/design-system/themes/compsych-fmla';
+import { sys } from '@javierkonpo/design-system/themes/compsych-fmla';
 ```
 
 Pass the `tokens` object through a React Context so every component has access to the active product theme.
@@ -93,7 +93,7 @@ The `sys.*` tier is the only tier you reference in UI code. `core.*`, `product.*
 ### React Native
 
 ```ts
-import { tokens } from '@compsych/design-system/themes/compsych-fmla';
+import { tokens } from '@javierkonpo/design-system/themes/compsych-fmla';
 import { StyleSheet } from 'react-native';
 
 const sys = tokens.sys;
@@ -120,9 +120,9 @@ The package includes every component spec under `specs/`. Each spec documents an
 In your Angular project, with Claude Code:
 
 ```
-Read the Button spec from the @compsych/design-system package (specs/button.spec.md).
+Read the Button spec from the @javierkonpo/design-system package (specs/button.spec.md).
 Generate an Angular component that implements this spec exactly.
-Use the tokens imported from @compsych/design-system/themes/compsych-crc.
+Use the tokens imported from @javierkonpo/design-system/themes/compsych-crc.
 Place the component at src/app/shared/components/button/.
 Follow this project's existing Angular conventions for module structure and testing.
 ```
@@ -130,9 +130,9 @@ Follow this project's existing Angular conventions for module structure and test
 ### Example: Button for React Native
 
 ```
-Read the Button spec from the @compsych/design-system package (specs/button.spec.md).
+Read the Button spec from the @javierkonpo/design-system package (specs/button.spec.md).
 Generate a React Native component that implements this spec exactly.
-Use the tokens object imported from @compsych/design-system/themes/compsych-fmla.
+Use the tokens object imported from @javierkonpo/design-system/themes/compsych-fmla.
 Place the component at src/components/Button/.
 Follow this project's existing React Native conventions for styling and testing.
 ```
@@ -145,7 +145,7 @@ For a drop-in Claude Code configuration that teaches the session every rule of t
 ## Updating the package
 
 ```bash
-npm update @compsych/design-system
+npm update @javierkonpo/design-system
 ```
 
 Then regenerate any components whose specs have changed. Each release ships a changelog describing which specs have been updated.
@@ -154,7 +154,7 @@ Then regenerate any components whose specs have changed. Each release ships a ch
 
 **`401 Unauthorized` when installing:** your `GITHUB_TOKEN` isn't set or the token lacks the `read:packages` scope. Regenerate at <https://github.com/settings/tokens> with `read:packages` checked, then re-export.
 
-**`404 Not found`:** the `.npmrc` scope line is missing or misspelled. Must read exactly `@compsych:registry=https://npm.pkg.github.com`.
+**`404 Not found`:** the `.npmrc` scope line is missing or misspelled. Must read exactly `@javierkonpo:registry=https://npm.pkg.github.com`.
 
 **Types aren't inferred on the TS import:** confirm your `tsconfig.json` has `"moduleResolution": "bundler"` (or `"node16"`) — the package uses the `exports` field.
 

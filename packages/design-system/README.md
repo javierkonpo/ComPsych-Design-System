@@ -1,25 +1,27 @@
-# @compsych/design-system
+# @javierkonpo/design-system
 
 Token bundles and component specifications for the ComPsych Design System. Consumed by ComPsych's Angular web and React Native mobile applications.
+
+> The package lives under the `@javierkonpo` npm scope because the source repo is hosted under the `javierkonpo` GitHub account and GitHub Packages requires the scope to match the repo owner. If / when this repo moves to a `compsych` GitHub org, we'll re-publish under `@compsych/design-system`.
 
 > Looking for the visual walkthrough? Open [https://ds-compsych.vercel.app/](https://ds-compsych.vercel.app/) and start on the **About** page.
 
 ## Install
 
-The package is published to **GitHub Packages** under the `@compsych` scope. To install, authenticate npm with a personal access token that has `read:packages` permission, then install as normal:
+The package is published to **GitHub Packages** under the `@javierkonpo` scope. To install, authenticate npm with a personal access token that has `read:packages` permission, then install as normal:
 
 ```bash
 # .npmrc (project-level or user-level)
-@compsych:registry=https://npm.pkg.github.com
+@javierkonpo:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
 ```bash
-npm install @compsych/design-system
+npm install @javierkonpo/design-system
 # or
-pnpm add @compsych/design-system
+pnpm add @javierkonpo/design-system
 # or
-yarn add @compsych/design-system
+yarn add @javierkonpo/design-system
 ```
 
 ## Available themes
@@ -38,7 +40,7 @@ Import the CSS bundle that matches the product you're building:
 
 ```scss
 // src/styles.scss
-@import '@compsych/design-system/themes/compsych-crc.css';
+@import '@javierkonpo/design-system/themes/compsych-crc.css';
 ```
 
 The import defines every `--sys-*` CSS custom property on `:root`. Use them in your components:
@@ -59,8 +61,8 @@ Numeric tokens (spacing, radius) are unit-less — multiply by `1px` inside `cal
 Import the typed token tree:
 
 ```ts
-import { tokens } from '@compsych/design-system/themes/compsych-fmla';
-// or: import { sys } from '@compsych/design-system/themes/compsych-fmla';
+import { tokens } from '@javierkonpo/design-system/themes/compsych-fmla';
+// or: import { sys } from '@javierkonpo/design-system/themes/compsych-fmla';
 
 const sys = tokens.sys;
 
@@ -80,9 +82,9 @@ Pass the `tokens` object through a React Context so the active theme is availabl
 The package ships every component spec under `specs/`. Each spec is framework-agnostic markdown documenting anatomy, props, states, and behavior. Generate framework-specific code with Claude Code:
 
 ```
-Read the Button spec from the @compsych/design-system package (specs/button.spec.md).
+Read the Button spec from the @javierkonpo/design-system package (specs/button.spec.md).
 Generate an Angular component that implements this spec exactly.
-Use the tokens imported from @compsych/design-system/themes/compsych-crc.
+Use the tokens imported from @javierkonpo/design-system/themes/compsych-crc.
 Place the component at src/app/shared/components/button/.
 Follow this project's existing Angular conventions for module structure and testing.
 ```

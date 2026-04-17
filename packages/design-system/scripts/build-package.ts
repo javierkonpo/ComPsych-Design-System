@@ -1,5 +1,5 @@
 /**
- * Assembles the distributable contents of `@compsych/design-system`.
+ * Assembles the distributable contents of `@javierkonpo/design-system`.
  *
  * Reads every bundle under `tokens/dist/<brand>-<product>/` and copies
  *   - tokens.css  →  packages/design-system/themes/<bundle>.css
@@ -89,8 +89,8 @@ function buildThemes(): string[] {
     // `{ sys }`; we re-export as `{ tokens }` (a `{ sys }` object) as
     // well, so adopters can write either form:
     //
-    //   import { sys } from '@compsych/design-system/themes/compsych-crc';
-    //   import { tokens } from '@compsych/design-system/themes/compsych-crc';
+    //   import { sys } from '@javierkonpo/design-system/themes/compsych-crc';
+    //   import { tokens } from '@javierkonpo/design-system/themes/compsych-crc';
     //
     // `tokens` reads nicely in React Native contexts where the whole
     // object gets passed through a ThemeProvider.

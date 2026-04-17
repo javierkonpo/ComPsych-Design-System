@@ -1,7 +1,12 @@
-name: Publish @compsych/design-system
+name: Publish @javierkonpo/design-system
 
 # Publishes the package to GitHub Packages (npm.pkg.github.com)
 # whenever a release is published in this repo, or on manual dispatch.
+#
+# Scope note: the package is published under @javierkonpo because
+# GitHub Packages requires the npm scope to match the repo owner.
+# When the repo moves into a @compsych org, update the scope below
+# and in packages/design-system/package.json.
 #
 # To cut a release:
 #   1. bump `packages/design-system/package.json` version
@@ -30,7 +35,7 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@compsych'
+          scope: '@javierkonpo'
 
       - name: Install root deps
         run: npm install

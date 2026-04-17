@@ -6,8 +6,8 @@ This file is dropped into the root of a React Native project that consumes the C
 
 ## What this project consumes
 
-- **Tokens** as a TypeScript export from the `@compsych/design-system` npm package (published to GitHub Packages under the `@compsych` scope).
-- **Component specs** shipped inside the same package at `@compsych/design-system/specs/<component-name>.spec.md`. Canonical source lives in the DS repo at `specs/<component-name>.spec.md`.
+- **Tokens** as a TypeScript export from the `@javierkonpo/design-system` npm package (published to GitHub Packages under the `@javierkonpo` scope — the scope tracks the repo owner and will switch to `@compsych` when the repo moves to a ComPsych GitHub org).
+- **Component specs** shipped inside the same package at `@javierkonpo/design-system/specs/<component-name>.spec.md`. Canonical source lives in the DS repo at `specs/<component-name>.spec.md`.
 
 This project does NOT import components from the DS. React Native components are implemented here, generated from the specs. The specs — not the React reference — are authoritative.
 
@@ -18,17 +18,17 @@ This project does NOT import components from the DS. React Native components are
 Install once:
 
 ```bash
-npm install @compsych/design-system
+npm install @javierkonpo/design-system
 ```
 
-(Requires a `.npmrc` that points the `@compsych` scope at GitHub Packages. See the repo's [`INSTALL.md`](../../INSTALL.md).)
+(Requires a `.npmrc` that points the `@javierkonpo` scope at GitHub Packages. See the repo's [`INSTALL.md`](../../INSTALL.md).)
 
 Import the theme bundle that matches the product this codebase ships. Both named exports are supported:
 
 ```ts
 // Pick one:
-import { sys } from '@compsych/design-system/themes/compsych-gro';
-import { tokens } from '@compsych/design-system/themes/compsych-gro';
+import { sys } from '@javierkonpo/design-system/themes/compsych-gro';
+import { tokens } from '@javierkonpo/design-system/themes/compsych-gro';
 // tokens.sys === sys
 ```
 
@@ -119,7 +119,7 @@ React Native has no CSS. Each bundle is a self-contained `sys` tree — the simp
 
 ```tsx
 import { createContext, useContext, PropsWithChildren } from 'react';
-import { sys as defaultSys } from '@compsych/design-system/themes/compsych-gro';
+import { sys as defaultSys } from '@javierkonpo/design-system/themes/compsych-gro';
 
 type Sys = typeof defaultSys;
 
@@ -137,7 +137,7 @@ export function useSys() {
 At the app root, pick the bundle that matches your build:
 
 ```tsx
-import { sys } from '@compsych/design-system/themes/compsych-fmla';
+import { sys } from '@javierkonpo/design-system/themes/compsych-fmla';
 // ...
 <DsProvider sys={sys}>
   <App />
@@ -182,7 +182,7 @@ Destructure the roles you need at the top of the render to keep the inline paths
 Before implementing any UI, read the spec. The specs ship inside the package:
 
 ```
-node_modules/@compsych/design-system/specs/<component-name>.spec.md
+node_modules/@javierkonpo/design-system/specs/<component-name>.spec.md
 ```
 
 (The same files live in the DS repo at `specs/<component-name>.spec.md` if you prefer to browse them on GitHub.)

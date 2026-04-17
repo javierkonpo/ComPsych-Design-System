@@ -86,6 +86,105 @@ export default function AboutPage() {
         </p>
       </Section>
 
+      <Section heading="Installing in your codebase">
+        <p className="ref-body-lg max-w-3xl">
+          The system ships as the npm package{' '}
+          <code>@javierkonpo/design-system</code>, hosted on GitHub Packages.
+          Adopting it in an Angular or React Native project takes three steps.
+        </p>
+        <div className="grid gap-4 md:grid-cols-3">
+          <InstallStep
+            step={1}
+            title="Authenticate npm"
+            body={
+              <>
+                Add a <code>.npmrc</code> at your project root that points the{' '}
+                <code>@javierkonpo</code> scope at GitHub Packages and reads a
+                token from the environment.
+              </>
+            }
+            code={`@javierkonpo:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=\${GITHUB_TOKEN}`}
+          />
+          <InstallStep
+            step={2}
+            title="Install the package"
+            body={
+              <>
+                One command pulls the token bundles and component
+                specifications into your project.
+              </>
+            }
+            code={`npm install @javierkonpo/design-system`}
+          />
+          <InstallStep
+            step={3}
+            title="Import the theme"
+            body={
+              <>
+                Pick the brand × product bundle your build targets. Angular
+                imports the CSS file; React Native imports the typed{' '}
+                <code>sys</code> object.
+              </>
+            }
+            code={`// Angular (src/styles.scss)
+@import '@javierkonpo/design-system/themes/compsych-gro.css';
+
+// React Native
+import { sys } from '@javierkonpo/design-system/themes/compsych-gro';`}
+          />
+        </div>
+        <div className="mt-4">
+          <p
+            className="ref-body max-w-3xl"
+            style={{
+              color:
+                'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+              margin: 0,
+            }}
+          >
+            For the fastest path, copy the drop-in{' '}
+            <code>CLAUDE.md</code> from{' '}
+            <Link
+              href="https://github.com/javierkonpo/ComPsych-Design-System/tree/main/adopters"
+              style={{
+                color:
+                  'var(--sys-color-roles-accent-primary-sys-primary, #075cba)',
+              }}
+            >
+              adopters/angular/
+            </Link>{' '}
+            or{' '}
+            <Link
+              href="https://github.com/javierkonpo/ComPsych-Design-System/tree/main/adopters"
+              style={{
+                color:
+                  'var(--sys-color-roles-accent-primary-sys-primary, #075cba)',
+              }}
+            >
+              adopters/react-native/
+            </Link>{' '}
+            into your project root. Any Claude Code session that opens the
+            project will then follow the system&rsquo;s rules automatically —
+            <em> only </em>
+            <code>sys.*</code> tokens in UI code, matching the spec&rsquo;s API
+            exactly, honoring the{' '}
+            <code>sys.elevation.level*</code> roles, etc. Full walkthrough and
+            troubleshooting in{' '}
+            <Link
+              href="https://github.com/javierkonpo/ComPsych-Design-System/blob/main/INSTALL.md"
+              style={{
+                color:
+                  'var(--sys-color-roles-accent-primary-sys-primary, #075cba)',
+              }}
+            >
+              INSTALL.md
+            </Link>
+            .
+          </p>
+        </div>
+      </Section>
+
       <Section heading="Who maintains what">
         <div className="grid gap-4 md:grid-cols-2">
           <OwnershipCard
@@ -251,6 +350,70 @@ function OwnershipCard({ owner, items }: { owner: string; items: string[] }) {
           </li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+function InstallStep({
+  step,
+  title,
+  body,
+  code,
+}: {
+  step: number;
+  title: string;
+  body: ReactNode;
+  code: string;
+}) {
+  return (
+    <div
+      className="rounded-lg p-5 flex flex-col gap-3"
+      style={{
+        border:
+          '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
+        backgroundColor:
+          'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
+      }}
+    >
+      <div className="flex items-center gap-3">
+        <span
+          aria-hidden
+          className="inline-flex items-center justify-center font-semibold"
+          style={{
+            width: 28,
+            height: 28,
+            borderRadius: 9999,
+            backgroundColor:
+              'var(--sys-color-roles-accent-primary-sys-primary-container, #070f36)',
+            color:
+              'var(--sys-color-roles-accent-primary-sys-on-primary-container, #ffffff)',
+            fontSize: 13,
+          }}
+        >
+          {step}
+        </span>
+        <div className="ref-heading-md">{title}</div>
+      </div>
+      <p className="ref-body-sm" style={{ margin: 0 }}>
+        {body}
+      </p>
+      <pre
+        className="ref-caption font-mono overflow-x-auto"
+        style={{
+          margin: 0,
+          padding: '12px 14px',
+          borderRadius: 8,
+          backgroundColor:
+            'var(--sys-color-roles-surface-surface-container-sys-surface-container, #f3f4f6)',
+          color:
+            'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
+          fontSize: 12,
+          lineHeight: 1.55,
+          whiteSpace: 'pre',
+        }}
+      >
+        {code}
+      </pre>
     </div>
   );
 }

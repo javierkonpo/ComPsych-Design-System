@@ -1,6 +1,6 @@
 {
-  "name": "@compsych/design-system",
-  "version": "0.1.0",
+  "name": "@javierkonpo/design-system",
+  "version": "0.1.1",
   "description": "ComPsych Design System — token bundles (12 brand\u00d7product combinations) and component specifications, consumed by ComPsych's Angular web and React Native mobile applications.",
   "license": "UNLICENSED",
   "author": "Konpo Studio",

@@ -6,8 +6,8 @@ This file is dropped into the root of an Angular project that consumes the ComPs
 
 ## What this project consumes
 
-- **Tokens** as CSS custom properties, loaded from the `@compsych/design-system` npm package (published to GitHub Packages under the `@compsych` scope).
-- **Component specs** shipped inside the same package at `@compsych/design-system/specs/<component-name>.spec.md`. Canonical source lives in the DS repo at `specs/<component-name>.spec.md`.
+- **Tokens** as CSS custom properties, loaded from the `@javierkonpo/design-system` npm package (published to GitHub Packages under the `@javierkonpo` scope — the scope tracks the repo owner and will switch to `@compsych` when the repo moves to a ComPsych GitHub org).
+- **Component specs** shipped inside the same package at `@javierkonpo/design-system/specs/<component-name>.spec.md`. Canonical source lives in the DS repo at `specs/<component-name>.spec.md`.
 
 This project does NOT import components from the DS. Angular components are implemented here, generated from the specs. The specs — not the React reference — are authoritative.
 
@@ -18,15 +18,15 @@ This project does NOT import components from the DS. Angular components are impl
 Install once:
 
 ```bash
-npm install @compsych/design-system
+npm install @javierkonpo/design-system
 ```
 
-(Requires a `.npmrc` that points the `@compsych` scope at GitHub Packages. See the repo's [`INSTALL.md`](../../INSTALL.md).)
+(Requires a `.npmrc` that points the `@javierkonpo` scope at GitHub Packages. See the repo's [`INSTALL.md`](../../INSTALL.md).)
 
 Import the theme bundle for the product this codebase ships. In `src/styles.scss` (or `src/styles.css`):
 
 ```scss
-@import '@compsych/design-system/themes/compsych-gro.css';
+@import '@javierkonpo/design-system/themes/compsych-gro.css';
 ```
 
 Swap `compsych-gro` for the brand × product your build targets — one of `compsych-{gro,crc,gn,fmla}` or `brand-{b,c}-{gro,crc,gn,fmla}`.
@@ -85,7 +85,7 @@ The simplest pattern: import a single brand × product bundle. The bundle's `:ro
 
 ```scss
 // src/styles.scss
-@import '@compsych/design-system/themes/compsych-gro.css';
+@import '@javierkonpo/design-system/themes/compsych-gro.css';
 ```
 
 If the project needs to switch themes at runtime (e.g. white-label preview for internal tooling), import multiple bundles and namespace them with a `data-theme` attribute in a small custom stylesheet, mirroring the pattern used by the reference app. Coordinate with the DS team before building this — most production surfaces ship one bundle.
@@ -97,7 +97,7 @@ If the project needs to switch themes at runtime (e.g. white-label preview for i
 Before implementing any UI, read the spec. The specs ship inside the package:
 
 ```
-node_modules/@compsych/design-system/specs/<component-name>.spec.md
+node_modules/@javierkonpo/design-system/specs/<component-name>.spec.md
 ```
 
 (The same files live in the DS repo at `specs/<component-name>.spec.md` if you prefer to browse them on GitHub.)
