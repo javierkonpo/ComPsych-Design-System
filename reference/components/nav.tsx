@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import styles from './nav.module.css';
 
 type NavItem = {
   href: string;
@@ -123,7 +124,7 @@ export function Nav() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="block px-2.5 py-1.5 rounded text-sm transition-colors"
+                      className={`block px-2.5 py-1.5 rounded text-sm ${styles.navLink}`}
                       style={{
                         backgroundColor: active
                           ? 'var(--sys-color-roles-accent-primary-sys-primary-container, #eceeef)'
