@@ -29,10 +29,9 @@ export default function ButtonPage() {
       {/* ------------------------------------------------------------------
           Playground — interactive preview wired to the real Button.
           ------------------------------------------------------------------ */}
-      <Section heading="Playground" lead="The real Button rendered live. Change any control on the right to see the component update; the code block shows the minimal JSX for your current combination.">
+      <Section heading="Playground" lead="The real Button rendered live. Change any control on the right to see the component update.">
         <Playground
           component={Button}
-          componentName="Button"
           staticProps={{ leadingIcon: <ArrowRight /> }}
           controls={[
             {

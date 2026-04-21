@@ -5,7 +5,6 @@ import {
   type ComponentType,
   type ReactNode,
 } from 'react';
-import { CopyCodeBlock } from '../copy-code-block';
 import styles from './playground.module.css';
 
 // ---------------------------------------------------------------------------
@@ -50,15 +49,13 @@ export interface PlaygroundProps {
    * same JSX an adopter would ship.
    */
   component: ComponentType<Record<string, unknown>>;
-  /** The JSX tag name used in the generated code snippet, e.g. `Button`. */
-  componentName: string;
   /** One entry per prop you want to expose as a control. */
   controls: readonly PlaygroundControl[];
   /**
    * Props merged into the component in addition to the control-driven
-   * values, but NOT exposed in the controls panel and NOT emitted in the
-   * generated JSX. Use for demo-only glue (e.g. a `backgroundImage` for
-   * Card's image variant, or a `leadingIcon` node).
+   * values, but NOT exposed in the controls panel. Use for demo-only
+   * glue (e.g. a `backgroundImage` for Card's image variant, or a
+   * `leadingIcon` node).
    */
   staticProps?: Record<string, unknown>;
   /**
@@ -67,12 +64,6 @@ export interface PlaygroundProps {
    * depend on them.
    */
   renderChildren?: (props: Record<string, unknown>) => ReactNode;
-  /**
-   * Placeholder string inserted between the opening and closing tags in
-   * the generated JSX when `renderChildren` is provided. Example:
-   * `"<ServiceCardContent />"`.
-   */
-  childrenCode?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -81,11 +72,9 @@ export interface PlaygroundProps {
 
 export function Playground({
   component: Component,
-  componentName,
   controls,
   staticProps = {},
   renderChildren,
-  childrenCode,
 }: PlaygroundProps) {
   const [values, setValues] = useState<Record<string, unknown>>(() =>
     buildInitialState(controls),
@@ -96,7 +85,6 @@ export function Playground({
   }
 
   const combinedProps = { ...staticProps, ...values };
-  const code = generateJsx(componentName, values, controls, childrenCode);
 
   return (
     <div className={styles.root}>
@@ -117,12 +105,6 @@ export function Playground({
           ))}
         </div>
       </div>
-      <div className={styles.code}>
-        <CopyCodeBlock
-          code={code}
-          label={`Copy ${componentName} snippet`}
-        />
-      </div>
     </div>
   );
 }
@@ -139,52 +121,6 @@ function buildInitialState(
     out[c.name] = c.defaultValue;
   }
   return out;
-}
-
-/**
- * Produce the minimal JSX for the current prop combination: only include
- * props whose current value differs from their schema default. Boolean
- * props are emitted as shorthand (`<Btn loading />`) when true; omitted
- * when false. Strings use JSON.stringify so quoting is correct. Enums
- * are always `prop="value"`.
- */
-function generateJsx(
-  componentName: string,
-  values: Record<string, unknown>,
-  controls: readonly PlaygroundControl[],
-  childrenCode?: string,
-): string {
-  const propLines: string[] = [];
-
-  for (const c of controls) {
-    const v = values[c.name];
-    if (v === c.defaultValue) continue;
-    if (c.type === 'boolean') {
-      if (v) propLines.push(c.name);
-    } else if (c.type === 'enum') {
-      propLines.push(`${c.name}="${String(v)}"`);
-    } else if (c.type === 'string') {
-      propLines.push(`${c.name}=${JSON.stringify(v)}`);
-    }
-  }
-
-  // No children — self-closing tag.
-  if (!childrenCode) {
-    if (propLines.length === 0) return `<${componentName} />`;
-    if (propLines.length <= 2) {
-      return `<${componentName} ${propLines.join(' ')} />`;
-    }
-    return `<${componentName}\n  ${propLines.join('\n  ')}\n/>`;
-  }
-
-  // With children.
-  const openTag =
-    propLines.length === 0
-      ? `<${componentName}>`
-      : propLines.length <= 2
-        ? `<${componentName} ${propLines.join(' ')}>`
-        : `<${componentName}\n  ${propLines.join('\n  ')}\n>`;
-  return `${openTag}\n  ${childrenCode}\n</${componentName}>`;
 }
 
 // ---------------------------------------------------------------------------

@@ -203,8 +203,8 @@ import { sys } from '@javierkonpo/design-system/themes/compsych-gro';`}
           />
           <StatusRow
             label="Core components"
-            status="planned"
-            statusLabel="Planned"
+            status="in-progress"
+            statusLabel="In Progress"
             detail="Specifications being written; reference implementations following."
           />
           <StatusRow

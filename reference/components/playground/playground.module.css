@@ -99,31 +99,29 @@
   width: 100%;
 }
 
-/* ----- Segmented control (enum) ----- */
+/* ----- Segmented control (enum) ----------------------------------
+   Wrap-friendly chip layout. Each option is a self-contained pill; no
+   outer track. Works cleanly for 2 options or 10 — they just flow to
+   the next row. Active state is a filled primary-container pill
+   (matches the sidebar active-item visual language).
+   ------------------------------------------------------------------ */
 
 .segmented {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
-  gap: 2px;
-  padding: 3px;
-  background: var(
-    --sys-color-roles-surface-surface-container-sys-surface-container,
-    #f3f4f6
-  );
-  border-radius: 9999px;
+  gap: 6px;
   width: 100%;
 }
 
 .segment {
-  flex: 1 1 auto;
-  min-width: 0;
-  padding: 5px 10px;
-  border: none;
-  background: transparent;
-  color: var(
-    --sys-color-roles-surface-surface-sys-on-surface-variant,
-    #565f6c
+  padding: 5px 12px;
+  border: 1px solid
+    var(--sys-color-roles-outline-sys-outline, #ebecf0);
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    #ffffff
   );
+  color: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
   font-family: inherit;
   font-size: 12px;
   font-weight: 500;
@@ -134,23 +132,31 @@
   text-align: center;
   transition:
     background-color 120ms ease-out,
-    color 120ms ease-out;
+    color 120ms ease-out,
+    border-color 120ms ease-out;
 }
 
 .segment:hover {
-  color: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-high,
+    #eceeef
+  );
 }
 
 .segmentActive,
 .segmentActive:hover {
   background: var(
-    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    --sys-color-roles-accent-primary-sys-primary-container,
+    #070f36
+  );
+  color: var(
+    --sys-color-roles-accent-primary-sys-on-primary-container,
     #ffffff
   );
-  color: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 1px 3px rgba(0, 0, 0, 0.06);
+  border-color: var(
+    --sys-color-roles-accent-primary-sys-primary-container,
+    #070f36
+  );
 }
 
 .segment:focus-visible {
@@ -244,16 +250,3 @@
     var(--sys-color-roles-transparent-primary-sys-primary-08, rgba(7, 92, 186, 0.08));
 }
 
-/* ----- Code section ----- */
-
-.code {
-  border-top: 1px solid
-    var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0);
-  padding: calc(
-    var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px
-  );
-  background: var(
-    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
-    #ffffff
-  );
-}
