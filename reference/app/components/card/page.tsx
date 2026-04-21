@@ -18,7 +18,7 @@ import {
   Info,
   type LucideIcon,
 } from 'lucide-react';
-import { Card, type CardVariant, type CardSize } from '@/components/ds/card';
+import { Card, type CardSize } from '@/components/ds/card';
 import { Button } from '@/components/ds/button';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 
@@ -127,13 +127,6 @@ const FEATURE_IMAGE = '/card-images/feature.png';
 // ---------------------------------------------------------------------------
 // Gallery
 // ---------------------------------------------------------------------------
-
-const SERVICE_VARIANTS: Array<{ value: CardVariant; label: string; description: string }> = [
-  { value: 'outlined', label: 'Outlined', description: 'Neutral container with a 1px outline.' },
-  { value: 'filled', label: 'Filled', description: 'High-emphasis feature card on primary-container.' },
-  { value: 'image', label: 'Image', description: 'Content overlaid on a background image with a scrim.' },
-  { value: 'gradient', label: 'Gradient', description: 'Outer shell + inner primary-to-surface wash.' },
-];
 
 const SIZES: CardSize[] = ['sm', 'md', 'lg', 'xl'];
 
@@ -289,40 +282,6 @@ export default function CardPage() {
                 >
                   {s}
                 </div>
-              </div>
-            ))}
-          </div>
-        </Surface>
-      </Section>
-
-      {/* ==============================================================
-          VARIANT MATRIX (summary)
-          ============================================================== */}
-
-      <Section heading="Variant summary">
-        <Surface>
-          <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
-            {SERVICE_VARIANTS.map((v) => (
-              <div key={v.value} className="flex flex-col gap-2">
-                <div className="ref-heading-md">{v.label}</div>
-                <div
-                  className="ref-body-sm"
-                  style={{
-                    color:
-                      'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-                  }}
-                >
-                  {v.description}
-                </div>
-                <code
-                  className="ref-caption font-mono"
-                  style={{
-                    color:
-                      'var(--sys-color-roles-accent-primary-sys-primary, #075cba)',
-                  }}
-                >
-                  {`variant="${v.value}"`}
-                </code>
               </div>
             ))}
           </div>

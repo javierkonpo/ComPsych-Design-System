@@ -1,7 +1,9 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ChevronDown } from 'lucide-react';
 import styles from './nav.module.css';
 
 type NavItem = {
@@ -11,18 +13,21 @@ type NavItem = {
   disabled?: boolean;
 };
 
-const NAV_SECTIONS: Array<{
+type NavSection = {
   heading: string;
   items: NavItem[];
-}> = [
+  /** When true, the section header toggles its item list open/closed. */
+  collapsible?: boolean;
+};
+
+const NAV_SECTIONS: NavSection[] = [
   {
     heading: 'Overview',
-    items: [
-      { href: '/about', label: 'About' },
-    ],
+    items: [{ href: '/about', label: 'About' }],
   },
   {
     heading: 'Foundations',
+    collapsible: true,
     items: [
       { href: '/foundations/color', label: 'Color' },
       { href: '/foundations/typography', label: 'Typography' },
@@ -35,6 +40,7 @@ const NAV_SECTIONS: Array<{
   },
   {
     heading: 'Molecules',
+    collapsible: true,
     items: [
       { href: '/components/button', label: 'Button' },
       { href: '#', label: 'Checkbox', disabled: true },
@@ -56,6 +62,7 @@ const NAV_SECTIONS: Array<{
   },
   {
     heading: 'Organisms',
+    collapsible: true,
     items: [
       { href: '#', label: 'Accordion', disabled: true },
       { href: '#', label: 'Header Navigation', disabled: true },
@@ -81,6 +88,15 @@ const NAV_SECTIONS: Array<{
   },
 ];
 
+function sectionContainsActive(section: NavSection, pathname: string): boolean {
+  return section.items.some(
+    (item) =>
+      !item.disabled &&
+      item.href !== '#' &&
+      (pathname === item.href || pathname.startsWith(item.href + '/')),
+  );
+}
+
 function ComPsychLogo() {
   return (
     <svg
@@ -99,6 +115,40 @@ function ComPsychLogo() {
 
 export function Nav() {
   const pathname = usePathname();
+
+  // Section-open state. Non-collapsible sections are always open. Collapsible
+  // sections start open if they contain the current route so the active link
+  // is visible on first load.
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>(() => {
+    const out: Record<string, boolean> = {};
+    for (const section of NAV_SECTIONS) {
+      out[section.heading] = section.collapsible
+        ? sectionContainsActive(section, pathname)
+        : true;
+    }
+    return out;
+  });
+
+  // On client-side navigation, auto-expand the section that owns the new
+  // route so users don't end up with a collapsed nav hiding their location.
+  // User-toggled collapsed state for OTHER sections is preserved.
+  useEffect(() => {
+    setOpenSections((prev) => {
+      let next = prev;
+      for (const section of NAV_SECTIONS) {
+        if (!section.collapsible) continue;
+        if (sectionContainsActive(section, pathname) && !prev[section.heading]) {
+          if (next === prev) next = { ...prev };
+          next[section.heading] = true;
+        }
+      }
+      return next;
+    });
+  }, [pathname]);
+
+  function toggleSection(heading: string) {
+    setOpenSections((prev) => ({ ...prev, [heading]: !prev[heading] }));
+  }
 
   return (
     <aside
@@ -122,72 +172,124 @@ export function Nav() {
           <ComPsychLogo />
         </Link>
 
-        {NAV_SECTIONS.map((section) => (
-          <div key={section.heading}>
-            <div
-              className="ref-caption uppercase tracking-wider mb-2.5 font-semibold"
-              style={{
-                color:
-                  'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-                letterSpacing: '0.08em',
-              }}
-            >
-              {section.heading}
+        {NAV_SECTIONS.map((section) => {
+          const open = openSections[section.heading];
+          return (
+            <div key={section.heading}>
+              <SectionHeading
+                section={section}
+                open={open}
+                onToggle={() => toggleSection(section.heading)}
+              />
+              {open && (
+                <ul className="flex flex-col gap-0.5">
+                  {section.items.map((item) => {
+                    const active =
+                      item.href === '/'
+                        ? pathname === '/'
+                        : pathname === item.href ||
+                          pathname.startsWith(item.href + '/');
+
+                    if (item.disabled) {
+                      return (
+                        <li key={item.label}>
+                          <span
+                            aria-disabled="true"
+                            className="block px-2.5 py-1.5 rounded text-sm select-none cursor-not-allowed"
+                            style={{
+                              color:
+                                'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+                              opacity: 0.55,
+                            }}
+                          >
+                            {item.label}
+                          </span>
+                        </li>
+                      );
+                    }
+
+                    return (
+                      <li key={item.label}>
+                        <Link
+                          href={item.href}
+                          className={`block px-2.5 py-1.5 rounded text-sm ${styles.navLink}${active ? ` ${styles.navLinkActive}` : ''}`}
+                          style={{
+                            color: active
+                              ? 'var(--sys-color-roles-accent-primary-sys-on-primary-container, inherit)'
+                              : item.muted
+                                ? 'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)'
+                                : 'inherit',
+                            fontWeight: active ? 500 : 400,
+                            textDecoration: 'none',
+                          }}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
             </div>
-            <ul className="flex flex-col gap-0.5">
-              {section.items.map((item) => {
-                const active =
-                  item.href === '/'
-                    ? pathname === '/'
-                    : pathname === item.href ||
-                      pathname.startsWith(item.href + '/');
-
-                if (item.disabled) {
-                  return (
-                    <li key={item.label}>
-                      <span
-                        aria-disabled="true"
-                        className="block px-2.5 py-1.5 rounded text-sm select-none cursor-not-allowed"
-                        style={{
-                          color:
-                            'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-                          opacity: 0.55,
-                        }}
-                      >
-                        {item.label}
-                      </span>
-                    </li>
-                  );
-                }
-
-                return (
-                  <li key={item.label}>
-                    <Link
-                      href={item.href}
-                      className={`block px-2.5 py-1.5 rounded text-sm ${styles.navLink}${active ? ` ${styles.navLinkActive}` : ''}`}
-                      /* Only set an inline backgroundColor for the active
-                         item — inline styles beat stylesheet :hover rules,
-                         so leaving background to the module CSS lets the
-                         hover state actually apply on non-active items. */
-                      style={{
-                        color: active
-                          ? 'var(--sys-color-roles-accent-primary-sys-on-primary-container, inherit)'
-                          : item.muted
-                            ? 'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)'
-                            : 'inherit',
-                        fontWeight: active ? 500 : 400,
-                        textDecoration: 'none',
-                      }}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </aside>
+  );
+}
+
+function SectionHeading({
+  section,
+  open,
+  onToggle,
+}: {
+  section: NavSection;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  const headingStyle: React.CSSProperties = {
+    color:
+      'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+    letterSpacing: '0.08em',
+  };
+
+  if (!section.collapsible) {
+    return (
+      <div
+        className="ref-caption uppercase tracking-wider mb-2.5 font-semibold"
+        style={headingStyle}
+      >
+        {section.heading}
+      </div>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={open}
+      className="w-full flex items-center justify-between mb-2.5 ref-caption uppercase tracking-wider font-semibold cursor-pointer"
+      style={{
+        ...headingStyle,
+        background: 'transparent',
+        border: 'none',
+        padding: 0,
+        font: 'inherit',
+        fontSize: 'inherit',
+        fontWeight: 600,
+      }}
+    >
+      <span>{section.heading}</span>
+      <ChevronDown
+        size={14}
+        aria-hidden
+        style={{
+          transition: 'transform 150ms ease-out',
+          transform: open ? 'rotate(0deg)' : 'rotate(-90deg)',
+          flexShrink: 0,
+        }}
+      />
+    </button>
   );
 }
