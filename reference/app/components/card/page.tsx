@@ -591,7 +591,7 @@ function ServiceCardFilledXl() {
             Headline
           </div>
         </div>
-        <FloatingButton label="Button" />
+        <Button variant="elevated" size="lg" label="Button" />
       </div>
     </Card>
   );
@@ -623,7 +623,7 @@ function ServiceCardFilledLg() {
               Headline
             </div>
           </div>
-          <FloatingButton label="Button" />
+          <Button variant="elevated" size="lg" label="Button" />
         </div>
       </Card>
     </div>
@@ -684,7 +684,7 @@ function ServiceCardImageXl() {
               Headline
             </div>
           </div>
-          <FloatingButton label="Button" />
+          <Button variant="elevated" size="lg" label="Button" />
         </div>
       </div>
     </div>
@@ -763,7 +763,9 @@ function ServiceCardGradientMd() {
           <div className="ref-body" style={{ color: onSurfaceVariant }}>
             Description
           </div>
-          <OutlinedButton label="Button" />
+          <div style={{ alignSelf: 'flex-start' }}>
+            <Button variant="outlined" size="lg" label="Button" />
+          </div>
         </div>
       </Card>
     </div>
@@ -1084,58 +1086,6 @@ function IconBadge({ small = false }: { small?: boolean }) {
       }}
     >
       <Target size={iconSize} strokeWidth={2} />
-    </span>
-  );
-}
-
-function FloatingButton({ label }: { label: string }) {
-  return (
-    <span
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 48,
-        padding: '0 32px',
-        borderRadius: 9999,
-        background:
-          'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
-        color: 'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
-        fontSize: 16,
-        lineHeight: '22.4px',
-        fontWeight: 500,
-        boxShadow:
-          '0 2px 8px 0 rgba(0,0,0,0.04), 0 2px 4px 0 rgba(0,0,0,0.06)',
-        whiteSpace: 'nowrap',
-      }}
-    >
-      {label}
-    </span>
-  );
-}
-
-function OutlinedButton({ label }: { label: string }) {
-  return (
-    <span
-      style={{
-        alignSelf: 'flex-start',
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 48,
-        padding: '0 32px',
-        borderRadius: 9999,
-        background: 'transparent',
-        color: 'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
-        border:
-          '1px solid var(--sys-color-roles-outline-sys-outline, #ebecf0)',
-        fontSize: 16,
-        lineHeight: '22.4px',
-        fontWeight: 500,
-        whiteSpace: 'nowrap',
-      }}
-    >
-      {label}
     </span>
   );
 }
