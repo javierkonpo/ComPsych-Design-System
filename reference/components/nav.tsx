@@ -43,7 +43,7 @@ const NAV_SECTIONS: NavSection[] = [
     collapsible: true,
     items: [
       { href: '/components/button', label: 'Button' },
-      { href: '#', label: 'Checkbox', disabled: true },
+      { href: '/components/checkbox', label: 'Checkbox' },
       { href: '#', label: 'Radio Button', disabled: true },
       { href: '#', label: 'Avatar', disabled: true },
       { href: '#', label: 'Input Field', disabled: true },

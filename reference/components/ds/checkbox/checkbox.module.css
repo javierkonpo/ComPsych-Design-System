@@ -1,0 +1,234 @@
+/*
+ * Checkbox — spec: specs/checkbox.spec.md
+ *
+ * Native <input type="checkbox"> wrapped in a <label> for click-to-toggle.
+ * The native input is visually hidden and layered over a custom-drawn box;
+ * that box sits inside a 40 × 40 (md) / 36 × 36 (sm) circle that carries
+ * the state-layer and ripple.
+ *
+ * Every visual property resolves to sys.* CSS custom properties.
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--sys-dimensions-spacing-padding-sys-padding-8, 8) * 1px);
+  cursor: pointer;
+  user-select: none;
+  color: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  line-height: 1;
+}
+
+.root.disabled {
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------
+   Control — the state-layer circle + the box + the (visually hidden)
+   native input. Hit target is the full circle.
+   -------------------------------------------------------------------- */
+
+.control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  overflow: hidden;
+  /* Circle size per checkbox size — the visual box stays 24/20. */
+  width: 40px;
+  height: 40px;
+  color: var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c);
+}
+
+.sm .control {
+  width: 36px;
+  height: 36px;
+}
+
+/* State-layer disc: fades in on hover / pressed via currentColor so
+   selected / danger / unselected each get the right tint without extra
+   rules. */
+.control::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease-out;
+}
+
+.root:hover:not(.disabled) .control::before {
+  opacity: calc(var(--sys-state-layer-sys-hover, 8) / 100);
+}
+
+.root:active:not(.disabled) .control::before {
+  opacity: calc(var(--sys-state-layer-sys-pressed, 10) / 100);
+}
+
+/* --------------------------------------------------------------------
+   Hidden native input — covers the whole circle so keyboard focus and
+   mouse clicks on the circle hit the real input.
+   -------------------------------------------------------------------- */
+
+.input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------
+   Box — the visual 24 × 24 / 20 × 20 square drawn inside the circle.
+   -------------------------------------------------------------------- */
+
+.box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  border: calc(
+      var(--sys-dimensions-border-width-sys-stroke-medium, 1.5) * 1px
+    ) solid
+    var(--sys-color-roles-outline-sys-outline-fixed, #8a96a6);
+  background: transparent;
+  border-radius: calc(
+    var(--sys-dimensions-border-radius-sys-radius-xs, 4) * 1px
+  );
+  color: var(--sys-color-roles-accent-primary-sys-on-primary, #ffffff);
+  transition:
+    background-color 120ms ease-out,
+    border-color 120ms ease-out;
+  pointer-events: none;
+}
+
+.sm .box {
+  width: 20px;
+  height: 20px;
+}
+
+/* Selected / Indeterminate — filled primary. */
+.input:checked + .box,
+.indeterminate .box {
+  background: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+  border-color: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+}
+
+/* When Selected / Indeterminate, re-color the state-layer disc so the
+   tint matches the box fill (matches M3 overlay rule). */
+.root:has(.input:checked) .control,
+.root.indeterminate .control {
+  color: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+}
+
+/* Danger / invalid */
+.invalid .box {
+  border-color: var(--sys-color-roles-error-sys-error, #d82727);
+}
+.invalid .input:checked + .box,
+.invalid.indeterminate .box {
+  background: var(--sys-color-roles-error-sys-error, #d82727);
+  border-color: var(--sys-color-roles-error-sys-error, #d82727);
+}
+.root.invalid .control {
+  color: var(--sys-color-roles-error-sys-error, #d82727);
+}
+
+/* Focus ring — around the visual box (not the state-layer circle). */
+.input:focus-visible + .box {
+  outline: calc(
+      var(--sys-dimensions-border-width-sys-stroke-medium, 1.5) * 1px
+    ) solid
+    var(
+      --sys-color-roles-add-on-primary-fixed-sys-on-primary-fixed-variant,
+      #4285f4
+    );
+  outline-offset: 2px;
+}
+.invalid .input:focus-visible + .box {
+  outline-color: var(--sys-color-roles-error-sys-error, #d82727);
+}
+
+/* Disabled */
+.root.disabled .box {
+  opacity: calc(var(--sys-state-layer-sys-disabled-container, 48) / 100);
+}
+.root.disabled .text {
+  opacity: calc(var(--sys-state-layer-sys-disabled-content, 64) / 100);
+}
+
+/* --------------------------------------------------------------------
+   Label block
+   -------------------------------------------------------------------- */
+
+.text {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.label {
+  font-family:
+    'Google Sans Text', 'Google Sans', var(--font-display), var(--font-inter),
+    system-ui, -apple-system, sans-serif;
+  font-size: calc(
+    var(--sys-type-scale-body-medium-sys-font-size, 16) * 1px
+  );
+  line-height: calc(
+    var(--sys-type-scale-body-medium-sys-line-height, 24) * 1px
+  );
+  color: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+}
+
+.sm .label {
+  font-size: calc(
+    var(--sys-type-scale-body-small-sys-font-size, 14) * 1px
+  );
+  line-height: calc(
+    var(--sys-type-scale-body-small-sys-line-height, 20) * 1px
+  );
+}
+
+.description {
+  font-family: inherit;
+  font-size: calc(
+    var(--sys-type-scale-body-small-sys-font-size, 14) * 1px
+  );
+  line-height: calc(
+    var(--sys-type-scale-body-small-sys-line-height, 20) * 1px
+  );
+  color: var(
+    --sys-color-roles-surface-surface-sys-on-surface-variant,
+    #565f6c
+  );
+}
+
+.sm .description {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+/* --------------------------------------------------------------------
+   Glyph — check mark / dash. Sized proportional to the box (same SVG
+   viewBox at either size; scales via parent).
+   -------------------------------------------------------------------- */
+
+.glyph {
+  width: 100%;
+  height: 100%;
+  color: var(--sys-color-roles-accent-primary-sys-on-primary, #ffffff);
+  pointer-events: none;
+}
