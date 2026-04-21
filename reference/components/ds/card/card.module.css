@@ -1,0 +1,329 @@
+/*
+ * Card — spec: specs/card.spec.md
+ *
+ * Every visual property resolves to a sys.* CSS custom property so the
+ * card re-themes live with the active brand × product bundle. Variants
+ * (outlined, filled, image, gradient) override a small set of local
+ * --card-* vars — the core shell is shared.
+ */
+
+/* ------------------------------------------------------------------
+   Base — shared across every variant and size
+   ------------------------------------------------------------------ */
+
+.root {
+  /* Local primitives — overridden per variant / size below. */
+  --card-bg: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    #ffffff
+  );
+  --card-fg: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  --card-border: var(--sys-color-roles-outline-sys-outline, #ebecf0);
+  --card-border-width: calc(
+    var(--sys-dimensions-border-width-sys-stroke-thin, 1) * 1px
+  );
+  --card-shadow: none;
+
+  /* Size-driven primitives (overridden in .sm/.md/.lg/.xl). */
+  --card-padding: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-24, 24) * 1px
+  );
+  --card-radius: calc(
+    var(--sys-dimensions-border-radius-sys-radius-lg, 16) * 1px
+  );
+  --card-gap: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px
+  );
+
+  /* Focus-ring color — same role Button uses. */
+  --card-focus-ring: var(
+    --sys-color-roles-add-on-primary-fixed-sys-on-primary-fixed-variant,
+    #4285f4
+  );
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+  box-sizing: border-box;
+  padding: var(--card-padding);
+  background: var(--card-bg);
+  color: var(--card-fg);
+  border: var(--card-border-width) solid var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  text-align: left;
+  /* Transitions apply for interactive cards only; non-interactive cards
+     don't move, but the property is cheap to declare either way. */
+  transition:
+    background-color 150ms ease-out,
+    box-shadow 150ms ease-out,
+    border-color 150ms ease-out;
+}
+
+/* Reset default anchor / button styling when the card is rendered as one
+   of those — the consumer can still pass className to override. */
+.root[href],
+button.root {
+  appearance: none;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  width: auto;
+}
+
+/* Full-width modifier. */
+.fullWidth {
+  display: flex;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------------
+   State-layer overlay — used by interactive cards. Hidden on
+   non-interactive and disabled cards. Absolutely positioned; clips to
+   the card radius via border-radius: inherit.
+   ------------------------------------------------------------------ */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(
+    --sys-color-roles-surface-surface-sys-on-surface-variant,
+    #565f6c
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease-out;
+}
+
+/* Content wrapper sits above overlay so the overlay doesn't tint content. */
+.content {
+  position: relative;
+  display: contents;
+}
+
+/* ------------------------------------------------------------------
+   Interactive — hover / focus / pressed. Pressed is the ripple, not a
+   flat overlay; keep the hover opacity persistent beneath the ripple.
+   ------------------------------------------------------------------ */
+
+.interactive {
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+}
+
+.interactive:hover:not(:disabled):not([aria-disabled='true']) .overlay {
+  opacity: calc(var(--sys-state-layer-sys-hover, 8) / 100);
+}
+
+.interactive:hover:not(:disabled):not([aria-disabled='true']) {
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.1),
+    0 2px 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Focus ring — keyboard only. Inset -1 px so layout doesn't shift. */
+.interactive:focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: calc(
+    var(--sys-dimensions-border-width-sys-stroke-medium, 1.5) * 1px
+  ) solid var(--card-focus-ring);
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------
+   Disabled
+   ------------------------------------------------------------------ */
+
+.interactive:disabled,
+.interactive[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: calc(var(--sys-state-layer-sys-disabled-container, 48) / 100);
+  box-shadow: none;
+}
+.interactive:disabled .content,
+.interactive[aria-disabled='true'] .content {
+  opacity: calc(
+    (var(--sys-state-layer-sys-disabled-content, 64) /
+      var(--sys-state-layer-sys-disabled-container, 48))
+  );
+}
+.interactive:disabled .overlay,
+.interactive[aria-disabled='true'] .overlay {
+  display: none;
+}
+
+/* ------------------------------------------------------------------
+   "Current" — the selected-within-a-set visual. Overrides the default
+   border with a thicker primary-toned one. Applies to any variant.
+   ------------------------------------------------------------------ */
+
+.current {
+  --card-border: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+  --card-border-width: calc(
+    var(--sys-dimensions-border-width-sys-stroke-thick, 2) * 1px
+  );
+}
+
+/* ------------------------------------------------------------------
+   Variants
+   ------------------------------------------------------------------ */
+
+.outlined {
+  /* Defaults already match outlined — kept as its own class for clarity
+     and to reset back from other variants via className composition. */
+}
+
+.filled {
+  --card-bg: var(
+    --sys-color-roles-accent-primary-sys-primary-container,
+    #070f36
+  );
+  --card-fg: var(
+    --sys-color-roles-accent-primary-sys-on-primary-container,
+    #ffffff
+  );
+  --card-border: transparent;
+  --card-border-width: 0;
+  --card-shadow:
+    0 2px 8px 0 rgba(0, 0, 0, 0.04),
+    0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.image {
+  --card-bg: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    #ffffff
+  );
+  --card-fg: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  --card-border: transparent;
+  --card-border-width: 0;
+  --card-shadow:
+    0 2px 8px 0 rgba(0, 0, 0, 0.04),
+    0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  background-size: cover;
+  background-position: center;
+  /* The scrim is painted as an ::before gradient so the background image
+     stays layered beneath without the consumer managing two stacks. */
+}
+.image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    var(--sys-color-roles-transparent-neutral-sys-white-50, rgba(255, 255, 255, 0.5)) 100%
+  );
+  pointer-events: none;
+}
+
+.gradient {
+  /* Outer shell is the default outlined surface; the inner gradient panel
+     is painted by the `.gradientInner` wrapper the React component renders. */
+}
+
+.gradientInner {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+  padding: var(--card-padding);
+  margin: calc(var(--card-padding) * -1);
+  background-image: linear-gradient(
+    to bottom,
+    var(--sys-color-roles-transparent-primary-sys-primary-08, rgba(7, 92, 186, 0.08)),
+    var(--sys-color-roles-transparent-neutral-sys-white-10, rgba(255, 255, 255, 0.1))
+  );
+  border-radius: calc(var(--card-radius) - 8px);
+}
+/* When the gradient variant is used, its outer padding shrinks so the
+   inner panel absorbs the visual padding. */
+.gradient {
+  --card-padding: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-8, 8) * 1px
+  );
+  --card-radius: calc(
+    var(--sys-dimensions-border-radius-sys-radius-xl, 24) * 1px
+  );
+}
+
+/* ------------------------------------------------------------------
+   Sizes
+   ------------------------------------------------------------------ */
+
+.sm {
+  --card-padding: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px
+  );
+  --card-radius: calc(
+    var(--sys-dimensions-border-radius-sys-radius-md, 12) * 1px
+  );
+  --card-gap: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-12, 12) * 1px
+  );
+}
+.md {
+  --card-padding: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-24, 24) * 1px
+  );
+  --card-radius: calc(
+    var(--sys-dimensions-border-radius-sys-radius-lg, 16) * 1px
+  );
+  --card-gap: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px
+  );
+}
+.lg {
+  --card-padding: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-32, 32) * 1px
+  );
+  --card-radius: calc(
+    var(--sys-dimensions-border-radius-sys-radius-lg, 16) * 1px
+  );
+  --card-gap: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-24, 24) * 1px
+  );
+}
+.xl {
+  --card-padding: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-48, 48) * 1px
+  );
+  --card-radius: calc(
+    var(--sys-dimensions-border-radius-sys-radius-xl, 24) * 1px
+  );
+  --card-gap: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-24, 24) * 1px
+  );
+}
+
+/* Gradient size override — gradient's outer padding always stays at
+   padding-8 regardless of --size. The inner panel picks up the full
+   size-driven padding. */
+.gradient.sm,
+.gradient.md,
+.gradient.lg,
+.gradient.xl {
+  --card-padding: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-8, 8) * 1px
+  );
+}
+.gradient.sm .gradientInner {
+  padding: calc(var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px);
+}
+.gradient.md .gradientInner {
+  padding: calc(var(--sys-dimensions-spacing-padding-sys-padding-24, 24) * 1px);
+}
+.gradient.lg .gradientInner {
+  padding: calc(var(--sys-dimensions-spacing-padding-sys-padding-32, 32) * 1px);
+}
+.gradient.xl .gradientInner {
+  padding: calc(var(--sys-dimensions-spacing-padding-sys-padding-48, 48) * 1px);
+}

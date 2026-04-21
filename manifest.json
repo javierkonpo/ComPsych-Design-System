@@ -53,6 +53,15 @@
       "referenceImplementation": "reference/components/ds/button/",
       "figmaUrl": "https://www.figma.com/design/VFBn7KCDy3FSIlvhNo3ylq/ComPsych-Design-System---Core-Components?node-id=17-1332",
       "status": "ready"
+    },
+    {
+      "name": "Card",
+      "slug": "card",
+      "category": "molecule",
+      "spec": "specs/card.spec.md",
+      "referenceImplementation": "reference/components/ds/card/",
+      "figmaUrl": "https://www.figma.com/design/VFBn7KCDy3FSIlvhNo3ylq/ComPsych-Design-System---Core-Components?node-id=1117-9829",
+      "status": "ready"
     }
   ]
 }
