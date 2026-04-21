@@ -270,14 +270,13 @@ function SectionHeading({
       onClick={onToggle}
       aria-expanded={open}
       className="w-full flex items-center justify-between mb-2.5 ref-caption uppercase tracking-wider font-semibold cursor-pointer"
+      /* Keep font-related properties unset so the `ref-caption` class drives
+         size / family / weight — matches the non-collapsible heading above. */
       style={{
         ...headingStyle,
         background: 'transparent',
         border: 'none',
         padding: 0,
-        font: 'inherit',
-        fontSize: 'inherit',
-        fontWeight: 600,
       }}
     >
       <span>{section.heading}</span>
