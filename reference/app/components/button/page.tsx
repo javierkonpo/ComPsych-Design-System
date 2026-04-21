@@ -24,7 +24,7 @@ export default function ButtonPage() {
     <FoundationPageShell
       eyebrow="Components"
       title="Button"
-      description="The canonical interactive element. Seven visual variants, four sizes, five states — every value driven by sys.* tokens so the button re-themes with the active brand × product bundle."
+      description="The canonical interactive element. Seven visual variants, four sizes, five states. Every value is driven by sys.* tokens so the button re-themes with the active brand and product bundle."
     >
       {/* ------------------------------------------------------------------
           Playground — interactive preview wired to the real Button.
@@ -114,7 +114,7 @@ export default function ButtonPage() {
       {/* ------------------------------------------------------------------
           Icon compositions
           ------------------------------------------------------------------ */}
-      <Section heading="Icon compositions" lead="Four compositions: leading-icon, trailing-icon, text-only, icon-only. Icons pass through as React nodes — use any Lucide icon.">
+      <Section heading="Icon compositions" lead="Four compositions: leading-icon, trailing-icon, text-only, icon-only. Icons pass through as React nodes, so any Lucide icon works.">
         <Surface>
           <div className="flex flex-wrap items-center gap-6">
             <Composition label="Leading icon">
@@ -138,7 +138,7 @@ export default function ButtonPage() {
           ------------------------------------------------------------------ */}
       <Section
         heading="States"
-        lead="Default, hover, focus, pressed, and disabled. Hover / focus / pressed require interaction — the dedicated columns show the static approximation via .ref-force-* utility classes."
+        lead="Default, hover, focus, pressed, and disabled. Hover, focus, and pressed require interaction; the dedicated columns show a static approximation."
       >
         <Surface>
           <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))' }}>
@@ -164,7 +164,7 @@ export default function ButtonPage() {
       {/* ------------------------------------------------------------------
           Full width
           ------------------------------------------------------------------ */}
-      <Section heading="Full width" lead="When the button needs to stretch to fill its container — typical inside forms on narrow screens.">
+      <Section heading="Full width" lead="When the button needs to stretch to fill its container. Typical inside forms on narrow screens.">
         <Surface>
           <div style={{ maxWidth: 360 }}>
             <Button fullWidth label="Continue" trailingIcon={<ArrowRight />} />
@@ -175,7 +175,7 @@ export default function ButtonPage() {
       {/* ------------------------------------------------------------------
           API reference
           ------------------------------------------------------------------ */}
-      <Section heading="API reference" lead="Full prop contract. Web names. On React Native, onClick → onPress, aria-label → accessibilityLabel.">
+      <Section heading="API reference" lead="Full prop contract. Web names. On React Native, onClick becomes onPress and aria-label becomes accessibilityLabel.">
         <div
           className="rounded-lg overflow-hidden"
           style={{
@@ -381,13 +381,13 @@ function PropsTable() {
     },
     { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", def: "'md'", notes: 'Height, padding, typography, icon size.' },
     { name: 'iconOnly', type: 'boolean', def: 'false', notes: 'Square icon-only button. Requires aria-label.' },
-    { name: 'leadingIcon', type: 'ReactNode', def: '—', notes: 'Rendered before label. Use a Lucide element.' },
-    { name: 'trailingIcon', type: 'ReactNode', def: '—', notes: 'Rendered after label.' },
+    { name: 'leadingIcon', type: 'ReactNode', def: '-', notes: 'Rendered before label. Use a Lucide element.' },
+    { name: 'trailingIcon', type: 'ReactNode', def: '-', notes: 'Rendered after label.' },
     { name: 'loading', type: 'boolean', def: 'false', notes: 'Swaps leading icon for spinner; suppresses activation.' },
     { name: 'disabled', type: 'boolean', def: 'false', notes: 'Disables interaction; applies disabled visual.' },
     { name: 'fullWidth', type: 'boolean', def: 'false', notes: 'Stretches the button to its container width.' },
-    { name: 'label', type: 'string', def: '—', notes: 'Required unless iconOnly. React: children also accepted.' },
-    { name: 'onClick', type: '(event) => void', def: '—', notes: 'Fires on activation. RN equivalent: onPress.' },
+    { name: 'label', type: 'string', def: '-', notes: 'Required unless iconOnly. React: children also accepted.' },
+    { name: 'onClick', type: '(event) => void', def: '-', notes: 'Fires on activation. RN equivalent: onPress.' },
     { name: 'type', type: "'button' | 'submit' | 'reset'", def: "'button'", notes: 'Web only.' },
   ];
   return (

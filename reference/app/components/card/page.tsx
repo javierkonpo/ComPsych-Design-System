@@ -142,7 +142,7 @@ export default function CardPage() {
     <FoundationPageShell
       eyebrow="Components"
       title="Card"
-      description="A self-contained content block. Four variants, four sizes; optional interactive / current / disabled modifiers. Every value resolves to sys.* tokens and re-themes live with the active bundle."
+      description="A self-contained content block. Four variants, four sizes, with optional interactive, current, and disabled modifiers. Every value resolves to sys.* tokens and re-themes live with the active bundle."
     >
       {/* ==============================================================
           SERVICE CARDS
@@ -181,7 +181,7 @@ export default function CardPage() {
         </Surface>
       </Section>
 
-      <Section heading="Gradient" lead="Outer shell, inner primary-08 \u2192 white-10 wash. md and sm sizes.">
+      <Section heading="Gradient" lead="Outer shell, inner primary-08 to white-10 wash. md and sm sizes.">
         <Surface>
           <div className="flex flex-col gap-6">
             <ServiceCardGradientMd />
@@ -196,7 +196,7 @@ export default function CardPage() {
 
       <Section
         heading="Content cards"
-        lead="Library / marketing tiles. Ten categories across three styles \u2014 Gradient, With Icon, With Chip. All 30 variants shown below."
+        lead="Library and marketing tiles across three styles: Gradient, With Icon, and With Chip."
       />
 
       <Section heading="With Icon" lead="Large category glyph on a primary-fixed-dim plate, title + body stack below.">
@@ -223,7 +223,7 @@ export default function CardPage() {
 
       <Section
         heading="Interactive patterns"
-        lead="Action Cards and Metric Cards are compositions on the interactive Card base \u2014 state-layer on hover/focus, ripple on press, focus ring for keyboard."
+        lead="Action Cards and Metric Cards are compositions on the interactive Card base. State-layer on hover and focus, ripple on press, focus ring for keyboard."
       >
         <Surface>
           <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
@@ -263,7 +263,7 @@ export default function CardPage() {
           SIZES (isolation)
           ============================================================== */}
 
-      <Section heading="Sizes" lead="Padding, radius, and gap scale across sm / md / lg / xl.">
+      <Section heading="Sizes" lead="Padding, radius, and gap scale across sm, md, lg, and xl.">
         <Surface>
           <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
             {SIZES.map((s) => (
@@ -333,7 +333,7 @@ export default function CardPage() {
           API REFERENCE
           ============================================================== */}
 
-      <Section heading="API reference" lead="Full prop contract. Web names. React Native: onClick \u2192 onPress, aria-* \u2192 accessibility*.">
+      <Section heading="API reference" lead="Full prop contract. Web names. On React Native, onClick becomes onPress and aria-* becomes accessibility*.">
         <div
           className="rounded-lg overflow-hidden"
           style={{
@@ -1199,11 +1199,11 @@ function PropsTable() {
     { name: 'interactive', type: 'boolean', def: 'false', notes: 'Makes the card pressable (state-layer + focus + ripple).' },
     { name: 'disabled', type: 'boolean', def: 'false', notes: 'Only meaningful with interactive.' },
     { name: 'current', type: 'boolean', def: 'false', notes: 'Selected/active within a set. Thick primary border.' },
-    { name: 'href', type: 'string', def: '—', notes: 'Renders as <a> and forces interactive.' },
+    { name: 'href', type: 'string', def: '-', notes: 'Renders as <a> and forces interactive.' },
     { name: 'as', type: 'ElementType', def: "'div' (or 'a' if href)", notes: "Override the rendered tag." },
-    { name: 'backgroundImage', type: 'string', def: '—', notes: 'Required for variant="image".' },
+    { name: 'backgroundImage', type: 'string', def: '-', notes: 'Required for variant="image".' },
     { name: 'fullWidth', type: 'boolean', def: 'false', notes: 'Stretch to container width.' },
-    { name: 'onClick', type: '(event) => void', def: '—', notes: 'Fires on activation. Suppressed when disabled.' },
+    { name: 'onClick', type: '(event) => void', def: '-', notes: 'Fires on activation. Suppressed when disabled.' },
   ];
   return (
     <table className="w-full" style={{ borderCollapse: 'collapse' }}>
