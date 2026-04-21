@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Heart, Download, ArrowRight, Plus } from 'lucide-react';
 import { Button, type ButtonVariant, type ButtonSize } from '@/components/ds/button';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { Playground } from '@/components/playground';
 
 const VARIANTS: Array<{ value: ButtonVariant; label: string; description: string }> = [
   { value: 'filled', label: 'Filled', description: 'Primary call to action.' },
@@ -26,12 +27,41 @@ export default function ButtonPage() {
       description="The canonical interactive element. Seven visual variants, four sizes, five states — every value driven by sys.* tokens so the button re-themes with the active brand × product bundle."
     >
       {/* ------------------------------------------------------------------
-          Live demo
+          Playground — interactive preview wired to the real Button.
           ------------------------------------------------------------------ */}
-      <Section heading="Live demo" lead="The canonical button with default props (filled, md, with label).">
-        <Surface>
-          <Button label="Get started" leadingIcon={<ArrowRight />} />
-        </Surface>
+      <Section heading="Playground" lead="The real Button rendered live. Change any control on the right to see the component update; the code block shows the minimal JSX for your current combination.">
+        <Playground
+          component={Button}
+          componentName="Button"
+          staticProps={{ leadingIcon: <ArrowRight /> }}
+          controls={[
+            {
+              name: 'variant',
+              type: 'enum',
+              label: 'Variant',
+              options: ['filled', 'tonal', 'outlined', 'elevated', 'text', 'danger', 'danger-outlined'],
+              defaultValue: 'filled',
+            },
+            {
+              name: 'size',
+              type: 'enum',
+              label: 'Size',
+              options: ['sm', 'md', 'lg', 'xl'],
+              defaultValue: 'md',
+            },
+            {
+              name: 'label',
+              type: 'string',
+              label: 'Label',
+              defaultValue: 'Button',
+              placeholder: 'Button label',
+            },
+            { name: 'iconOnly', type: 'boolean', label: 'Icon only', defaultValue: false },
+            { name: 'loading', type: 'boolean', label: 'Loading', defaultValue: false },
+            { name: 'disabled', type: 'boolean', label: 'Disabled', defaultValue: false },
+            { name: 'fullWidth', type: 'boolean', label: 'Full width', defaultValue: false },
+          ]}
+        />
       </Section>
 
       {/* ------------------------------------------------------------------

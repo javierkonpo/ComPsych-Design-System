@@ -127,6 +127,7 @@ Follow these strictly:
 5. **Follow the file and naming conventions.** Kebab-case folders, co-located specs with components, one spec file per component.
 6. **Read before you write.** Before modifying any file, read it. Before proposing a change, understand the existing patterns.
 7. **Interactive components use the shared `<Ripple />` primitive.** For press feedback on buttons, chips, list items, menu items, and icon buttons, consume `useRipple()` from `reference/components/ds/ripple/`. Do not reimplement ripple animations per component.
+8. **Every component gallery page starts with `<Playground />`.** The shared `reference/components/playground/` primitive renders the real component from `reference/components/ds/<name>/` with state-driven props and generates minimal JSX for the current combination. Pass the actual component reference (not a copy), the `componentName`, and a `controls` schema listing each exposed prop as `enum` / `boolean` / `string`. For components that need children (e.g. `<Card>`), pass `renderChildren` + `childrenCode`. For demo-only glue (a fixed `leadingIcon`, a sample `backgroundImage`), use `staticProps` — those flow through to the component but are hidden from both controls and generated code. The "Variants", "States", and other gallery sections continue to render below the Playground unchanged.
 
 ---
 

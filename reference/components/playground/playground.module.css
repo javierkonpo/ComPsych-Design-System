@@ -1,0 +1,259 @@
+/*
+ * Playground — the shared interactive preview shell.
+ *
+ * Two-column on desktop: stage on the left, controls on the right.
+ * Code block sits below both, spanning the full width. All backgrounds,
+ * borders, and typography resolve to sys.* tokens.
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid
+    var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0);
+  border-radius: calc(
+    var(--sys-dimensions-border-radius-sys-radius-lg, 16) * 1px
+  );
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    #ffffff
+  );
+  overflow: hidden;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  min-height: 280px;
+}
+
+@media (max-width: 800px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ----- Stage ----- */
+
+.stage {
+  padding: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-32, 32) * 1px
+  );
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-low,
+    #f9fafb
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid
+    var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0);
+  min-width: 0;
+}
+
+@media (max-width: 800px) {
+  .stage {
+    border-right: none;
+    border-bottom: 1px solid
+      var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0);
+  }
+}
+
+/* ----- Controls panel ----- */
+
+.controls {
+  padding: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-24, 24) * 1px
+  );
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px);
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    #ffffff
+  );
+  overflow-y: auto;
+}
+
+.controlRow {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--sys-dimensions-spacing-padding-sys-padding-8, 8) * 1px);
+}
+
+.controlLabel {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(
+    --sys-color-roles-surface-surface-sys-on-surface-variant,
+    #565f6c
+  );
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.controlField {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ----- Segmented control (enum) ----- */
+
+.segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container,
+    #f3f4f6
+  );
+  border-radius: 9999px;
+  width: 100%;
+}
+
+.segment {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 5px 10px;
+  border: none;
+  background: transparent;
+  color: var(
+    --sys-color-roles-surface-surface-sys-on-surface-variant,
+    #565f6c
+  );
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+  border-radius: 9999px;
+  white-space: nowrap;
+  text-align: center;
+  transition:
+    background-color 120ms ease-out,
+    color 120ms ease-out;
+}
+
+.segment:hover {
+  color: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+}
+
+.segmentActive,
+.segmentActive:hover {
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    #ffffff
+  );
+  color: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.segment:focus-visible {
+  outline: 2px solid
+    var(
+      --sys-color-roles-add-on-primary-fixed-sys-on-primary-fixed-variant,
+      #4285f4
+    );
+  outline-offset: 2px;
+}
+
+/* ----- Switch (boolean) ----- */
+
+.switch {
+  position: relative;
+  width: 40px;
+  height: 24px;
+  border: 1px solid
+    var(--sys-color-roles-outline-sys-outline, #ebecf0);
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-high,
+    #eceeef
+  );
+  border-radius: 9999px;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background-color 150ms ease-out,
+    border-color 150ms ease-out;
+  flex-shrink: 0;
+}
+
+.switchOn {
+  background: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+  border-color: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+}
+
+.switchThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    #ffffff
+  );
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  transition: transform 150ms ease-out;
+}
+
+.switchOn .switchThumb {
+  transform: translateX(16px);
+}
+
+.switch:focus-visible {
+  outline: 2px solid
+    var(
+      --sys-color-roles-add-on-primary-fixed-sys-on-primary-fixed-variant,
+      #4285f4
+    );
+  outline-offset: 2px;
+}
+
+/* ----- Text input (string) ----- */
+
+.textInput {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    #ffffff
+  );
+  border: 1px solid
+    var(--sys-color-roles-outline-sys-outline, #ebecf0);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  outline: none;
+  transition:
+    border-color 120ms ease-out,
+    box-shadow 120ms ease-out;
+}
+
+.textInput:focus {
+  border-color: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+  box-shadow: 0 0 0 3px
+    var(--sys-color-roles-transparent-primary-sys-primary-08, rgba(7, 92, 186, 0.08));
+}
+
+/* ----- Code section ----- */
+
+.code {
+  border-top: 1px solid
+    var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0);
+  padding: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px
+  );
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    #ffffff
+  );
+}

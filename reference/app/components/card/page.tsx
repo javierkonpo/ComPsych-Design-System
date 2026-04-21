@@ -21,6 +21,7 @@ import {
 import { Card, type CardVariant, type CardSize } from '@/components/ds/card';
 import { Button } from '@/components/ds/button';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { Playground } from '@/components/playground';
 
 // ---------------------------------------------------------------------------
 // Category registry — each Content Card category maps to a Lucide icon and
@@ -144,6 +145,38 @@ export default function CardPage() {
       title="Card"
       description="A self-contained content block. Four variants, four sizes; optional interactive / current / disabled modifiers. Every value resolves to sys.* tokens and re-themes live with the active bundle."
     >
+      {/* ==============================================================
+          PLAYGROUND — interactive preview wired to the real Card.
+          ============================================================== */}
+      <Section heading="Playground" lead="The real Card rendered live with the canonical Service Card content. Toggle variants, sizes, interactive / current / disabled — the code block shows the minimal JSX.">
+        <Playground
+          component={Card}
+          componentName="Card"
+          renderChildren={() => <ServiceCardBody />}
+          childrenCode="<ServiceCardBody />"
+          controls={[
+            {
+              name: 'variant',
+              type: 'enum',
+              label: 'Variant',
+              options: ['outlined', 'filled', 'gradient'],
+              defaultValue: 'outlined',
+            },
+            {
+              name: 'size',
+              type: 'enum',
+              label: 'Size',
+              options: ['sm', 'md', 'lg', 'xl'],
+              defaultValue: 'md',
+            },
+            { name: 'interactive', type: 'boolean', label: 'Interactive', defaultValue: false },
+            { name: 'current', type: 'boolean', label: 'Current', defaultValue: false },
+            { name: 'disabled', type: 'boolean', label: 'Disabled', defaultValue: false },
+            { name: 'fullWidth', type: 'boolean', label: 'Full width', defaultValue: false },
+          ]}
+        />
+      </Section>
+
       {/* ==============================================================
           SERVICE CARDS
           ============================================================== */}
@@ -385,34 +418,46 @@ const onContainerVariant =
   'var(--sys-color-roles-accent-primary-sys-on-primary-container-variant, #badcff)';
 
 /** md Outlined — the canonical Service Card. 420 wide in Figma. */
+/**
+ * The interior of the canonical Service Card. Extracted so the Playground
+ * can drop it inside whatever variant the user selects without reinventing
+ * the composition.
+ */
+function ServiceCardBody() {
+  return (
+    <>
+      <div className="flex items-start justify-between">
+        <Target size={48} style={{ color: primary }} strokeWidth={1.5} />
+        <div className="flex items-center gap-2">
+          <InfoChip label="Primary" />
+          <ArrowUpRight size={24} style={{ color: onSurfaceVariant }} />
+        </div>
+      </div>
+      <div className="flex flex-col gap-1">
+        <div className="ref-caption" style={{ color: onSurfaceVariant }}>Label</div>
+        <div
+          style={{
+            fontSize: 20,
+            lineHeight: '28px',
+            fontWeight: 400,
+            color: onSurface,
+          }}
+        >
+          Title <span style={{ color: onSurfaceVariant }}>subtle</span>
+        </div>
+      </div>
+      <div className="ref-body" style={{ color: onSurfaceVariant }}>
+        Description
+      </div>
+    </>
+  );
+}
+
 function ServiceCardOutlinedMd() {
   return (
     <div style={{ maxWidth: 420 }}>
       <Card size="md">
-        <div className="flex items-start justify-between">
-          <Target size={48} style={{ color: primary }} strokeWidth={1.5} />
-          <div className="flex items-center gap-2">
-            <InfoChip label="Primary" />
-            <ArrowUpRight size={24} style={{ color: onSurfaceVariant }} />
-          </div>
-        </div>
-        <div className="flex flex-col gap-1">
-          <div className="ref-caption" style={{ color: onSurfaceVariant }}>Label</div>
-          <div
-            style={{
-              fontSize: 20,
-              lineHeight: '28px',
-              fontWeight: 400,
-              color: onSurface,
-            }}
-          >
-            Title{' '}
-            <span style={{ color: onSurfaceVariant }}>subtle</span>
-          </div>
-        </div>
-        <div className="ref-body" style={{ color: onSurfaceVariant }}>
-          Description
-        </div>
+        <ServiceCardBody />
       </Card>
     </div>
   );
