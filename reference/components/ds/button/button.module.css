@@ -72,6 +72,10 @@
     var(--sys-dimensions-border-radius-sys-radius-full, 999) * 1px
   );
   box-shadow: var(--btn-shadow);
+  /* The ripple layer inside this button clips itself to the button's
+     border-radius via `border-radius: inherit`. Clipping at the root
+     guarantees no corner-escape on any browser. */
+  overflow: hidden;
 
   font-family: var(--btn-font-family);
   font-size: var(--btn-font-size);
@@ -160,9 +164,9 @@
   opacity: calc(var(--sys-state-layer-sys-hover, 8) / 100);
 }
 
-.root:active:not(:disabled) .overlay {
-  opacity: calc(var(--sys-state-layer-sys-pressed, 10) / 100);
-}
+/* Press feedback is the ripple (via useRipple), not a flat overlay. Keep
+   :hover opacity visible during the press so the interaction layers
+   cleanly — the ripple animates on top of the hover tint. */
 
 /* Focus ring — visible for keyboard focus only. Inset -1px so the ring sits
    just outside the outer edge without shifting layout. */

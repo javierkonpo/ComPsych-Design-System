@@ -2,6 +2,7 @@
 
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { Loader2 } from 'lucide-react';
+import { useRipple } from '../ripple';
 import styles from './button.module.css';
 
 export type ButtonVariant =
@@ -65,10 +66,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       className,
       onClick,
+      onPointerDown,
+      onKeyDown,
       ...rest
     },
     ref,
   ) {
+    const { ripples, rippleProps } = useRipple({ disabled: disabled || loading });
     // React ergonomics: `children` is the idiomatic way to pass a label in
     // React, but the framework-agnostic spec names the prop `label`. We
     // accept both and prefer `label` when both are supplied.
@@ -140,11 +144,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           }
           onClick?.(event);
         }}
+        onPointerDown={(event) => {
+          rippleProps.onPointerDown(event);
+          onPointerDown?.(event);
+        }}
+        onKeyDown={(event) => {
+          rippleProps.onKeyDown(event);
+          onKeyDown?.(event);
+        }}
         {...rest}
       >
-        {/* State-layer overlay. Absolutely positioned behind content; opacity
-            is driven by :hover / :active via the stylesheet. */}
+        {/* Hover / focus state-layer overlay (a flat tint — not the ripple). */}
         <span className={styles.overlay} aria-hidden />
+        {/* Press feedback: M3 ripple. Absolutely positioned inside the button
+            via the shared primitive; clips to the button's pill radius. */}
+        {ripples}
 
         <span className={styles.content}>
           {leadingSlot}

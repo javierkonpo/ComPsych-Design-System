@@ -1,0 +1,62 @@
+/*
+ * Material 3 ripple — pure CSS animation. Consumed by `useRipple()`.
+ *
+ * The .layer fills the interactive container and clips ripples to its
+ * shape (via border-radius: inherit). Each .ripple is a circle centered
+ * at the pointer-down coordinate that scales out and fades.
+ *
+ * Color comes from `currentColor` (via the consumer's text color) unless
+ * overridden. Opacity is driven by --sys-state-layer-sys-pressed so the
+ * animation respects the token for "pressed" emphasis.
+ */
+
+.layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  /* forwards keeps the final 0-opacity state until the node is removed. */
+  animation: ripple-pulse 450ms cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+@keyframes ripple-pulse {
+  0% {
+    opacity: calc(var(--sys-state-layer-sys-pressed, 10) / 100);
+    transform: translate(-50%, -50%) scale(0);
+  }
+  60% {
+    opacity: calc(var(--sys-state-layer-sys-pressed, 10) / 100);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Reduced motion: skip the scale; only fade. Short duration so the feedback
+   still registers without motion. */
+@media (prefers-reduced-motion: reduce) {
+  .ripple {
+    animation: ripple-pulse-reduced 180ms linear forwards;
+    /* Pre-scaled so the fade happens on a static disc, not an invisible point. */
+    transform: translate(-50%, -50%) scale(1);
+  }
+  @keyframes ripple-pulse-reduced {
+    0% {
+      opacity: calc(var(--sys-state-layer-sys-pressed, 10) / 100);
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

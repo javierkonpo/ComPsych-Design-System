@@ -126,6 +126,7 @@ Follow these strictly:
 4. **Spec files are authoritative.** When implementing in any framework, the spec's API contract, visual spec, states, and behavior are the source of truth. Match them exactly.
 5. **Follow the file and naming conventions.** Kebab-case folders, co-located specs with components, one spec file per component.
 6. **Read before you write.** Before modifying any file, read it. Before proposing a change, understand the existing patterns.
+7. **Interactive components use the shared `<Ripple />` primitive.** For press feedback on buttons, chips, list items, menu items, and icon buttons, consume `useRipple()` from `reference/components/ds/ripple/`. Do not reimplement ripple animations per component.
 
 ---
 

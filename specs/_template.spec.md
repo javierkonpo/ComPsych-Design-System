@@ -154,6 +154,22 @@ Document every state. Mark web-only or RN-only where applicable.
 - Edge cases: what happens with very long labels, empty states, rapid repeated activation, etc.
 - Transitions: any enter/exit animations, their durations and easings (reference `sys.motion.*`).
 
+## Interaction feedback
+
+Document the press-feedback pattern. Every interactive, pressable surface in this system uses Material 3 ripple feedback — a circular pulse originating at the click point, expanding and fading.
+
+| Aspect | Value |
+|--------|-------|
+| Feedback type | Material 3 ripple (press) + flat state-layer overlay (hover / focus). |
+| Web implementation | Use the shared `useRipple()` primitive from `reference/components/ds/ripple/`. Do NOT reimplement. Pass `color` if the container's `currentColor` isn't the correct overlay color (rare). |
+| React Native equivalent | Android: `android_ripple={{ color }}` on `<Pressable>`. iOS: `activeOpacity` / `android_disableSound=false` fallback since native ripple is Android-only; use a short opacity transition at `sys.stateLayer.sysPressed` instead. |
+| Keyboard | Enter / Space trigger a centered ripple (handled automatically by the hook). |
+| Tokens used | `sys.stateLayer.sysPressed` (opacity, 0–100) drives the initial overlay opacity. Color is `currentColor` by default — inherits from the surface's text color to match M3's "on-color at pressed opacity" contract. |
+| Reduced motion | The primitive respects `prefers-reduced-motion: reduce` — the scale animation is skipped and the ripple simply fades for ~180 ms instead of expanding. No consumer config required. |
+| When to suppress | Non-interactive surfaces (static cards, labels). Also suppress when `disabled` or `loading` — the hook's `disabled` option handles this. |
+
+Variant-specific overrides: if a component's on-color differs per variant (e.g. a destructive button where the ripple should use `sys-error` instead of `currentColor`), pass an explicit `color` to `useRipple`.
+
 ## Accessibility
 
 ### Web (Angular, React)
