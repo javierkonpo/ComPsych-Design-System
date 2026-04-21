@@ -239,7 +239,11 @@ button.root {
      so the size-driven --card-gap doesn't bleed in. */
   gap: calc(var(--sys-dimensions-spacing-padding-sys-padding-32, 32) * 1px);
   padding: var(--card-padding);
-  margin: calc(var(--card-padding) * -1);
+  /* Sit inside the outer card's 8px padding so the framed-border visual
+     is preserved AND the gradient's rounded corners stay clear of the
+     outer card's rounded corners (matching Figma, and avoiding the
+     corner-bleed you get if the gradient is pulled out to the border
+     edge via a negative margin). */
   background-image: linear-gradient(
     to bottom,
     var(--sys-color-roles-transparent-primary-sys-primary-08, rgba(7, 92, 186, 0.08)),

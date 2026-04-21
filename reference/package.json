@@ -6,8 +6,8 @@
   "scripts": {
     "predev": "tsx scripts/build-themes.ts",
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "node node_modules/next/dist/bin/next build",
+    "start": "node node_modules/next/dist/bin/next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "build:themes": "tsx scripts/build-themes.ts"

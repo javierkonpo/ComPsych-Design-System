@@ -31,8 +31,11 @@ function Row({ token, max }: { token: TokenLeaf; max: number }) {
 
   return (
     <div className="flex items-center gap-3">
-      <div className="w-40 shrink-0 text-xs font-mono truncate">
-        sys.{token.path.slice(-3).join('.')}
+      {/* Left column is the raw px size — short, scannable, matches
+          how designers think about spacing. The token name is still
+          accessible via the copy chip on the right. */}
+      <div className="w-16 shrink-0 text-xs font-mono text-right opacity-80">
+        {toPx(value)}
       </div>
       <div className="flex-1">
         <div
@@ -45,9 +48,6 @@ function Row({ token, max }: { token: TokenLeaf; max: number }) {
           }}
           title={numeric < 0 ? 'Negative spacing (absolute width shown)' : undefined}
         />
-      </div>
-      <div className="w-16 shrink-0 text-xs font-mono text-right opacity-80">
-        {toPx(value)}
       </div>
       <div className="w-[180px] shrink-0">
         <CopyChip value={`var(${token.cssVar})`} />
