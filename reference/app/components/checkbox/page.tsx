@@ -8,45 +8,18 @@ import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { Playground } from '@/components/playground';
 
 // ---------------------------------------------------------------------------
-// Playground wrapper — maps a friendly "selection" enum to the Checkbox's
-// tri-state `checked` prop (boolean | 'indeterminate'), so the Playground can
-// expose the three selection values as an enum control.
+// Playground — maps a friendly "selection" enum control to the Checkbox's
+// tri-state `checked` prop (boolean | 'indeterminate'), and round-trips user
+// clicks back into the control so toggling the live preview updates the
+// segmented control on the right.
 // ---------------------------------------------------------------------------
 
-interface PlaygroundCheckboxProps {
-  selection: 'unchecked' | 'checked' | 'indeterminate';
-  size: 'sm' | 'md';
-  label: string;
-  description: string;
-  disabled: boolean;
-  invalid: boolean;
-}
-
-function PlaygroundCheckbox({
-  selection,
-  size,
-  label,
-  description,
-  disabled,
-  invalid,
-}: PlaygroundCheckboxProps) {
-  const checked: CheckboxCheckedState =
-    selection === 'checked'
-      ? true
-      : selection === 'indeterminate'
-        ? 'indeterminate'
-        : false;
-  return (
-    <Checkbox
-      checked={checked}
-      onChange={() => {}}
-      size={size}
-      label={label || undefined}
-      description={description || undefined}
-      disabled={disabled}
-      invalid={invalid}
-    />
-  );
+function deriveChecked(
+  selection: unknown,
+): CheckboxCheckedState {
+  if (selection === 'checked') return true;
+  if (selection === 'indeterminate') return 'indeterminate';
+  return false;
 }
 
 export default function CheckboxPage() {
@@ -62,7 +35,6 @@ export default function CheckboxPage() {
         lead="The real Checkbox rendered live. Change any control on the right to see the component update."
       >
         <Playground
-          component={PlaygroundCheckbox as never}
           controls={[
             {
               name: 'selection',
@@ -94,6 +66,27 @@ export default function CheckboxPage() {
             { name: 'disabled', type: 'boolean', label: 'Disabled', defaultValue: false },
             { name: 'invalid', type: 'boolean', label: 'Invalid', defaultValue: false },
           ]}
+          render={(values, setValue) => (
+            <Checkbox
+              checked={deriveChecked(values.selection)}
+              onChange={(next) =>
+                setValue('selection', next ? 'checked' : 'unchecked')
+              }
+              size={values.size as 'sm' | 'md'}
+              label={
+                typeof values.label === 'string' && values.label
+                  ? values.label
+                  : undefined
+              }
+              description={
+                typeof values.description === 'string' && values.description
+                  ? values.description
+                  : undefined
+              }
+              disabled={Boolean(values.disabled)}
+              invalid={Boolean(values.invalid)}
+            />
+          )}
         />
       </Section>
 

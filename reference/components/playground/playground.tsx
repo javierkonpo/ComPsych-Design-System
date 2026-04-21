@@ -46,9 +46,9 @@ export interface PlaygroundProps {
   /**
    * The REAL component from `reference/components/ds/…`. The playground
    * never renders a reimplementation — what you see in the stage is the
-   * same JSX an adopter would ship.
+   * same JSX an adopter would ship. Optional when `render` is provided.
    */
-  component: ComponentType<Record<string, unknown>>;
+  component?: ComponentType<Record<string, unknown>>;
   /** One entry per prop you want to expose as a control. */
   controls: readonly PlaygroundControl[];
   /**
@@ -64,6 +64,17 @@ export interface PlaygroundProps {
    * depend on them.
    */
   renderChildren?: (props: Record<string, unknown>) => ReactNode;
+  /**
+   * Advanced: full control over what renders in the stage. Receives the
+   * current state map and a setter so the live component can round-trip
+   * interactions back to the controls (e.g. clicking a Checkbox updates
+   * the `selection` control). When provided, this takes precedence over
+   * `component` + `renderChildren`.
+   */
+  render?: (
+    values: Record<string, unknown>,
+    setValue: (name: string, value: unknown) => void,
+  ) => ReactNode;
 }
 
 // ---------------------------------------------------------------------------
@@ -75,6 +86,7 @@ export function Playground({
   controls,
   staticProps = {},
   renderChildren,
+  render,
 }: PlaygroundProps) {
   const [values, setValues] = useState<Record<string, unknown>>(() =>
     buildInitialState(controls),
@@ -86,14 +98,23 @@ export function Playground({
 
   const combinedProps = { ...staticProps, ...values };
 
+  // Stage content: explicit render override > component + renderChildren.
+  // Exactly one of `render` or `component` is expected.
+  let stage: ReactNode = null;
+  if (render) {
+    stage = render(values, setValue);
+  } else if (Component) {
+    stage = (
+      <Component {...combinedProps}>
+        {renderChildren ? renderChildren(combinedProps) : undefined}
+      </Component>
+    );
+  }
+
   return (
     <div className={styles.root}>
       <div className={styles.main}>
-        <div className={styles.stage}>
-          <Component {...combinedProps}>
-            {renderChildren ? renderChildren(combinedProps) : undefined}
-          </Component>
-        </div>
+        <div className={styles.stage}>{stage}</div>
         <div className={styles.controls}>
           {controls.map((c) => (
             <ControlRow
