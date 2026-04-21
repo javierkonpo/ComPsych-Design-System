@@ -44,5 +44,15 @@
       "tokens/dist/brand-c-fmla/"
     ]
   },
-  "components": []
+  "components": [
+    {
+      "name": "Button",
+      "slug": "button",
+      "category": "molecule",
+      "spec": "specs/button.spec.md",
+      "referenceImplementation": "reference/components/ds/button/",
+      "figmaUrl": "https://www.figma.com/design/VFBn7KCDy3FSIlvhNo3ylq/ComPsych-Design-System---Core-Components?node-id=17-1332",
+      "status": "ready"
+    }
+  ]
 }

@@ -1,0 +1,410 @@
+/*
+ * Button — spec: specs/button.spec.md
+ *
+ * All visual properties reference sys.* CSS custom properties so the
+ * button re-themes live when the active (brand × product) bundle changes.
+ */
+
+/* ------------------------------------------------------------------
+   Base — shared across every variant and size
+   ------------------------------------------------------------------ */
+
+.root {
+  /* Local primitives — overridden per variant / size below. */
+  --btn-bg: transparent;
+  --btn-fg: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  --btn-border: transparent;
+  --btn-border-width: 0;
+  --btn-shadow: none;
+
+  /* Interactive overlay color — white on dark fills, primary on
+     transparent / light fills. Toggled per variant. */
+  --btn-overlay: var(--sys-color-roles-accent-primary-sys-on-primary, #ffffff);
+
+  /* Focus-ring color — per spec, default sits on the accent tone; danger
+     variants override to sys-error so the ring reads as "destructive". */
+  --btn-focus-ring: var(
+    --sys-color-roles-add-on-primary-fixed-sys-on-primary-fixed-variant,
+    #4285f4
+  );
+
+  /* Layout primitives, overridden per size below. */
+  --btn-padding-x: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px
+  );
+  --btn-padding-y: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-8, 8) * 1px
+  );
+  --btn-gap: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-8, 8) * 1px
+  );
+  --btn-min-height: 40px;
+  --btn-icon-size: 16px;
+
+  /* Typography, overridden per size below. */
+  --btn-font-family:
+    var(--sys-type-scale-label-medium-sys-font-family, 'Google Sans Text'),
+    var(--font-display), var(--font-inter), system-ui, -apple-system, sans-serif;
+  --btn-font-size: calc(
+    var(--sys-type-scale-label-medium-sys-font-size, 14) * 1px
+  );
+  --btn-line-height: calc(
+    var(--sys-type-scale-label-medium-sys-line-height, 20) * 1px
+  );
+  --btn-tracking: calc(
+    var(--sys-type-scale-label-medium-sys-tracking, 0.07) * 1px
+  );
+  --btn-font-weight: 500;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--btn-gap);
+  box-sizing: border-box;
+  min-height: var(--btn-min-height);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: var(--btn-border-width) solid var(--btn-border);
+  border-radius: calc(
+    var(--sys-dimensions-border-radius-sys-radius-full, 999) * 1px
+  );
+  box-shadow: var(--btn-shadow);
+
+  font-family: var(--btn-font-family);
+  font-size: var(--btn-font-size);
+  line-height: var(--btn-line-height);
+  letter-spacing: var(--btn-tracking);
+  font-weight: var(--btn-font-weight);
+  white-space: nowrap;
+
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition:
+    background-color 120ms ease-out,
+    box-shadow 120ms ease-out,
+    color 120ms ease-out,
+    border-color 120ms ease-out;
+}
+
+/* Interactive overlay — owns the state layer. `inset: 0` so it tracks the
+   root's pill shape via `border-radius: inherit`. Opacity is driven by
+   hover / active state below. */
+.overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--btn-overlay);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease-out;
+}
+
+/* Content wrapper sits above the overlay so label/icons aren't tinted. */
+.content {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+  min-width: 0;
+}
+
+/* Truncate label when the button is constrained in width. */
+.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--btn-icon-size);
+  height: var(--btn-icon-size);
+  flex-shrink: 0;
+}
+
+/* Lucide renders <svg> — size it to match the slot. */
+.icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Spinner — swaps in for the leading icon when loading=true. */
+.spinner {
+  animation: btn-spin 1s linear infinite;
+}
+
+@keyframes btn-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Full-width modifier. */
+.fullWidth {
+  display: flex;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------------
+   Interaction — hover, pressed, focus
+   ------------------------------------------------------------------ */
+
+.root:hover:not(:disabled) .overlay {
+  opacity: calc(var(--sys-state-layer-sys-hover, 8) / 100);
+}
+
+.root:active:not(:disabled) .overlay {
+  opacity: calc(var(--sys-state-layer-sys-pressed, 10) / 100);
+}
+
+/* Focus ring — visible for keyboard focus only. Inset -1px so the ring sits
+   just outside the outer edge without shifting layout. */
+.root:focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: calc(
+    var(--sys-dimensions-border-width-sys-stroke-medium, 1.5) * 1px
+  ) solid var(--btn-focus-ring);
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------
+   Disabled — the state-layer opacity tokens apply split-level to
+   container and content so the container is more muted than the label.
+   ------------------------------------------------------------------ */
+
+.root:disabled,
+.root[aria-disabled='true'] {
+  cursor: not-allowed;
+  background: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-highest,
+    #e6e8ea
+  );
+  color: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  border-color: transparent;
+  box-shadow: none;
+  opacity: calc(var(--sys-state-layer-sys-disabled-container, 48) / 100);
+}
+.root:disabled .content,
+.root[aria-disabled='true'] .content {
+  opacity: calc(
+    (var(--sys-state-layer-sys-disabled-content, 64) /
+      var(--sys-state-layer-sys-disabled-container, 48))
+  );
+}
+.root:disabled .overlay,
+.root[aria-disabled='true'] .overlay {
+  display: none;
+}
+
+/* For transparent-bg variants (outlined / text / danger-outlined), the
+   disabled state shouldn't paint a container color — keep them transparent
+   with just opacity on the content. */
+.outlined:disabled,
+.outlined[aria-disabled='true'],
+.text:disabled,
+.text[aria-disabled='true'],
+.dangerOutlined:disabled,
+.dangerOutlined[aria-disabled='true'] {
+  background: transparent;
+}
+.outlined:disabled,
+.outlined[aria-disabled='true'],
+.dangerOutlined:disabled,
+.dangerOutlined[aria-disabled='true'] {
+  border-color: var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0);
+}
+
+/* ------------------------------------------------------------------
+   Variants
+   ------------------------------------------------------------------ */
+
+.filled {
+  --btn-bg: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+  --btn-fg: var(--sys-color-roles-accent-primary-sys-on-primary, #ffffff);
+  --btn-overlay: var(--sys-color-roles-accent-primary-sys-on-primary, #ffffff);
+}
+.filled:hover:not(:disabled),
+.filled:focus-visible:not(:disabled) {
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+.tonal {
+  --btn-bg: var(
+    --sys-color-roles-add-on-primary-fixed-sys-primary-fixed-dim,
+    #e3f1ff
+  );
+  --btn-fg: var(
+    --sys-color-roles-add-on-primary-fixed-sys-on-primary-fixed,
+    #075cba
+  );
+  --btn-overlay: var(
+    --sys-color-roles-add-on-primary-fixed-sys-on-primary-fixed,
+    #075cba
+  );
+}
+
+.outlined {
+  --btn-bg: transparent;
+  --btn-fg: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  --btn-border: var(--sys-color-roles-outline-sys-outline, #ebecf0);
+  --btn-border-width: calc(
+    var(--sys-dimensions-border-width-sys-stroke-thin, 1) * 1px
+  );
+  --btn-overlay: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+}
+
+.elevated {
+  --btn-bg: var(
+    --sys-color-roles-surface-surface-container-sys-surface-container-lowest,
+    #ffffff
+  );
+  --btn-fg: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  --btn-overlay: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+  --btn-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+.text {
+  --btn-bg: transparent;
+  --btn-fg: var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22);
+  --btn-overlay: var(--sys-color-roles-accent-primary-sys-primary, #075cba);
+  --btn-padding-x: 0;
+  --btn-min-height: auto;
+}
+
+.danger {
+  --btn-bg: var(--sys-color-roles-error-sys-error, #d82727);
+  --btn-fg: var(--sys-color-roles-error-sys-on-error, #ffffff);
+  --btn-overlay: var(--sys-color-roles-error-sys-on-error, #ffffff);
+  --btn-focus-ring: var(--sys-color-roles-error-sys-error, #d82727);
+}
+.danger:hover:not(:disabled),
+.danger:focus-visible:not(:disabled) {
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+.dangerOutlined {
+  --btn-bg: transparent;
+  --btn-fg: var(--sys-color-roles-error-sys-error, #d82727);
+  --btn-border: var(--sys-color-roles-error-sys-error-container, #f7d4d4);
+  --btn-border-width: calc(
+    var(--sys-dimensions-border-width-sys-stroke-thin, 1) * 1px
+  );
+  --btn-overlay: var(--sys-color-roles-error-sys-error, #d82727);
+  --btn-focus-ring: var(--sys-color-roles-error-sys-error, #d82727);
+}
+
+/* ------------------------------------------------------------------
+   Sizes — height + padding + typography + icon size.
+   ------------------------------------------------------------------ */
+
+.sm {
+  --btn-min-height: 32px;
+  --btn-padding-x: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-12, 12) * 1px
+  );
+  --btn-padding-y: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-4, 4) * 1px
+  );
+  --btn-icon-size: calc(var(--sys-iconography-sys-size-xs, 16) * 1px);
+  --btn-font-size: calc(
+    var(--sys-type-scale-label-small-sys-font-size, 12) * 1px
+  );
+  --btn-line-height: calc(
+    var(--sys-type-scale-label-small-sys-line-height, 18) * 1px
+  );
+  --btn-tracking: calc(
+    var(--sys-type-scale-label-small-sys-tracking, 0.12) * 1px
+  );
+}
+
+.md {
+  --btn-min-height: 40px;
+  --btn-padding-x: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px
+  );
+  --btn-padding-y: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-8, 8) * 1px
+  );
+  --btn-icon-size: calc(var(--sys-iconography-sys-size-xs, 16) * 1px);
+  --btn-font-size: calc(
+    var(--sys-type-scale-label-medium-sys-font-size, 14) * 1px
+  );
+  --btn-line-height: calc(
+    var(--sys-type-scale-label-medium-sys-line-height, 20) * 1px
+  );
+  --btn-tracking: calc(
+    var(--sys-type-scale-label-medium-sys-tracking, 0.07) * 1px
+  );
+}
+
+.lg {
+  --btn-min-height: 48px;
+  --btn-padding-x: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-24, 24) * 1px
+  );
+  --btn-padding-y: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-12, 12) * 1px
+  );
+  --btn-icon-size: calc(var(--sys-iconography-sys-size-sm, 20) * 1px);
+  --btn-font-size: calc(
+    var(--sys-type-scale-label-large-sys-font-size, 16) * 1px
+  );
+  --btn-line-height: calc(
+    var(--sys-type-scale-label-large-sys-line-height, 22.4) * 1px
+  );
+  --btn-tracking: calc(
+    var(--sys-type-scale-label-large-sys-tracking, 0) * 1px
+  );
+}
+
+.xl {
+  --btn-min-height: 56px;
+  --btn-padding-x: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-32, 32) * 1px
+  );
+  --btn-padding-y: calc(
+    var(--sys-dimensions-spacing-padding-sys-padding-16, 16) * 1px
+  );
+  --btn-icon-size: calc(var(--sys-iconography-sys-size-md, 24) * 1px);
+  --btn-font-size: calc(
+    var(--sys-type-scale-title-small-sys-font-size, 20) * 1px
+  );
+  --btn-line-height: calc(
+    var(--sys-type-scale-title-small-sys-line-height, 28) * 1px
+  );
+  --btn-tracking: calc(
+    var(--sys-type-scale-title-small-sys-tracking, 0) * 1px
+  );
+  --btn-font-weight: 500;
+}
+
+/* ------------------------------------------------------------------
+   Icon-only — square, zero horizontal padding (icon centers itself).
+   ------------------------------------------------------------------ */
+
+.iconOnly {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.iconOnly.sm { width: 32px; }
+.iconOnly.md { width: 40px; }
+.iconOnly.lg { width: 48px; }
+.iconOnly.xl { width: 56px; }
+
+/* Text variant explicitly opts out of a minimum height so it can sit
+   inline with body copy. */
+.text {
+  min-height: auto;
+}
