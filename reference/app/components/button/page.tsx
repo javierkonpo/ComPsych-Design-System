@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Heart, Download, ArrowRight, Plus } from 'lucide-react';
 import { Button, type ButtonVariant, type ButtonSize } from '@/components/ds/button';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
-import { CopyChip } from '@/components/copy-chip';
 
 const VARIANTS: Array<{ value: ButtonVariant; label: string; description: string }> = [
   { value: 'filled', label: 'Filled', description: 'Primary call to action.' },
@@ -18,42 +17,6 @@ const VARIANTS: Array<{ value: ButtonVariant; label: string; description: string
 ];
 
 const SIZES: ButtonSize[] = ['sm', 'md', 'lg', 'xl'];
-
-const TOKENS: string[] = [
-  'sys.colorRoles.accent.primary.sysPrimary',
-  'sys.colorRoles.accent.primary.sysOnPrimary',
-  'sys.colorRoles.addOn.primaryFixed.sysPrimaryFixedDim',
-  'sys.colorRoles.addOn.primaryFixed.sysOnPrimaryFixed',
-  'sys.colorRoles.addOn.primaryFixed.sysOnPrimaryFixedVariant',
-  'sys.colorRoles.surface.surface.sysOnSurface',
-  'sys.colorRoles.surface.surfaceContainer.sysSurfaceContainerLowest',
-  'sys.colorRoles.surface.surfaceContainer.sysSurfaceContainerHighest',
-  'sys.colorRoles.outline.sysOutline',
-  'sys.colorRoles.error.sysError',
-  'sys.colorRoles.error.sysOnError',
-  'sys.colorRoles.error.sysErrorContainer',
-  'sys.dimensions.spacing.padding.sysPadding4',
-  'sys.dimensions.spacing.padding.sysPadding8',
-  'sys.dimensions.spacing.padding.sysPadding12',
-  'sys.dimensions.spacing.padding.sysPadding16',
-  'sys.dimensions.spacing.padding.sysPadding24',
-  'sys.dimensions.spacing.padding.sysPadding32',
-  'sys.dimensions.borderRadius.sysRadiusFull',
-  'sys.dimensions.borderWidth.sysStrokeThin',
-  'sys.dimensions.borderWidth.sysStrokeMedium',
-  'sys.stateLayer.sysHover',
-  'sys.stateLayer.sysPressed',
-  'sys.stateLayer.sysDisabledContainer',
-  'sys.stateLayer.sysDisabledContent',
-  'sys.elevation.sysLevel2',
-  'sys.iconography.sysSizeXs',
-  'sys.iconography.sysSizeSm',
-  'sys.iconography.sysSizeMd',
-  'sys.typeScale.labelSmall',
-  'sys.typeScale.labelMedium',
-  'sys.typeScale.labelLarge',
-  'sys.typeScale.titleSmall',
-];
 
 export default function ButtonPage() {
   return (
@@ -203,17 +166,6 @@ export default function ButtonPage() {
           }}
         >
           <PropsTable />
-        </div>
-      </Section>
-
-      {/* ------------------------------------------------------------------
-          Tokens used
-          ------------------------------------------------------------------ */}
-      <Section heading="Tokens used" lead="Every sys.* token this component consumes. Click to copy.">
-        <div className="flex flex-wrap gap-2">
-          {TOKENS.map((t) => (
-            <CopyChip key={t} value={t} />
-          ))}
         </div>
       </Section>
 
