@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 import Link from 'next/link';
-import { Heart, Download, ArrowRight, Plus } from 'lucide-react';
+import { Heart, Download, ArrowRight, ArrowUpRight, Plus } from 'lucide-react';
 import { Button, type ButtonVariant, type ButtonSize } from '@/components/ds/button';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { Playground } from '@/components/playground';
@@ -203,7 +203,7 @@ export default function ButtonPage() {
           <LinkRow
             label="Figma component"
             href="https://www.figma.com/design/VFBn7KCDy3FSIlvhNo3ylq/ComPsych-Design-System---Core-Components?node-id=17-1332"
-            hint="ComPsych DS — Core Components"
+            hint="Figma link"
           />
           <LinkRow
             label="React reference"
@@ -341,17 +341,28 @@ function LinkRow({
       }}
     >
       <span className="ref-body font-medium">{label}</span>
-      {hint && (
-        <span
-          className="ref-caption font-mono"
+      <span className="flex items-center gap-3">
+        {hint && (
+          <span
+            className="ref-caption font-mono"
+            style={{
+              color:
+                'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+            }}
+          >
+            {hint}
+          </span>
+        )}
+        <ArrowUpRight
+          size={16}
+          aria-hidden
           style={{
             color:
               'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
+            flexShrink: 0,
           }}
-        >
-          {hint}
-        </span>
-      )}
+        />
+      </span>
     </Link>
   );
 }
