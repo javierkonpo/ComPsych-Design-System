@@ -35,7 +35,6 @@ const NAV_SECTIONS: Array<{
   {
     heading: 'Components',
     items: [
-      { href: '/components', label: 'Overview' },
       { href: '/components/button', label: 'Button' },
     ],
   },
