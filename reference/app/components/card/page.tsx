@@ -150,10 +150,10 @@ export default function CardPage() {
 
       <Section
         heading="Service cards"
-        lead="The general-purpose container. Four variants, four sizes. Below: every Figma Service Card composition at its canonical size with matched content."
+        lead="The general-purpose container. Four variants, four sizes, with each composition shown at its canonical size."
       />
 
-      <Section heading="Outlined" lead="Default. Padding + radius scale with size.">
+      <Section heading="Outlined" lead="The default neutral container.">
         <Surface>
           <div className="flex flex-col gap-6">
             <ServiceCardOutlinedMd />
@@ -163,7 +163,7 @@ export default function CardPage() {
         </Surface>
       </Section>
 
-      <Section heading="Filled" lead="High-emphasis, ships with primary-container. xl and lg sizes in Figma.">
+      <Section heading="Filled" lead="High-emphasis feature card. Used at the hero sizes.">
         <Surface>
           <div className="flex flex-col gap-6">
             <ServiceCardFilledXl />
@@ -172,7 +172,7 @@ export default function CardPage() {
         </Surface>
       </Section>
 
-      <Section heading="Image" lead="Background imagery with a contrast scrim, headline in on-primary, pill button.">
+      <Section heading="Image" lead="Background imagery with a contrast scrim and a floating action button.">
         <Surface>
           <div className="flex flex-col gap-6">
             <ServiceCardImageXl />
@@ -181,7 +181,7 @@ export default function CardPage() {
         </Surface>
       </Section>
 
-      <Section heading="Gradient" lead="Outer shell, inner primary-08 to white-10 wash. md and sm sizes.">
+      <Section heading="Gradient" lead="Soft emphasis with a subtle wash behind the content.">
         <Surface>
           <div className="flex flex-col gap-6">
             <ServiceCardGradientMd />
@@ -199,7 +199,7 @@ export default function CardPage() {
         lead="Library and marketing tiles across three styles: Gradient, With Icon, and With Chip."
       />
 
-      <Section heading="With Icon" lead="Large category glyph on a primary-fixed-dim plate, title + body stack below.">
+      <Section heading="With Icon" lead="Large category icon on a tinted plate, with a title and body below.">
         <Surface>
           <ContentCardWithIcon category={CATEGORIES[0]} />
         </Surface>
@@ -223,7 +223,7 @@ export default function CardPage() {
 
       <Section
         heading="Interactive patterns"
-        lead="Action Cards and Metric Cards are compositions on the interactive Card base. State-layer on hover and focus, ripple on press, focus ring for keyboard."
+        lead="Action Cards and Metric Cards are compositions on the interactive Card base, with hover feedback, a ripple on press, and a focus ring for keyboard users."
       >
         <Surface>
           <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
@@ -327,24 +327,6 @@ export default function CardPage() {
             ))}
           </div>
         </Surface>
-      </Section>
-
-      {/* ==============================================================
-          API REFERENCE
-          ============================================================== */}
-
-      <Section heading="API reference" lead="Full prop contract. Web names. On React Native, onClick becomes onPress and aria-* becomes accessibility*.">
-        <div
-          className="rounded-lg overflow-hidden"
-          style={{
-            border:
-              '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
-            backgroundColor:
-              'var(--sys-color-roles-surface-surface-container-sys-surface-container-lowest, #ffffff)',
-          }}
-        >
-          <PropsTable />
-        </div>
       </Section>
 
       <Section heading="Canonical sources">
@@ -1192,84 +1174,3 @@ function LinkRow({
   );
 }
 
-function PropsTable() {
-  const rows: Array<{ name: string; type: string; def: string; notes: string }> = [
-    { name: 'variant', type: "'outlined' | 'filled' | 'image' | 'gradient'", def: "'outlined'", notes: 'Visual style.' },
-    { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", def: "'md'", notes: 'Padding, radius, internal gap.' },
-    { name: 'interactive', type: 'boolean', def: 'false', notes: 'Makes the card pressable (state-layer + focus + ripple).' },
-    { name: 'disabled', type: 'boolean', def: 'false', notes: 'Only meaningful with interactive.' },
-    { name: 'current', type: 'boolean', def: 'false', notes: 'Selected/active within a set. Thick primary border.' },
-    { name: 'href', type: 'string', def: '-', notes: 'Renders as <a> and forces interactive.' },
-    { name: 'as', type: 'ElementType', def: "'div' (or 'a' if href)", notes: "Override the rendered tag." },
-    { name: 'backgroundImage', type: 'string', def: '-', notes: 'Required for variant="image".' },
-    { name: 'fullWidth', type: 'boolean', def: 'false', notes: 'Stretch to container width.' },
-    { name: 'onClick', type: '(event) => void', def: '-', notes: 'Fires on activation. Suppressed when disabled.' },
-  ];
-  return (
-    <table className="w-full" style={{ borderCollapse: 'collapse' }}>
-      <thead>
-        <tr
-          style={{
-            backgroundColor:
-              'var(--sys-color-roles-surface-surface-container-sys-surface-container, #f3f4f6)',
-          }}
-        >
-          <HeaderCell>Prop</HeaderCell>
-          <HeaderCell>Type</HeaderCell>
-          <HeaderCell>Default</HeaderCell>
-          <HeaderCell>Notes</HeaderCell>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((r, i) => (
-          <tr
-            key={r.name}
-            style={{
-              borderTop:
-                i === 0
-                  ? 'none'
-                  : '1px solid var(--sys-color-roles-outline-sys-outline-variant, #d7dbe0)',
-            }}
-          >
-            <Cell><code className="ref-caption font-mono">{r.name}</code></Cell>
-            <Cell>
-              <code
-                className="ref-caption font-mono"
-                style={{
-                  color:
-                    'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-                }}
-              >
-                {r.type}
-              </code>
-            </Cell>
-            <Cell><code className="ref-caption font-mono">{r.def}</code></Cell>
-            <Cell><span className="ref-body-sm">{r.notes}</span></Cell>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}
-
-function HeaderCell({ children }: { children: ReactNode }) {
-  return (
-    <th
-      className="text-left px-4 py-3 ref-body-sm font-semibold"
-      style={{ color: 'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)' }}
-    >
-      {children}
-    </th>
-  );
-}
-
-function Cell({ children }: { children: ReactNode }) {
-  return (
-    <td
-      className="px-4 py-3 align-top"
-      style={{ color: 'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)' }}
-    >
-      {children}
-    </td>
-  );
-}
