@@ -410,7 +410,7 @@ function ServiceCardBody() {
             color: onSurface,
           }}
         >
-          Title <span style={{ color: onSurfaceVariant }}>subtle</span>
+          Title
         </div>
       </div>
       <div className="ref-body" style={{ color: onSurfaceVariant }}>
@@ -699,7 +699,7 @@ function ServiceCardGradientMd() {
                 Label
               </div>
               <div style={{ fontSize: 20, lineHeight: '28px', color: onSurface }}>
-                Title <span style={{ color: onSurfaceVariant }}>subtle</span>
+                Title
               </div>
             </div>
             <div className="ref-body" style={{ color: onSurfaceVariant }}>
