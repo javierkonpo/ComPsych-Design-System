@@ -125,11 +125,12 @@ export function Nav() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`block px-2.5 py-1.5 rounded text-sm ${styles.navLink}`}
+                      className={`block px-2.5 py-1.5 rounded text-sm ${styles.navLink}${active ? ` ${styles.navLinkActive}` : ''}`}
+                      /* Only set an inline backgroundColor for the active
+                         item — inline styles beat stylesheet :hover rules,
+                         so leaving background to the module CSS lets the
+                         hover state actually apply on non-active items. */
                       style={{
-                        backgroundColor: active
-                          ? 'var(--sys-color-roles-accent-primary-sys-primary-container, #eceeef)'
-                          : 'transparent',
                         color: active
                           ? 'var(--sys-color-roles-accent-primary-sys-on-primary-container, inherit)'
                           : item.muted

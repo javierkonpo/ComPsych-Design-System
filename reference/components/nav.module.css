@@ -1,14 +1,14 @@
 /*
- * Sidebar nav link — hover state.
+ * Sidebar nav link — default, hover, and active state.
  *
- * Base background is transparent (inherits the aside's surface-container-low
- * tone). Hover paints a slightly-darker surface tone so the affordance is
- * readable without competing with the active-item pill. Active state is set
- * via inline style and always wins over :hover because the specificity is
- * equal and the inline declaration comes later in the cascade.
+ * All three live in the stylesheet (rather than mixing inline styles for
+ * active with a :hover stylesheet rule for hover) so the hover can
+ * actually apply on non-active items — inline styles always beat
+ * stylesheet :hover rules at equal specificity.
  */
 
 .navLink {
+  background-color: transparent;
   transition: background-color 120ms ease-out, color 120ms ease-out;
 }
 
@@ -16,5 +16,15 @@
   background-color: var(
     --sys-color-roles-surface-surface-container-sys-surface-container-high,
     #eceeef
+  );
+}
+
+/* Active wins over hover. `.navLink.navLinkActive` is specificity 0-2-0 vs
+   `.navLink:hover` at 0-2-0 too — same specificity, so source order decides.
+   The active rule is defined last, so it wins. */
+.navLink.navLinkActive {
+  background-color: var(
+    --sys-color-roles-accent-primary-sys-primary-container,
+    #070f36
   );
 }
