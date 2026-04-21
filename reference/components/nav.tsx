@@ -34,10 +34,49 @@ const NAV_SECTIONS: Array<{
     ],
   },
   {
-    heading: 'Components',
+    heading: 'Molecules',
     items: [
       { href: '/components/button', label: 'Button' },
-      { href: '/components/card', label: 'Card' },
+      { href: '#', label: 'Checkbox', disabled: true },
+      { href: '#', label: 'Radio Button', disabled: true },
+      { href: '#', label: 'Avatar', disabled: true },
+      { href: '#', label: 'Input Field', disabled: true },
+      { href: '#', label: 'Pagination', disabled: true },
+      { href: '#', label: 'Chip', disabled: true },
+      { href: '#', label: 'Badge', disabled: true },
+      { href: '#', label: 'Progress Tracker', disabled: true },
+      { href: '#', label: 'Breadcrumb', disabled: true },
+      { href: '#', label: 'Alert', disabled: true },
+      { href: '#', label: 'Divider', disabled: true },
+      { href: '#', label: 'Tooltip', disabled: true },
+      { href: '#', label: 'Switch', disabled: true },
+      { href: '#', label: 'Slider', disabled: true },
+      { href: '#', label: 'Empty State', disabled: true },
+    ],
+  },
+  {
+    heading: 'Organisms',
+    items: [
+      { href: '#', label: 'Accordion', disabled: true },
+      { href: '#', label: 'Header Navigation', disabled: true },
+      { href: '#', label: 'Sidebar', disabled: true },
+      { href: '/components/card', label: 'Cards' },
+      { href: '#', label: 'Text Field', disabled: true },
+      { href: '#', label: 'Text Area', disabled: true },
+      { href: '#', label: 'Dropdown', disabled: true },
+      { href: '#', label: 'Dropdown Menu', disabled: true },
+      { href: '#', label: 'Search Field', disabled: true },
+      { href: '#', label: 'Tab', disabled: true },
+      { href: '#', label: 'Data Visualization', disabled: true },
+      { href: '#', label: 'Radio Button Group', disabled: true },
+      { href: '#', label: 'Checkbox Group', disabled: true },
+      { href: '#', label: 'Selection Card Group', disabled: true },
+      { href: '#', label: 'Dialog', disabled: true },
+      { href: '#', label: 'Sheet/Flyout', disabled: true },
+      { href: '#', label: 'Date & Time Picker', disabled: true },
+      { href: '#', label: 'Data Table', disabled: true },
+      { href: '#', label: 'File Upload', disabled: true },
+      { href: '#', label: 'Toolbar', disabled: true },
     ],
   },
 ];
@@ -105,14 +144,14 @@ export function Nav() {
 
                 if (item.disabled) {
                   return (
-                    <li key={item.href}>
+                    <li key={item.label}>
                       <span
                         aria-disabled="true"
-                        className="block px-2.5 py-1.5 rounded text-sm italic select-none cursor-not-allowed"
+                        className="block px-2.5 py-1.5 rounded text-sm select-none cursor-not-allowed"
                         style={{
                           color:
                             'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-                          opacity: 0.75,
+                          opacity: 0.55,
                         }}
                       >
                         {item.label}
@@ -122,7 +161,7 @@ export function Nav() {
                 }
 
                 return (
-                  <li key={item.href}>
+                  <li key={item.label}>
                     <Link
                       href={item.href}
                       className={`block px-2.5 py-1.5 rounded text-sm ${styles.navLink}${active ? ` ${styles.navLinkActive}` : ''}`}
