@@ -234,7 +234,10 @@ button.root {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: inherit;
+  /* Figma: gradient inner panel stacks icon row → text+button with a
+     sys-padding-32 gap at md/lg/xl, tighter at sm. Set explicitly here
+     so the size-driven --card-gap doesn't bleed in. */
+  gap: calc(var(--sys-dimensions-spacing-padding-sys-padding-32, 32) * 1px);
   padding: var(--card-padding);
   margin: calc(var(--card-padding) * -1);
   background-image: linear-gradient(
@@ -243,6 +246,10 @@ button.root {
     var(--sys-color-roles-transparent-neutral-sys-white-10, rgba(255, 255, 255, 0.1))
   );
   border-radius: calc(var(--card-radius) - 8px);
+}
+.gradient.sm .gradientInner {
+  /* Small gradient card in Figma is tighter. */
+  gap: calc(var(--sys-dimensions-spacing-padding-sys-padding-24, 24) * 1px);
 }
 /* When the gradient variant is used, its outer padding shrinks so the
    inner panel absorbs the visual padding. */

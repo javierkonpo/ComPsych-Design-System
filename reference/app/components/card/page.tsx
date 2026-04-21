@@ -21,7 +21,6 @@ import {
 import { Card, type CardVariant, type CardSize } from '@/components/ds/card';
 import { Button } from '@/components/ds/button';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
-import { CopyChip } from '@/components/copy-chip';
 
 // ---------------------------------------------------------------------------
 // Category registry — each Content Card category maps to a Lucide icon and
@@ -138,69 +137,12 @@ const SERVICE_VARIANTS: Array<{ value: CardVariant; label: string; description: 
 
 const SIZES: CardSize[] = ['sm', 'md', 'lg', 'xl'];
 
-const TOKENS: string[] = [
-  'sys.colorRoles.surface.surfaceContainer.sysSurfaceContainerLowest',
-  'sys.colorRoles.surface.surface.sysOnSurface',
-  'sys.colorRoles.surface.surface.sysOnSurfaceVariant',
-  'sys.colorRoles.outline.sysOutline',
-  'sys.colorRoles.accent.primary.sysPrimary',
-  'sys.colorRoles.accent.primary.sysOnPrimary',
-  'sys.colorRoles.accent.primary.sysPrimaryContainer',
-  'sys.colorRoles.accent.primary.sysOnPrimaryContainer',
-  'sys.colorRoles.accent.primary.sysOnPrimaryContainerVariant',
-  'sys.colorRoles.addOn.primaryFixed.sysPrimaryFixedDim',
-  'sys.colorRoles.addOn.primaryFixed.sysOnPrimaryFixed',
-  'sys.colorRoles.addOn.primaryFixed.sysOnPrimaryFixedVariant',
-  'sys.colorRoles.transparent.primary.sysPrimary08',
-  'sys.colorRoles.transparent.neutral.sysWhite10',
-  'sys.colorRoles.custom.info.sysInfoContainer',
-  'sys.colorRoles.custom.info.sysOnInfoContainer',
-  'sys.dimensions.spacing.padding.sysPadding4',
-  'sys.dimensions.spacing.padding.sysPadding8',
-  'sys.dimensions.spacing.padding.sysPadding12',
-  'sys.dimensions.spacing.padding.sysPadding16',
-  'sys.dimensions.spacing.padding.sysPadding24',
-  'sys.dimensions.spacing.padding.sysPadding32',
-  'sys.dimensions.spacing.padding.sysPadding48',
-  'sys.dimensions.borderRadius.sysRadiusSm',
-  'sys.dimensions.borderRadius.sysRadiusMd',
-  'sys.dimensions.borderRadius.sysRadiusLg',
-  'sys.dimensions.borderRadius.sysRadiusXl',
-  'sys.dimensions.borderRadius.sysRadiusFull',
-  'sys.dimensions.borderWidth.sysStrokeThin',
-  'sys.dimensions.borderWidth.sysStrokeMedium',
-  'sys.dimensions.borderWidth.sysStrokeThick',
-  'sys.stateLayer.sysHover',
-  'sys.stateLayer.sysPressed',
-  'sys.stateLayer.sysDisabledContainer',
-  'sys.stateLayer.sysDisabledContent',
-  'sys.elevation.sysLevel1',
-  'sys.elevation.sysLevel2',
-  'sys.typeScale.labelSmall',
-  'sys.typeScale.labelMedium',
-  'sys.typeScale.labelLarge',
-  'sys.typeScale.titleSmall',
-  'sys.typeScale.titleLarge',
-  'sys.typeScale.bodySmall',
-  'sys.typeScale.bodyMedium',
-  'sys.typeScale.displayLarge',
-];
-
 export default function CardPage() {
   return (
     <FoundationPageShell
       eyebrow="Components"
       title="Card"
       description="A self-contained content block. Four variants, four sizes; optional interactive / current / disabled modifiers. Every value resolves to sys.* tokens and re-themes live with the active bundle."
-      whyThisMatters={
-        <>
-          Cards group related content into a single unit. The four variants
-          encode emphasis \u2014 outlined for neutral, filled for features,
-          gradient for soft focus, image for marketing \u2014 and the
-          interactive modifier turns any card into a pressable surface
-          without reimplementing state-layer and ripple feedback.
-        </>
-      }
     >
       {/* ==============================================================
           SERVICE CARDS
@@ -259,31 +201,19 @@ export default function CardPage() {
 
       <Section heading="With Icon" lead="Large category glyph on a primary-fixed-dim plate, title + body stack below.">
         <Surface>
-          <ContentGrid>
-            {CATEGORIES.map((c) => (
-              <ContentCardWithIcon key={c.key} category={c} />
-            ))}
-          </ContentGrid>
+          <ContentCardWithIcon category={CATEGORIES[0]} />
         </Surface>
       </Section>
 
       <Section heading="Gradient" lead="Outer outline, inner gradient panel with round category icon and text.">
         <Surface>
-          <ContentGrid>
-            {CATEGORIES.map((c) => (
-              <ContentCardGradient key={c.key} category={c} />
-            ))}
-          </ContentGrid>
+          <ContentCardGradient category={CATEGORIES[0]} />
         </Surface>
       </Section>
 
       <Section heading="With Chip" lead="Category as a dark pill chip at top; tighter composition without the icon plate.">
         <Surface>
-          <ContentGrid>
-            {CATEGORIES.map((c) => (
-              <ContentCardWithChip key={c.key} category={c} />
-            ))}
-          </ContentGrid>
+          <ContentCardWithChip category={CATEGORIES[0]} />
         </Surface>
       </Section>
 
@@ -414,14 +344,6 @@ export default function CardPage() {
           }}
         >
           <PropsTable />
-        </div>
-      </Section>
-
-      <Section heading="Tokens used" lead="Every sys.* token this component consumes. Click to copy.">
-        <div className="flex flex-wrap gap-2">
-          {TOKENS.map((t) => (
-            <CopyChip key={t} value={t} />
-          ))}
         </div>
       </Section>
 
@@ -741,11 +663,12 @@ function ServiceCardImageMd() {
   );
 }
 
-/** md Gradient — 420×284. */
+/** md Gradient — 420×284. Figma nesting: inner gap 32 → text+button gap 24 → text gap 12 → title+label gap 4. */
 function ServiceCardGradientMd() {
   return (
     <div style={{ maxWidth: 420 }}>
       <Card variant="gradient" size="md">
+        {/* Icon + Label row */}
         <div className="flex items-start justify-between">
           <IconBadge />
           <div className="flex items-center gap-2">
@@ -753,19 +676,25 @@ function ServiceCardGradientMd() {
             <ArrowUpRight size={24} style={{ color: onSurfaceVariant }} />
           </div>
         </div>
-        <div className="flex flex-col gap-3">
-          <div className="flex flex-col gap-1">
-            <div className="ref-caption" style={{ color: onSurfaceVariant }}>Label</div>
-            <div style={{ fontSize: 20, lineHeight: '28px', color: onSurface }}>
-              Title <span style={{ color: onSurfaceVariant }}>subtle</span>
+
+        {/* Text + Button wrapper — gap 24 (sys-padding-24) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'flex-start' }}>
+          {/* Text wrapper — gap 12 (sys-padding-12) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+            {/* Title + Label — gap 4 (sys-padding-4) */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              <div className="ref-caption" style={{ color: onSurfaceVariant }}>
+                Label
+              </div>
+              <div style={{ fontSize: 20, lineHeight: '28px', color: onSurface }}>
+                Title <span style={{ color: onSurfaceVariant }}>subtle</span>
+              </div>
+            </div>
+            <div className="ref-body" style={{ color: onSurfaceVariant }}>
+              Description
             </div>
           </div>
-          <div className="ref-body" style={{ color: onSurfaceVariant }}>
-            Description
-          </div>
-          <div style={{ alignSelf: 'flex-start' }}>
-            <Button variant="outlined" size="lg" label="Button" />
-          </div>
+          <Button variant="outlined" size="lg" label="Button" />
         </div>
       </Card>
     </div>
@@ -808,21 +737,26 @@ function ContentCardGradient({ category }: { category: Category }) {
             '1px solid var(--sys-color-roles-outline-sys-outline, #ebecf0)',
           borderRadius: 24,
           padding: 8,
+          /* Figma: 328 × 290 = 8 outer padding + 274 inner panel (gradient). */
+          height: 290,
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <div
           style={{
+            flex: '1 1 auto',
             padding: 16,
             borderRadius: 16,
             backgroundImage:
               'linear-gradient(180deg, var(--sys-color-roles-transparent-primary-sys-primary-08, rgba(7,92,186,0.08)), var(--sys-color-roles-transparent-neutral-sys-white-10, rgba(255,255,255,0.1)))',
             display: 'flex',
             flexDirection: 'column',
+            /* Figma: inner panel gap icon-row → text = sys-padding-32. */
             gap: 32,
-            minHeight: 258,
           }}
         >
-          <div className="flex items-center gap-4">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <span
               style={{
                 width: 44,
@@ -833,6 +767,7 @@ function ContentCardGradient({ category }: { category: Category }) {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                flexShrink: 0,
               }}
             >
               <Icon size={22} strokeWidth={2} />
@@ -848,7 +783,8 @@ function ContentCardGradient({ category }: { category: Category }) {
               {category.label}
             </div>
           </div>
-          <div className="flex flex-col gap-4">
+          {/* Text block — gap sys-padding-16 between headline and body. */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, minHeight: 0 }}>
             <Clamp
               style={{ fontSize: 16, lineHeight: '22.4px', fontWeight: 500, color: onSurface }}
               lines={4}
@@ -883,7 +819,8 @@ function ContentCardWithIcon({ category }: { category: Category }) {
           display: 'flex',
           flexDirection: 'column',
           gap: 12,
-          minHeight: 354,
+          /* Figma: outer card is 386 tall (16 + 120 + 12 + 222 + 16). */
+          height: 386,
         }}
       >
         <div
@@ -897,6 +834,7 @@ function ContentCardWithIcon({ category }: { category: Category }) {
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
+            flexShrink: 0,
           }}
         >
           <Icon size={48} strokeWidth={1.5} />
@@ -907,11 +845,12 @@ function ContentCardWithIcon({ category }: { category: Category }) {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            flex: 1,
-            minHeight: 190,
+            flex: '1 1 auto',
+            /* Figma: inner container is 222 tall (content + its 16 padding). */
+            height: 222,
           }}
         >
-          <div className="flex flex-col gap-2">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <div style={{ fontSize: 14, lineHeight: '20px', fontWeight: 500, color: onSurfaceVariant }}>
               {category.label}
             </div>
@@ -949,7 +888,8 @@ function ContentCardWithChip({ category }: { category: Category }) {
           display: 'flex',
           flexDirection: 'column',
           gap: 24,
-          minHeight: 270,
+          /* Figma: 328 × 270 exact. */
+          height: 270,
         }}
       >
         <div
@@ -964,6 +904,7 @@ function ContentCardWithChip({ category }: { category: Category }) {
             background:
               'var(--sys-color-primary-core-primary-10, #050a24)',
             color: onPrimary,
+            flexShrink: 0,
           }}
         >
           <Icon size={20} strokeWidth={2} style={{ color: onPrimary }} />
@@ -976,8 +917,9 @@ function ContentCardWithChip({ category }: { category: Category }) {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            flex: 1,
-            minHeight: 166,
+            flex: '1 1 auto',
+            /* Figma: inner text block is 166 tall. */
+            height: 166,
           }}
         >
           <Clamp
@@ -987,7 +929,7 @@ function ContentCardWithChip({ category }: { category: Category }) {
             {category.headline}
           </Clamp>
           <Clamp
-            style={{ fontSize: 14, lineHeight: '20px', color: onSurfaceVariant, marginTop: 12 }}
+            style={{ fontSize: 14, lineHeight: '20px', color: onSurfaceVariant }}
             lines={4}
           >
             {category.body}
@@ -1120,17 +1062,6 @@ function Clamp({
 // ===========================================================================
 // Gallery scaffolding
 // ===========================================================================
-
-function ContentGrid({ children }: { children: ReactNode }) {
-  return (
-    <div
-      className="grid gap-6"
-      style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(328px, 328px))' }}
-    >
-      {children}
-    </div>
-  );
-}
 
 function Section({
   heading,

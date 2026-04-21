@@ -24,15 +24,6 @@ export default function ButtonPage() {
       eyebrow="Components"
       title="Button"
       description="The canonical interactive element. Seven visual variants, four sizes, five states — every value driven by sys.* tokens so the button re-themes with the active brand × product bundle."
-      whyThisMatters={
-        <>
-          A button tells a user which action is the one to take. The
-          variant ladder (Filled → Tonal → Outlined → Text) encodes that
-          hierarchy so stakeholders can match emphasis to intent without
-          guessing. Danger variants signal destructive or irreversible
-          actions and stay out of the way until they&rsquo;re needed.
-        </>
-      }
     >
       {/* ------------------------------------------------------------------
           Live demo

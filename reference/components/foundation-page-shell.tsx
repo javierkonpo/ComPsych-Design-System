@@ -7,8 +7,10 @@ interface Props {
   eyebrow?: string;
   title: string;
   description: string;
-  /** 2–3 sentences of plain-language rationale. */
-  whyThisMatters: ReactNode;
+  /** 2–3 sentences of plain-language rationale. Optional — when omitted
+   *  the "Why this matters" section is skipped (useful for component
+   *  pages that let the live demo carry the intent). */
+  whyThisMatters?: ReactNode;
   /** Token displays — anything the foundation needs. */
   children: ReactNode;
 }
@@ -54,14 +56,16 @@ export function FoundationPageShell({
         </p>
       </header>
 
-      <section className="flex flex-col gap-4">
-        <h2 className="ref-heading-lg" style={{ margin: 0 }}>
-          Why this matters
-        </h2>
-        <p className="ref-body-lg max-w-3xl" style={{ margin: 0 }}>
-          {whyThisMatters}
-        </p>
-      </section>
+      {whyThisMatters && (
+        <section className="flex flex-col gap-4">
+          <h2 className="ref-heading-lg" style={{ margin: 0 }}>
+            Why this matters
+          </h2>
+          <p className="ref-body-lg max-w-3xl" style={{ margin: 0 }}>
+            {whyThisMatters}
+          </p>
+        </section>
+      )}
 
       {children}
     </div>
