@@ -49,8 +49,12 @@ function Row({ token, max }: { token: TokenLeaf; max: number }) {
           title={numeric < 0 ? 'Negative spacing (absolute width shown)' : undefined}
         />
       </div>
-      <div className="w-[180px] shrink-0">
-        <CopyChip value={`var(${token.cssVar})`} />
+      <div className="w-[240px] shrink-0">
+        {/* Dot-notation path to match every other foundation gallery
+            (Elevation, Border Width, Radius, Iconography). The chip
+            truncates with an ellipsis for long paths and exposes the
+            full value via tooltip and click-to-copy. */}
+        <CopyChip block value={`sys.${token.path.join('.')}`} />
       </div>
     </div>
   );
