@@ -2,6 +2,7 @@
 
 import { useCssVar } from '@/lib/utils';
 import type { TokenLeaf } from '@/lib/tokens';
+import { CopyChip } from './copy-chip';
 
 interface Props {
   /** Background color token. */
@@ -66,27 +67,19 @@ export function ColorSwatch({
             {usage}
           </div>
         )}
-        <div className="flex items-baseline justify-between gap-3 pt-1">
-          <span
-            className="ref-body-sm font-mono"
-            style={{
-              color:
-                'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
-            }}
-          >
-            {resolved || '—'}
-          </span>
-          <code
-            className="ref-caption font-mono text-right truncate"
-            style={{
-              color:
-                'var(--sys-color-roles-surface-surface-sys-on-surface-variant, #565f6c)',
-            }}
-            title={`sys.${token.path.join('.')}`}
-          >
-            sys.{token.path.slice(-2).join('.')}
-          </code>
-        </div>
+        <span
+          className="ref-body-sm font-mono pt-1"
+          style={{
+            color:
+              'var(--sys-color-roles-surface-surface-sys-on-surface, #1b1d22)',
+          }}
+        >
+          {resolved || '—'}
+        </span>
+        {/* Full dot-notation path via the shared CopyChip — same pattern as
+            every other foundation gallery. Block mode truncates the long
+            path with an ellipsis and exposes the full value on hover + copy. */}
+        <CopyChip block value={`sys.${token.path.join('.')}`} />
       </div>
     </div>
   );
